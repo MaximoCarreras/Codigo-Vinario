@@ -1,0 +1,125 @@
+.ritual-carousel {
+  padding: 100px 0;
+  background-color: #fdfaf7;
+  overflow: hidden;
+}
+
+.ritual-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.ritual-overline {
+  color: #a5813a;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.ritual-title {
+  font-family: 'Noto Serif', serif;
+  font-size: 2.5rem;
+  color: #1a1614;
+}
+
+.ritual-divider {
+  width: 60px;
+  height: 2px;
+  background: #a5813a;
+  margin: 25px auto 0;
+}
+
+.ritual-marquee {
+  display: flex;
+  width: 100%;
+  overflow: hidden; 
+}
+
+.ritual-track {
+  display: flex;
+  gap: 20px;
+  width: max-content; 
+  /* La animación dura 35 segundos para que no maree y se vea elegante */
+  animation: ritualScroll 35s linear infinite; 
+}
+
+.ritual-track:hover {
+  animation-play-state: paused;
+}
+
+.ritual-item {
+  width: 300px;
+  height: 300px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.ritual-img-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.ritual-main-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(20%);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ritual-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(165, 129, 58, 0.5); /* Filtro dorado un poco más marcado */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: 0.4s;
+}
+
+/* --- ESTILOS DEL NUEVO LOGO --- */
+.ritual-overlay-logo {
+  width: 90px; /* Tamaño del logo. Lo podés achicar o agrandar */
+  height: auto;
+  /* El filtro de abajo convierte tu logo de color a Blanco puro brillante. 
+     Si querés que tu logo conserve su color original (dorado/negro), borrá la línea de filter de abajo */
+  filter: brightness(0) invert(1); 
+  transition: transform 0.4s ease;
+}
+
+.ritual-item:hover .ritual-main-img {
+  filter: grayscale(0%);
+  transform: scale(1.05);
+}
+
+.ritual-item:hover .ritual-overlay {
+  opacity: 1;
+}
+
+.ritual-item:hover .ritual-overlay-logo {
+  transform: scale(1.1); /* Hace que el logo palpite un poquito al pasar el mouse */
+}
+
+/* MATEMÁTICA EXACTA DEL BUCLE INFINITO */
+@keyframes ritualScroll {
+  0% { 
+    transform: translateX(0); 
+  }
+  100% { 
+    transform: translateX(calc(-50% - 10px)); 
+  }
+}
+
+@media (max-width: 768px) {
+  .ritual-item {
+    width: 250px;
+    height: 250px;
+  }
+}
