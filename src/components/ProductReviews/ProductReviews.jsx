@@ -19,7 +19,6 @@ export default function ProductReviews({ productSlug }) {
     }, [productSlug]);
 
     const fetchReviews = async () => {
-        // Traemos las reseñas, incluyendo nombre, foto y respuesta del admin
         const { data, error } = await supabase
             .from('reviews')
             .select(`
@@ -55,33 +54,32 @@ export default function ProductReviews({ productSlug }) {
             console.error("Error guardando reseña:", error);
             toast.error("Hubo un error al publicar tu reseña.");
         } else {
-            toast.success("¡Gracias por tu opinión! 🧉");
+            toast.success("Reseña publicada con éxito.");
             setComment('');
             setRating(5);
-            fetchReviews(); // Recargamos la lista automáticamente
+            fetchReviews();
         }
     };
 
     return (
-        <div className="reviews-container">
-            <h3 className="section__title">Opiniones de la Comunidad</h3>
+        <div className="cv-reviews-container">
+            <h3 className="cv-reviews-title">Opiniones de la Comunidad</h3>
             
             {/* FORMULARIO DE CARGA */}
-            <div className="review-form-card">
+            <div className="cv-review-form-card">
                 {user ? (
                     <form onSubmit={handleSubmit}>
                         <h4>Dejá tu reseña</h4>
-                        <div className="star-selector">
+                        <div className="cv-star-selector">
                             {[1, 2, 3, 4, 5].map((star) => (
-                                /* 🔥 SVG NATIVO PARA EL SELECTOR DE ESTRELLAS (Relleno asegurado) */
                                 <svg
                                     key={star}
                                     onClick={() => setRating(star)}
                                     width="32" 
                                     height="32"
                                     viewBox="0 0 24 24"
-                                    fill={star <= rating ? '#a5813a' : 'transparent'}
-                                    stroke={star <= rating ? '#a5813a' : '#ccc'}
+                                    fill={star <= rating ? '#85123e' : 'transparent'}
+                                    stroke={star <= rating ? '#85123e' : '#ccc'}
                                     strokeWidth="1.5"
                                     style={{ cursor: 'pointer', transition: '0.2s', marginRight: '4px' }}
                                     xmlns="http://www.w3.org/2000/svg"
@@ -93,46 +91,46 @@ export default function ProductReviews({ productSlug }) {
                         <textarea 
                             value={comment} 
                             onChange={(e) => setComment(e.target.value)} 
-                            placeholder="¿Qué te pareció este producto? Tu opinión ayuda a otros materos." 
+                            placeholder="¿Qué te pareció este producto? Tu opinión ayuda a otros clientes." 
                             rows="3"
+                            className="cv-review-textarea"
                         />
-                        <button type="submit" disabled={loading} className="btn-gold">
-                            {loading ? 'Publicando...' : 'Publicar Reseña'}
+                        <button type="submit" disabled={loading} className="cv-btn-submit">
+                            {loading ? 'PUBLICANDO...' : 'PUBLICAR RESEÑA'}
                         </button>
                     </form>
                 ) : (
-                    <div className="login-prompt">
-                        <p>¿Ya probaste este producto? Compartí tu experiencia con otros materos.</p>
-                        <Link to="/mi-cuenta" className="btn-outline-gold">Iniciar sesión para comentar</Link>
+                    <div className="cv-login-prompt">
+                        <p>¿Ya probaste este producto? Compartí tu experiencia.</p>
+                        <Link to="/mi-cuenta" className="cv-btn-outline">INICIAR SESIÓN PARA COMENTAR</Link>
                     </div>
                 )}
             </div>
 
             {/* LISTA DE RESEÑAS */}
-            <div className="reviews-list">
+            <div className="cv-reviews-list">
                 {reviews.length === 0 ? (
-                    <p className="no-reviews">Todavía no hay opiniones. ¡Sé el primero en comentar!</p>
+                    <p className="cv-no-reviews">Todavía no hay opiniones. ¡Sé el primero en comentar!</p>
                 ) : (
                     reviews.map(rev => (
-                        <div key={rev.id} className="review-item">
-                            <div className="review-header">
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                        <div key={rev.id} className="cv-review-item">
+                            <div className="cv-review-header">
+                                <div className="cv-reviewer-info">
                                     <img 
-                                        src={rev.profiles?.avatar_url || `https://api.dicebear.com/7.x/initials/svg?seed=${rev.profiles?.full_name || 'U'}&backgroundColor=a5813a`} 
+                                        src={rev.profiles?.avatar_url || `https://api.dicebear.com/7.x/initials/svg?seed=${rev.profiles?.full_name || 'U'}&backgroundColor=85123e`} 
                                         alt="Avatar" 
-                                        style={{ width: '35px', height: '35px', borderRadius: '50%', objectFit: 'cover' }}
+                                        className="cv-reviewer-avatar"
                                     />
                                     <strong>{rev.profiles?.full_name || 'Usuario Anónimo'}</strong>
                                 </div>
-                                <div className="review-stars">
+                                <div className="cv-review-stars">
                                     {[...Array(5)].map((_, i) => (
-                                        /* 🔥 SVG NATIVO PARA LA LISTA DE RESEÑAS PUBLICADAS */
                                         <svg
                                             key={i}
-                                            width="20" 
-                                            height="20"
+                                            width="18" 
+                                            height="18"
                                             viewBox="0 0 24 24"
-                                            fill={i < rev.rating ? '#a5813a' : '#e2e8f0'}
+                                            fill={i < rev.rating ? '#85123e' : '#e2e8f0'}
                                             xmlns="http://www.w3.org/2000/svg"
                                             style={{ marginRight: '2px' }}
                                         >
@@ -141,17 +139,17 @@ export default function ProductReviews({ productSlug }) {
                                     ))}
                                 </div>
                             </div>
-                            <p className="review-date">{new Date(rev.created_at).toLocaleDateString('es-AR')}</p>
-                            <p className="review-text">{rev.comment}</p>
+                            <p className="cv-review-date">{new Date(rev.created_at).toLocaleDateString('es-AR')}</p>
+                            <p className="cv-review-text">{rev.comment}</p>
 
-                            {/* RESPUESTA OFICIAL (Aparece solo si escribís algo desde Supabase en admin_reply) */}
+                            {/* RESPUESTA DEL ADMIN (CÓDIGO VINARIO) */}
                             {rev.admin_reply && (
-                                <div style={{ marginTop: '15px', background: 'rgba(165, 129, 58, 0.05)', padding: '15px', borderRadius: '12px', borderLeft: '3px solid #a5813a' }}>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                                        <span className="material-symbols-outlined" style={{ color: '#a5813a', fontSize: '18px' }}>storefront</span>
-                                        <strong style={{ color: '#a5813a', fontSize: '0.9rem' }}>Cuyo Cebado</strong>
+                                <div className="cv-admin-reply">
+                                    <div className="cv-admin-header">
+                                        <span className="material-symbols-outlined">storefront</span>
+                                        <strong>Código Vinario</strong>
                                     </div>
-                                    <p style={{ margin: 0, fontSize: '0.9rem', color: '#4a403a' }}>{rev.admin_reply}</p>
+                                    <p>{rev.admin_reply}</p>
                                 </div>
                             )}
                         </div>
