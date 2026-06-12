@@ -1,9 +1,10 @@
 .cv-hero {
   display: flex;
   width: 100%;
-  min-height: 500px;
+  min-height: 550px; /* Un poco más de aire */
   background-color: var(--color-negro);
   color: var(--color-blanco);
+  overflow: hidden; /* Evita que las animaciones generen scroll horizontal */
 }
 
 .cv-hero-text {
@@ -23,19 +24,30 @@
   letter-spacing: 1px;
 }
 
-.cv-hero-text h2 {
+/* Color para cuando las letras están encriptadas */
+.encrypted-glitch {
+  color: #ffb3c6; 
+  font-weight: bold;
+}
+
+.cv-hero-title {
   font-size: 3.5rem;
   font-weight: 700;
   line-height: 1.1;
   margin-bottom: 20px;
+  color: var(--color-blanco);
 }
 
-.cv-hero-text p {
+.cv-hero-subtitle {
   font-size: 1.2rem;
   font-weight: 300;
-  margin-bottom: 30px;
-  max-width: 80%;
+  margin-bottom: 35px;
+  max-width: 85%;
   color: #cccccc;
+  /* Animación para que aparezca suavemente después del título */
+  opacity: 0;
+  animation: fadeInSubtitle 1s ease-in-out forwards;
+  animation-delay: 0.8s;
 }
 
 .cv-btn-wine {
@@ -49,20 +61,52 @@
   border-radius: 30px;
   cursor: pointer;
   transition: all 0.3s ease;
+  /* Aparece junto con el subtítulo */
+  opacity: 0;
+  animation: fadeInSubtitle 1s ease-in-out forwards;
+  animation-delay: 1s;
 }
 
 .cv-btn-wine:hover {
   background-color: var(--color-wine);
   color: var(--color-blanco);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(133, 18, 62, 0.3); /* Resplandor color vino */
 }
 
 .cv-hero-image {
   flex: 1;
   overflow: hidden;
+  position: relative;
+}
+
+/* Efecto de degradado para que la foto se funda con el fondo negro */
+.cv-hero-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 150px;
+  background: linear-gradient(to right, var(--color-negro), transparent);
+  z-index: 1;
 }
 
 .cv-hero-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  opacity: 0;
+  animation: fadeInImage 2s ease-in-out forwards;
+}
+
+/* Keyframes de las animaciones suaves */
+@keyframes fadeInSubtitle {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInImage {
+  from { opacity: 0; transform: scale(1.05); }
+  to { opacity: 0.8; transform: scale(1); }
 }
