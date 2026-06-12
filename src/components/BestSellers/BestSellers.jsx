@@ -1,14 +1,19 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
+import { useFeaturedProducts } from '../../hooks/useProducts';
+import { useCart } from '../../context/CartContext';
 import './BestSellers.css';
 
-const BestSellers = () => {
-  // Lista temporal de productos para ver el diseño
-  const productos = [
-    { id: 1, nombre: "Vino Pixel Malbec", precio: "$6.500", img: "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" },
-    { id: 2, nombre: "Vino Pixel Blend de Tintas", precio: "$7.200", img: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" },
-    { id: 3, nombre: "Cerveza Chachingo IPA", precio: "$2.800", img: "https://images.unsplash.com/photo-1614316311859-07fb1e0b5220?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" },
-    { id: 4, nombre: "Fernet Branca 750ml", precio: "$8.500", img: "https://images.unsplash.com/photo-1614316311859-07fb1e0b5220?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" } // Podés cambiar las URLs por fotos reales luego
-  ];
+export default function BestSellers() {
+  const { products, loading } = useFeaturedProducts();
+  const { addToCart } = useCart();
+
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat('es-AR', {
+      style: 'currency',
+      currency: 'ARS',
+      minimumFractionDigits: 0,
+    }).format(price);
+  };
 
   return (
     <section className="cv-bestsellers">
@@ -17,22 +22,29 @@ const BestSellers = () => {
         <h2>Los más elegidos</h2>
       </div>
 
-      <div className="products-grid">
-        {productos.map(producto => (
-          <div className="product-card" key={producto.id}>
-            <div className="product-image">
-              <img src={producto.img} alt={producto.nombre} />
-            </div>
-            <div className="product-info">
-              <h3>{producto.nombre}</h3>
-              <p className="price">{producto.precio}</p>
-              <button className="add-to-cart-btn">AGREGAR</button>
-            </div>
-          </div>
-        ))}
-      </div>
+      {loading ? (
+        <div className="loading-state">Cargando selección...</div>
+      ) : (
+        <div className="products-grid">
+          {products.map((product) => (
+            <article className="product-card" key={product.id}>
+              <div className="product-image">
+                <img src={product.image_url} alt={product.name} loading="lazy" />
+              </div>
+              <div className="product-info">
+                <h3>{product.name}</h3>
+                <p className="price">{formatPrice(product.price)}</p>
+                <button 
+                  className="add-to-cart-btn" 
+                  onClick={() => addToCart(product)}
+                >
+                  AGREGAR AL CARRITO
+                </button>
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
     </section>
   );
-};
-
-export default BestSellers;
+}
