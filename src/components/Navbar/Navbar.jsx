@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -32,7 +33,7 @@ const Navbar = () => {
       {/* Menú de categorías con Mega Menu */}
       <nav className="cv-categories">
         <ul>
-          <li><a href="#bodegas">BODEGAS</a></li>
+          <li><Link to="/bodegas">BODEGAS</Link></li>
           
           {/* Este es el ítem que despliega el Mega Menú */}
           <li className="has-mega-menu">
