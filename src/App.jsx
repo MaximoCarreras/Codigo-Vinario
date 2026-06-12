@@ -10,7 +10,8 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/bodegas" element={<Bodegas />} />
-      <Route path="/categoria" element={<CategoryPage />} />
+      {/* Agregamos /:idCategoria para que sea una ruta dinámica */}
+      <Route path="/categoria/:idCategoria" element={<CategoryPage />} />
     </Routes>
   );
 }

@@ -13,10 +13,11 @@ const Navbar = () => {
       {/* Main Navbar */}
       <div className="cv-navbar-main">
         <div className="cv-logo">
-          <div className="logo-text">
+          {/* Si querés que el logo te lleve al inicio al hacerle clic, también usamos Link acá */}
+          <Link to="/" className="logo-text" style={{ textDecoration: 'none' }}>
             <span className="binary-text">01010110</span>
-            <h1>CÓDIGO VINARIO</h1>
-          </div>
+            <h1 style={{ color: 'var(--color-negro)' }}>CÓDIGO VINARIO</h1>
+          </Link>
         </div>
 
         <div className="cv-search-container">
@@ -37,51 +38,53 @@ const Navbar = () => {
           
           {/* Este es el ítem que despliega el Mega Menú */}
           <li className="has-mega-menu">
-            <a href="#vinos">VINOS <span>▾</span></a>
+            <Link to="/categoria/vinos">VINOS <span>▾</span></Link>
             
             {/* Contenedor del Mega Menú */}
             <div className="mega-menu">
               <div className="mega-menu-content">
                 <div className="mega-column">
                   <h4>// TINTOS</h4>
-                  {/* ACÁ ESTÁ EL CAMBIO: Usamos Link en vez de "a href" */}
-                  <Link to="/categoria">Malbec</Link>
-                  <a href="#cabernet">Cabernet Sauvignon</a>
-                  <a href="#cabernet-franc">Cabernet Franc</a>
-                  <a href="#blend">Blend</a>
-                  <a href="#pinot">Pinot Noir</a>
+                  <Link to="/categoria/malbec">Malbec</Link>
+                  <Link to="/categoria/cabernet">Cabernet Sauvignon</Link>
+                  <Link to="/categoria/cabernet-franc">Cabernet Franc</Link>
+                  <Link to="/categoria/blend">Blend</Link>
+                  <Link to="/categoria/pinot-noir">Pinot Noir</Link>
                 </div>
                 <div className="mega-column">
                   <h4>// BLANCOS</h4>
-                  <a href="#chardonnay">Chardonnay</a>
-                  <a href="#sauvignon">Sauvignon Blanc</a>
-                  <a href="#torrontes">Torrontés</a>
-                  <a href="#semillon">Semillón</a>
+                  <Link to="/categoria/chardonnay">Chardonnay</Link>
+                  <Link to="/categoria/sauvignon">Sauvignon Blanc</Link>
+                  <Link to="/categoria/torrontes">Torrontés</Link>
+                  <Link to="/categoria/semillon">Semillón</Link>
                 </div>
                 <div className="mega-column">
                   <h4>// ESPUMANTES</h4>
-                  <a href="#brut-nature">Brut Nature</a>
-                  <a href="#extra-brut">Extra Brut</a>
-                  <a href="#dulce">Espumante Dulce</a>
+                  <Link to="/categoria/brut-nature">Brut Nature</Link>
+                  <Link to="/categoria/extra-brut">Extra Brut</Link>
+                  <Link to="/categoria/dulce">Espumante Dulce</Link>
                 </div>
                 <div className="mega-column">
                   <h4>// OTROS</h4>
-                  <a href="#rosados">Rosados</a>
-                  <a href="#naranjos">Naranjos</a>
-                  <a href="#organicos">Orgánicos</a>
+                  <Link to="/categoria/rosados">Rosados</Link>
+                  <Link to="/categoria/naranjos">Naranjos</Link>
+                  <Link to="/categoria/organicos">Orgánicos</Link>
                 </div>
               </div>
               
               <div className="mega-menu-promo">
-                <button className="cv-btn-white">VER SELECCIÓN</button>
+                <Link to="/categoria/destacados">
+                  <button className="cv-btn-white">VER SELECCIÓN</button>
+                </Link>
                 <img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Selección de Vinos" />
               </div>
             </div>
           </li>
 
-          <li><a href="#destilados">DESTILADOS</a></li>
-          <li><a href="#cervezas">CERVEZAS</a></li>
-          <li><a href="#combos">COMBOS</a></li>
+          {/* Enlaces directos en la barra principal */}
+          <li><Link to="/categoria/destilados">DESTILADOS</Link></li>
+          <li><Link to="/categoria/cervezas">CERVEZAS</Link></li>
+          <li><Link to="/categoria/combos">COMBOS</Link></li>
         </ul>
       </nav>
     </header>

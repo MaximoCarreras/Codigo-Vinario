@@ -1,14 +1,19 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
 import './CategoryPage.css';
 
 const CategoryPage = () => {
-  // Lista temporal para ver el diseño (luego Dux Software llenará esto automáticamente)
+  // useParams lee la palabra que está en la URL (ej: "destilados" o "malbec")
+  const { idCategoria } = useParams();
+  
+  // Convertimos la palabra a mayúsculas. Si no hay palabra, dice "PRODUCTOS"
+  const titulo = idCategoria ? idCategoria.toUpperCase() : "PRODUCTOS";
+
+  // Lista temporal para ver el diseño
   const productos = [
     { id: 1, bodega: "PIXEL", nombre: "Vino Pixel Malbec 750ml", precioOriginal: "$7.500", precioFinal: "$6.500", img: "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" },
-    { id: 2, bodega: "PIXEL", nombre: "Vino Pixel Malbec x6 unidades", precioOriginal: "$45.000", precioFinal: "$39.000", img: "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" },
-    { id: 3, bodega: "PIXEL", nombre: "Vino Pixel Blend de Tintas", precioOriginal: "$8.200", precioFinal: "$7.200", img: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" },
     { id: 4, bodega: "CHACHINGO", nombre: "Cerveza Chachingo IPA", precioOriginal: "$3.200", precioFinal: "$2.800", img: "https://images.unsplash.com/photo-1614316311859-07fb1e0b5220?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" }
   ];
 
@@ -17,9 +22,9 @@ const CategoryPage = () => {
       <Navbar />
       
       <main className="cv-category-main">
-        {/* Banner de Categoría */}
+        {/* Banner de Categoría Dinámico */}
         <div className="cv-category-banner">
-          <h1>{'{ MALBEC }'}</h1>
+          <h1>{`{ ${titulo} }`}</h1>
         </div>
 
         <div className="cv-category-layout">
@@ -27,9 +32,12 @@ const CategoryPage = () => {
           <aside className="cv-sidebar-filtros">
             <h3>Filtrar productos</h3>
             
-            <div className="filtro-grupo">
-              <h4>+ Varietales</h4>
-            </div>
+            {/* Si es destilados, podemos ocultar los varietales, pero por ahora lo dejamos fijo */}
+            {idCategoria !== 'destilados' && (
+              <div className="filtro-grupo">
+                <h4>+ Varietales</h4>
+              </div>
+            )}
             <div className="filtro-grupo">
               <h4>+ Bodegas</h4>
             </div>
@@ -43,7 +51,7 @@ const CategoryPage = () => {
           {/* Columna Derecha: Grilla de Productos */}
           <section className="cv-productos-section">
             <div className="cv-productos-header">
-              <p>59 productos</p>
+              <p>73 productos</p>
               <select className="cv-sort-select">
                 <option>Orden predeterminado</option>
                 <option>Menor precio</option>
