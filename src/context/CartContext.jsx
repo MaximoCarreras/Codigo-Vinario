@@ -1,7 +1,7 @@
 import { createContext, useContext, useReducer, useEffect, useCallback } from 'react';
 
 const CartContext = createContext(null);
-const STORAGE_KEY = 'cuyo_cebado_cart_v2';
+const STORAGE_KEY = 'codigo_vinario_cart_v1';
 
 const ACTIONS = {
   ADD_ITEM: 'ADD_ITEM',
@@ -87,7 +87,6 @@ export function CartProvider({ children }) {
   const removeFromCart = (id) => dispatch({ type: ACTIONS.REMOVE_ITEM, payload: id });
   const updateQuantity = (id, quantity) => dispatch({ type: ACTIONS.UPDATE_QUANTITY, payload: { id, quantity } });
   
-  // Envolvemos clearCart en useCallback para evitar problemas de re-renderizados
   const clearCart = useCallback(() => {
       dispatch({ type: ACTIONS.CLEAR_CART });
       localStorage.removeItem(STORAGE_KEY);
