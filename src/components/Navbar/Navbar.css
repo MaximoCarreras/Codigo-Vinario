@@ -99,8 +99,8 @@
   margin: 0;
 }
 
-.cv-categories l    i {
-  /* Al no tener position relative, el mega menú ocupa todo el ancho de la pantalla */
+.cv-categories li {
+  position: relative; /* Al no tener position relative, el mega menú ocupa todo el ancho de la pantalla */
 }
 
 .cv-categories a {
