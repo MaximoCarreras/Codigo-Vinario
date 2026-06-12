@@ -1,166 +1,84 @@
-import { useParams, Link } from 'react-router-dom';
-import { useState, useMemo, useEffect } from 'react';
-import { useCart } from '../../context/CartContext';
-import { getGlobalCatalog } from '../../lib/catalogStore'; // 🔥 ACÁ IMPORTAMOS EL CEREBRO
+import React from 'react';
+import Navbar from '../../components/Navbar/Navbar';
+import Footer from '../../components/Footer/Footer';
 import './CategoryPage.css';
 
-export default function CategoryPage() {
-    const { categoryId } = useParams();
-    const { addToCart } = useCart();
-    
-    const [dbProducts, setDbProducts] = useState([]);
-    const [currentCategory, setCurrentCategory] = useState(null);
-    const [loading, setLoading] = useState(true); // Arranca cargando
-    
-    const [maxPrice, setMaxPrice] = useState(250000);
-    const [selectedMaterial, setSelectedMaterial] = useState('todos');
-    const [selectedType, setSelectedType] = useState('todos');
-    
-    // Estado para el acordeón de filtros en celular
-    const [isFilterOpen, setIsFilterOpen] = useState(false);
+const CategoryPage = () => {
+  // Lista temporal para ver el diseño (luego Dux Software llenará esto automáticamente)
+  const productos = [
+    { id: 1, bodega: "PIXEL", nombre: "Vino Pixel Malbec 750ml", precioOriginal: "$7.500", precioFinal: "$6.500", img: "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" },
+    { id: 2, bodega: "PIXEL", nombre: "Vino Pixel Malbec x6 unidades", precioOriginal: "$45.000", precioFinal: "$39.000", img: "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" },
+    { id: 3, bodega: "PIXEL", nombre: "Vino Pixel Blend de Tintas", precioOriginal: "$8.200", precioFinal: "$7.200", img: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" },
+    { id: 4, bodega: "CHACHINGO", nombre: "Cerveza Chachingo IPA", precioOriginal: "$3.200", precioFinal: "$2.800", img: "https://images.unsplash.com/photo-1614316311859-07fb1e0b5220?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" }
+  ];
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                setLoading(true);
-                
-                // 🔥 MAGIA: Le pedimos los datos al cerebro (tarda 0 seg si ya cargó antes)
-                const { products, categories } = await getGlobalCatalog();
-                
-                // Filtramos los productos de esta categoría específica
-                const catProducts = products.filter(p => p.category === categoryId);
-                // Buscamos los datos de la categoría (título, etc)
-                const catDetails = categories.find(c => String(c.id) === String(categoryId));
-
-                setDbProducts(catProducts);
-                setCurrentCategory(catDetails || null);
-
-            } catch (error) {
-                console.error("Error en CategoryPage:", error);
-            } finally {
-                setLoading(false);
-            }
-        };
-        
-        fetchData();
-        setSelectedMaterial('todos');
-        setSelectedType('todos');
-    }, [categoryId]);
-
-    const filteredProducts = useMemo(() => {
-        return dbProducts.filter(p => {
-            const matchPrice = p.price <= maxPrice;
-            const matchMaterial = selectedMaterial === 'todos' || p.material === selectedMaterial;
-            const matchType = selectedType === 'todos' || p.type === selectedType;
-            return matchPrice && matchMaterial && matchType;
-        });
-    }, [dbProducts, maxPrice, selectedMaterial, selectedType]);
-
-    const getOptions = (key) => {
-        const uniqueValues = [...new Set(dbProducts.map(p => p[key]).filter(Boolean))];
-        return ['todos', ...uniqueValues];
-    };
-
-    const getTypeLabel = () => {
-        if (categoryId === 'yerbas') return 'Variedad';
-        if (categoryId === 'bombillas') return 'Estilo';
-        return 'Modelo';
-    };
-
-    const handleQuickAdd = (e, product) => {
-        e.preventDefault();
-        e.stopPropagation();
-        addToCart(product);
-    };
-
-    // TU DISEÑO INTACTO DESDE ACÁ PARA ABAJO
-    return (
-        <div className="category-page">
-            <div className="category-page__nav">
-                <Link to="/productos" className="btn-back">
-                    <span className="material-symbols-outlined">arrow_back</span> Volver a categorías
-                </Link>
-            </div>
-            <div className="category-page__main">
-                <aside className="sidebar-mafia">
-                    <div className="sidebar__title" onClick={() => setIsFilterOpen(!isFilterOpen)}>
-                        <div className="title-left">
-                            <h3>Filtros</h3>
-                            <div className="gold-dot desktop-only-dot"></div>
-                        </div>
-                        <span className="material-symbols-outlined mobile-only-icon">
-                            {isFilterOpen ? 'expand_less' : 'filter_list'}
-                        </span>
-                    </div>
-                    
-                    <div className={`filter-options-wrapper ${isFilterOpen ? 'open' : ''}`}>
-                        <div className="filter-group">
-                            <label>Precio máximo: <b>${maxPrice.toLocaleString('es-AR')}</b></label>
-                            <input type="range" min="0" max="250000" step="5000" value={maxPrice} onChange={(e) => setMaxPrice(Number(e.target.value))} className="price-slider-mafia" />
-                        </div>
-                        {getOptions('material').length > 1 && (
-                            <div className="filter-group">
-                                <label>Material</label>
-                                <select value={selectedMaterial} onChange={(e) => setSelectedMaterial(e.target.value)}>
-                                    {getOptions('material').map(o => <option key={o} value={o}>{o.toUpperCase()}</option>)}
-                                </select>
-                            </div>
-                        )}
-                        {getOptions('type').length > 1 && (
-                            <div className="filter-group">
-                                <label>{getTypeLabel()}</label>
-                                <select value={selectedType} onChange={(e) => setSelectedType(e.target.value)}>
-                                    {getOptions('type').map(o => <option key={o} value={o}>{o.toUpperCase()}</option>)}
-                                </select>
-                            </div>
-                        )}
-                    </div>
-                </aside>
-
-                <section className="products-content">
-                    <header className="category-header">
-                        <h1 className="section__title">
-                            {currentCategory ? currentCategory.label : (loading ? 'Cargando...' : 'Productos')}
-                        </h1>
-                        <p className="products-count">
-                            {loading ? 'Buscando catálogo...' : `${filteredProducts.length} piezas encontradas`}
-                        </p>
-                    </header>
-                    
-                    <div className="products-grid-mafia">
-                        {loading ? (
-                            <div style={{ gridColumn: '1 / -1', padding: '60px 20px', textAlign: 'center', color: '#a5813a', fontWeight: '800', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '15px' }}>
-                                <span className="material-symbols-outlined" style={{ animation: 'spin 2s linear infinite', fontSize: '2rem' }}>sync</span>
-                                Trayendo catálogo...
-                            </div>
-                        ) : filteredProducts.length > 0 ? (
-                            filteredProducts.map(product => (
-                                <Link key={product.id} to={`/producto/${product.slug}`} className="product-card-link-mafia">
-                                    <div className={`product-card-mafia`}>
-                                        
-                                        <div className="product-image-container-mafia">
-                                            <img src={product.image_url || '/assets/placeholder.png'} alt={product.name} />
-                                        </div>
-
-                                        <div className="product-info-mafia">
-                                            <p className="product-tag-mafia">{product.type} {product.material ? `| ${product.material}` : ''}</p>
-                                            <h4 className="product-name-mafia">{product.name}</h4>
-                                            <p className="product-price-mafia">${Number(product.price).toLocaleString('es-AR')}</p>
-                                            <button className={`btn-add-mafia ${product.stock === 0 ? 'btn-disabled' : ''}`} disabled={product.stock === 0} onClick={(e) => handleQuickAdd(e, product)}>
-                                                {product.stock === 0 ? 'Sin Stock' : 'Agregar al Carrito'}
-                                            </button>
-                                        </div>
-                                    </div>
-                                </Link>
-                            ))
-                        ) : (
-                            <div style={{ gridColumn: '1 / -1', padding: '40px', textAlign: 'center', color: '#888' }}>
-                                No encontramos productos con estos filtros.
-                            </div>
-                        )}
-                    </div>
-                </section>
-            </div>
+  return (
+    <div className="cv-page-container">
+      <Navbar />
+      
+      <main className="cv-category-main">
+        {/* Banner de Categoría */}
+        <div className="cv-category-banner">
+          <h1>{'{ MALBEC }'}</h1>
         </div>
-    );
-}
+
+        <div className="cv-category-layout">
+          {/* Columna Izquierda: Filtros */}
+          <aside className="cv-sidebar-filtros">
+            <h3>Filtrar productos</h3>
+            
+            <div className="filtro-grupo">
+              <h4>+ Varietales</h4>
+            </div>
+            <div className="filtro-grupo">
+              <h4>+ Bodegas</h4>
+            </div>
+            <div className="filtro-grupo">
+              <h4>+ Precio</h4>
+            </div>
+            
+            <button className="btn-limpiar">Limpiar filtros</button>
+          </aside>
+
+          {/* Columna Derecha: Grilla de Productos */}
+          <section className="cv-productos-section">
+            <div className="cv-productos-header">
+              <p>59 productos</p>
+              <select className="cv-sort-select">
+                <option>Orden predeterminado</option>
+                <option>Menor precio</option>
+                <option>Mayor precio</option>
+              </select>
+            </div>
+
+            <div className="cv-productos-grid">
+              {productos.map(prod => (
+                <div className="cv-card" key={prod.id}>
+                  <div className="cv-card-img">
+                    <span className="badge-oferta">15% OFF</span>
+                    <img src={prod.img} alt={prod.nombre} />
+                  </div>
+                  <div className="cv-card-info">
+                    <p className="bodega-txt">{prod.bodega}</p>
+                    <h3>{prod.nombre}</h3>
+                    <p className="precio-tachado">{prod.precioOriginal}</p>
+                    <p className="precio-final">{prod.precioFinal}</p>
+                    <p className="transferencia-txt">Pagando con transferencia</p>
+                    <div className="card-actions">
+                      <input type="number" defaultValue="1" min="1" />
+                      <button className="btn-añadir">AÑADIR</button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <Footer />
+    </div>
+  );
+};
+
+export default CategoryPage;

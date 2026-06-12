@@ -44,7 +44,8 @@ const Navbar = () => {
               <div className="mega-menu-content">
                 <div className="mega-column">
                   <h4>// TINTOS</h4>
-                  <a href="#malbec">Malbec</a>
+                  {/* ACÁ ESTÁ EL CAMBIO: Usamos Link en vez de "a href" */}
+                  <Link to="/categoria">Malbec</Link>
                   <a href="#cabernet">Cabernet Sauvignon</a>
                   <a href="#cabernet-franc">Cabernet Franc</a>
                   <a href="#blend">Blend</a>
@@ -73,7 +74,6 @@ const Navbar = () => {
               
               <div className="mega-menu-promo">
                 <button className="cv-btn-white">VER SELECCIÓN</button>
-                {/* Acá podés poner una foto horizontal de las botellas como tienen ellos */}
                 <img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Selección de Vinos" />
               </div>
             </div>
