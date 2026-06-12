@@ -5,17 +5,15 @@ import './Navbar.css';
 const Navbar = () => {
   return (
     <header className="cv-header">
-      {/* Topbar negra */}
       <div className="cv-topbar">
         <span>ENVÍO GRATIS EN LAS HERAS Y GRAN MENDOZA A PARTIR DE $50.000 | 3 CUOTAS SIN INTERÉS</span>
       </div>
 
-      {/* Main Navbar */}
       <div className="cv-navbar-main">
         <div className="cv-logo">
-          <Link to="/" className="logo-text" style={{ textDecoration: 'none' }}>
+          <Link to="/" className="logo-text">
             <span className="binary-text">01010110</span>
-            <h1 style={{ color: 'var(--color-negro)' }}>CÓDIGO VINARIO</h1>
+            <h1>CÓDIGO VINARIO</h1>
           </Link>
         </div>
 
@@ -25,19 +23,15 @@ const Navbar = () => {
         </div>
 
         <div className="cv-cart-container">
-          <span className="cart-icon">🛒</span>
-          <span className="cart-badge">0</span>
+          🛒 <span className="cart-badge">0</span>
         </div>
       </div>
 
-      {/* Menú de categorías con Mega Menu */}
       <nav className="cv-categories">
-        <ul>
+        <ul className="cv-menu-list">
           <li><Link to="/bodegas">BODEGAS</Link></li>
-          
           <li className="has-mega-menu">
-            <Link to="/categoria/vinos">VINOS <span>▾</span></Link>
-            
+            <Link to="/categoria/vinos" className="menu-link">VINOS ▾</Link>
             <div className="mega-menu">
               <div className="mega-menu-content">
                 <div className="mega-column">
@@ -57,7 +51,6 @@ const Navbar = () => {
                   <h4>// ESPUMANTES</h4>
                   <Link to="/categoria/brut-nature">Brut Nature</Link>
                   <Link to="/categoria/extra-brut">Extra Brut</Link>
-                  <Link to="/categoria/dulce">Dulce</Link>
                 </div>
                 <div className="mega-column">
                   <h4>// OTROS</h4>
@@ -65,15 +58,8 @@ const Navbar = () => {
                   <Link to="/categoria/naranjos">Naranjos</Link>
                 </div>
               </div>
-              
-              <div className="mega-menu-promo">
-                <Link to="/categoria/destacados">
-                  <button className="cv-btn-white">VER SELECCIÓN</button>
-                </Link>
-              </div>
             </div>
           </li>
-
           <li><Link to="/categoria/destilados">DESTILADOS</Link></li>
           <li><Link to="/categoria/cervezas">CERVEZAS</Link></li>
           <li><Link to="/categoria/combos">COMBOS</Link></li>
