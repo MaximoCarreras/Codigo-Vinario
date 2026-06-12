@@ -1,107 +1,112 @@
-/* Nuestra Garantía — Sección unificada */
-.testimonials {
-  background-color: #fdfaf7;
-  /* Fondo hueso */
-  padding: 80px 20px;
+.cv-testimonials-section {
+    background-color: #fdfdfd; /* Fondo claro y limpio */
+    padding: 80px 5%;
 }
 
-/* --- TÍTULO DOMADO --- */
-.testimonials__header h2 {
-  font-size: clamp(1.5rem, 3vw, 2rem) !important;
-  color: #2b2520;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 10px;
-  font-family: 'Noto Serif', serif;
-  font-weight: 800;
+.cv-testimonials-container {
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.gold-line {
-  width: 50px;
-  height: 3px;
-  background-color: #a5813a;
-  margin: 0 auto 40px auto;
-  border-radius: 5px;
+/* Reutilizamos el estilo del título global */
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.cv-code-detail {
+    color: #85123e;
+    font-family: monospace;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.section-header h2 {
+    font-size: 2.2rem;
+    color: #000;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin: 0;
 }
 
 /* --- GRILLA DE COMPROMISOS --- */
-.testimonials__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-  max-width: 1200px;
-  margin: 0 auto 40px auto;
+.cv-testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 50px;
 }
 
-.testimonials__card {
-  background: #ffffff;
-  padding: 40px 30px;
-  /* Acá está el aire que le faltaba a los costados */
-  border-radius: 20px;
-  /* Bordes redondeados premium */
-  box-shadow: 0 10px 25px rgba(43, 37, 32, 0.05);
-  /* Sombra suave */
-  border: 1px solid rgba(165, 129, 58, 0.1);
-  text-align: center;
-  transition: all 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.cv-testimonials-card {
+    background: #ffffff;
+    padding: 40px 30px;
+    border-radius: 8px; /* Borde más recto y profesional */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+    border: 1px solid #eaeaea;
+    text-align: center;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.testimonials__card:hover {
-  box-shadow: 0 15px 35px rgba(43, 37, 32, 0.1);
-  transform: translateY(-5px);
+.cv-testimonials-card:hover {
+    box-shadow: 0 15px 35px rgba(133, 18, 62, 0.08); /* Sombra sutil color vino */
+    transform: translateY(-5px);
+    border-color: #85123e;
 }
 
-.testimonials__icon {
-  font-size: 3rem !important;
-  color: #a5813a;
-  /* Dorado oficial */
-  margin-bottom: 20px;
-  transition: transform 0.3s ease;
+.cv-testimonials-icon {
+    font-size: 3rem !important;
+    color: #85123e; /* Acento color vino */
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
 }
 
-.testimonials__card:hover .testimonials__icon {
-  transform: scale(1.1);
+.cv-testimonials-card:hover .cv-testimonials-icon {
+    transform: scale(1.1);
 }
 
-.testimonials__card h3 {
-  font-size: 1.2rem;
-  color: #2b2520;
-  margin-bottom: 15px;
-  font-weight: 700;
-  font-family: 'Noto Serif', serif;
+.cv-testimonials-card h3 {
+    font-size: 1.2rem;
+    color: #000;
+    margin-bottom: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-.testimonials__text {
-  color: #5a5048;
-  /* Gris oscuro para lectura */
-  line-height: 1.7;
-  font-size: 0.95rem;
-  margin: 0;
+.cv-testimonials-text {
+    color: #555;
+    line-height: 1.7;
+    font-size: 0.95rem;
+    margin: 0;
 }
 
 /* --- FOOTER DE LA SECCIÓN --- */
-.testimonials__footer {
-  text-align: center;
-  font-size: 1.05rem;
-  color: #2b2520;
-  padding-top: 30px;
-  border-top: 1px solid rgba(165, 129, 58, 0.2);
-  max-width: 400px;
-  margin: 0 auto;
+.cv-testimonials-footer {
+    text-align: center;
+    font-size: 1.05rem;
+    color: #333;
+    padding-top: 30px;
+    border-top: 1px solid #eaeaea;
+    max-width: 400px;
+    margin: 0 auto;
 }
 
-.testimonials__footer b {
-  color: #a5813a;
-  font-weight: 700;
+.cv-testimonials-footer b {
+    color: #85123e; /* Marca destacada en vino */
+    font-weight: 700;
 }
 
 /* --- RESPONSIVE --- */
 @media (max-width: 900px) {
-  .testimonials__grid {
-    grid-template-columns: 1fr;
-    max-width: 500px;
-  }
+    .cv-testimonials-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
