@@ -2,7 +2,7 @@
   width: 100%;
   border-bottom: 1px solid #eaeaea;
   background-color: var(--color-blanco);
-  position: relative; /* Clave para que el Mega Menú sepa de dónde colgarse */
+  position: relative;
   z-index: 1000;
 }
 
@@ -100,7 +100,7 @@
 }
 
 .cv-categories li {
-  position: relative; /* Al no tener position relative, el mega menú ocupa todo el ancho de la pantalla */
+  position: relative;
 }
 
 .cv-categories a {
@@ -109,38 +109,31 @@
   font-size: 0.9rem;
   font-weight: 700;
   transition: color 0.3s;
-  padding-bottom: 20px; /* Extiende el área táctil para que no se cierre el menú al bajar el mouse */
+  padding-bottom: 20px;
 }
 
 .cv-categories a:hover {
   color: var(--color-wine);
 }
 
-/* ============================
-   ESTILOS DEL MEGA MENÚ
-   ============================ */
-
+/* MEGA MENÚ */
 .mega-menu {
   position: absolute;
-  top: 100%; /* Empieza justo donde termina el header */
+  top: 100%;
   left: 0;
   width: 100%;
   background-color: var(--color-wine);
   color: var(--color-blanco);
-  padding: 40px 5%;
+  padding: 40px 10%;
   display: flex;
-  justify-content: space-between;
-  border-top: 2px solid rgba(0,0,0,0.2);
-  
-  /* Animación oculta por defecto */
   opacity: 0;
   visibility: hidden;
   transform: translateY(10px);
   transition: all 0.3s ease;
   box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  z-index: 1000;
 }
 
-/* Al pasar el mouse por el <li>, aparece el Mega Menú */
 .has-mega-menu:hover .mega-menu {
   opacity: 1;
   visibility: visible;
@@ -149,15 +142,18 @@
 
 .mega-menu-content {
   display: flex;
-  gap: 80px;
+  flex: 1;
+  gap: 60px;
 }
 
 .mega-column h4 {
-  font-family: monospace; /* Toque de código para los títulos */
+  font-family: monospace;
   font-size: 0.9rem;
   letter-spacing: 1px;
   margin-bottom: 15px;
-  color: #ffb3c6; /* Rosa pastel para que contraste con el rojo oscuro */
+  color: #ffb3c6;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  padding-bottom: 8px;
 }
 
 .mega-column a {
@@ -166,7 +162,7 @@
   font-size: 0.85rem;
   font-weight: 300;
   margin-bottom: 12px;
-  padding-bottom: 0;
+  padding: 0;
 }
 
 .mega-column a:hover {
@@ -176,8 +172,8 @@
 
 .mega-menu-promo {
   display: flex;
-  gap: 30px;
   align-items: center;
+  padding-left: 40px;
 }
 
 .cv-btn-white {
@@ -194,11 +190,4 @@
 
 .cv-btn-white:hover {
   transform: scale(1.05);
-}
-
-.mega-menu-promo img {
-  width: 300px;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 8px;
 }
