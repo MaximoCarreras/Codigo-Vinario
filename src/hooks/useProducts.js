@@ -1,81 +1,77 @@
 /**
- * useProducts — Hook para obtener productos de Cuyo Cebado.
- * IDs actualizados con UUID de Supabase para compatibilidad con el checkout.
+ * useProducts — Hook para obtener productos de Código Vinario.
+ * IDs con UUID para futura compatibilidad con base de datos y checkout.
  */
 import { useState, useEffect } from 'react';
 
-// Importamos las imágenes desde assets
-import product1 from '../assets/product_1.png';
-import product2 from '../assets/product_2.png';
-import product3 from '../assets/product_3.png';
-import product4 from '../assets/product_4.png';
-// Nota: Si tenés imágenes para los nuevos productos, importalas aquí.
+// Si tenés imágenes locales en la carpeta assets, podés importarlas y reemplazar las URLs:
+// import pixelMalbec from '../assets/pixel_malbec.png';
 
 const FALLBACK_PRODUCTS = [
   {
     id: '939a1f06-6e48-47e1-a5a1-4cc4e74eafe8',
-    name: 'Mate Lapacho Imperial',
-    description: 'Tallado a mano en madera de lapacho. Acabado natural con aceite de tung.',
-    price: 45000,
-    category: 'madera',
-    image_url: product1,
-    badge: 'Más vendido',
-    stock: 12,
+    name: 'Vino Pixel Malbec',
+    description: 'Malbec mendocino de excelente cuerpo y notas a frutos rojos. Ideal para acompañar carnes.',
+    price: 6500,
+    category: 'vinos',
+    image_url: 'https://images.unsplash.com/photo-1584916201218-f4242ceb4809?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
+    badge: 'Destacado',
+    stock: 24,
     is_featured: true,
   },
   {
     id: 'fe6bfa0f-a835-4a6a-864d-0048906238a9',
-    name: 'Mate Calabaza Gaucho',
-    description: 'Calabaza curada con virola de alpaca y base de cuero repujado.',
-    price: 35000,
-    category: 'calabaza',
-    image_url: product2,
+    name: 'Vino Pixel Blend de Tintas',
+    description: 'Blend exclusivo con paso por barrica. Notas especiadas y final persistente.',
+    price: 7200,
+    category: 'vinos',
+    image_url: 'https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
     badge: 'Más vendido',
-    stock: 8,
+    stock: 18,
     is_featured: true,
   },
   {
     id: '977e492d-990e-4934-8227-6ae0a8203ef5',
-    name: 'Mate Cerámica Tierra',
-    description: 'Cerámica artesanal con esmalte en tonos tierra. Hecho a mano en Mendoza.',
-    price: 28000,
-    category: 'ceramica',
-    image_url: product3,
+    name: 'Cerveza Chachingo IPA',
+    description: 'Cerveza artesanal mendocina con intenso aroma a lúpulo y amargor equilibrado.',
+    price: 2800,
+    category: 'cervezas',
+    image_url: 'https://images.unsplash.com/photo-1614316311859-07fb1e0b5220?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
     badge: null,
-    stock: 15,
+    stock: 48,
     is_featured: true,
   },
   {
     id: '6acf35f1-8a23-4717-971e-5fe657c5ed35',
-    name: 'Kit Regalo Premium',
-    description: 'Mate lapacho + bombilla alpaca + yerba orgánica + caja de madera.',
-    price: 89000,
-    category: 'kit',
-    image_url: product4,
-    badge: 'Más vendido',
-    stock: 5,
+    name: 'Estuche Degustación Premium',
+    description: '2 Botellas Reserva de selección exclusiva + estuche de madera grabado.',
+    price: 45000,
+    category: 'combos',
+    image_url: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    badge: 'Edición Limitada',
+    stock: 15,
     is_featured: true,
   },
   {
     id: '4668527e-d5b2-4302-9985-b55d87dc5f80',
-    name: 'Mate Quebracho Rústico',
-    description: 'Madera de quebracho ultra resistente con detalles en plata y alpaca.',
-    price: 42000,
-    category: 'madera',
-    image_url: product1, // Reemplazar por la imagen correcta si la tenés
-    badge: 'Nuevo',
-    stock: 10,
+    name: 'Fernet Branca 750ml',
+    description: 'El clásico aperitivo italiano, infaltable para armar el combo perfecto.',
+    price: 8500,
+    category: 'destilados',
+    image_url: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
+    badge: 'Clásico',
+    stock: 30,
     is_featured: false,
   },
   {
     id: '9852b131-00e1-4b09-8ab1-ed94984568b2',
-    name: 'Bombilla Alpaca Clásica',
-    description: 'Bombilla de alpaca con filtro de resorte, desarmable para limpieza fácil.',
-    price: 12000,
-    category: 'accesorios',
-    image_url: product2, // Reemplazar por la imagen correcta si la tenés
+    name: 'Gin Mendocino Artesanal',
+    description: 'Gin destilado con botánicos de la precordillera. Fresco y aromático.',
+    price: 15000,
+    category: 'destilados',
+    image_url: 'https://images.unsplash.com/photo-1596464716127-f2a82984de30?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
     badge: null,
-    stock: 30,
+    stock: 12,
     is_featured: false,
   }
 ];
@@ -85,6 +81,7 @@ export function useFeaturedProducts() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Filtra solo los que tienen is_featured en true para la página principal
     setProducts(FALLBACK_PRODUCTS.filter(p => p.is_featured));
     setLoading(false);
   }, []);
@@ -97,6 +94,7 @@ export function useProducts(category = null) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Si se pasa una categoría filtra por ella, sino devuelve todo el catálogo
     const filtered = category
       ? FALLBACK_PRODUCTS.filter(p => p.category === category)
       : FALLBACK_PRODUCTS;
