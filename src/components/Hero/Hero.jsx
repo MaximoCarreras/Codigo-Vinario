@@ -1,46 +1,47 @@
 import React from 'react';
-import BlurText from '../ReactBits/BlurText';
-import DecryptedText from '../ReactBits/DecryptedText';
-import './Hero.css';
+import Navbar from '../../components/Navbar/Navbar';
+import Hero from '../../components/Hero/Hero';
+import LogoLoop from '../../components/ReactBits/LogoLoop';
+import Categories from '../../components/Categories/Categories';
+import BestSellers from '../../components/BestSellers/BestSellers';
+import Community from '../../components/Community/Community';
+import Footer from '../../components/Footer/Footer';
+import './Home.css';
 
-const Hero = () => {
+const Home = () => {
+  // Estos son los logos de las bodegas para el carrusel
+  const bodegas = [
+    { src: 'https://placehold.co/150x50/000000/FFF?text=PIXEL', alt: 'Pixel' },
+    { src: 'https://placehold.co/150x50/000000/FFF?text=CHACHINGO', alt: 'Chachingo' },
+    { src: 'https://placehold.co/150x50/000000/FFF?text=LAMADRID', alt: 'Lamadrid' },
+  ];
+
   return (
-    <section className="cv-hero">
-      <div className="cv-hero-text">
-        
-        {/* El detalle técnico con efecto Matrix Binario */}
-        <div className="cv-code-detail">
-          <DecryptedText
-            text="C:\> RUN_STORE"
-            animateOn="view"
-            speed={70}
-            maxIterations={20}
-            characters="01"
-            encryptedClassName="encrypted-glitch"
-          />
-        </div>
+    <div className="home-container">
+      {/* 1. Navegación */}
+      <Navbar />
 
-        {/* El título con revelado cinematográfico */}
-        <BlurText
-          text="La experiencia del vino, decodificada."
-          delay={120}
-          animateBy="words"
-          direction="top"
-          className="cv-hero-title"
-        />
+      {/* 2. Portada Principal */}
+      <Hero />
+      
+      {/* 3. Cinta de Bodegas (Separador visual) */}
+      <section style={{ padding: '40px 0', backgroundColor: '#fdfdfd', borderBottom: '1px solid #eaeaea' }}>
+         <LogoLoop logos={bodegas} speed={40} />
+      </section>
 
-        <p className="cv-hero-subtitle">
-          Tu selección exclusiva de bodegas, cervezas y destilados con envíos a todo el país.
-        </p>
-        
-        <button className="cv-btn-wine">VER SELECCIÓN</button>
-      </div>
+      {/* 4. Categorías de Bebidas */}
+      <Categories />
 
-      <div className="cv-hero-image">
-        <img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Brindis Código Vinario" />
-      </div>
-    </section>
+      {/* 5. Los Más Vendidos (Productos) */}
+      <BestSellers />
+
+      {/* 6. Redes y Contacto */}
+      <Community />
+
+      {/* 7. Pie de página */}
+      <Footer />
+    </div>
   );
 };
 
-export default Hero;
+export default Home;
