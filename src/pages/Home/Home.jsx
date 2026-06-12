@@ -4,6 +4,7 @@ import Hero from '../../components/Hero/Hero';
 import LogoLoop from '../../components/ReactBits/LogoLoop';
 import TiltedCard from '../../components/ReactBits/TiltedCard';
 import Footer from '../../components/Footer/Footer';
+import './Home.css';
 
 const Home = () => {
   const bodegas = [
@@ -13,20 +14,30 @@ const Home = () => {
   ];
 
   return (
-    <div style={{ width: '100%', overflowX: 'hidden' }}>
+    <div className="home-container">
       <Navbar />
       <Hero />
       
-      {/* Sección Bodegas - Altura controlada */}
-      <section style={{ padding: '60px 0', backgroundColor: '#fdfdfd' }}>
+      {/* Sección Bodegas */}
+      <section className="section-padding section-light">
          <LogoLoop logos={bodegas} speed={40} />
       </section>
 
-      {/* Sección Producto 3D - Tamaño controlado */}
-      <section style={{ padding: '80px 20px', display: 'flex', justifyContent: 'center' }}>
+      {/* Grilla de Categorías (Estructura profesional) */}
+      <section className="section-padding">
+        <h2 className="section-title">Nuestras Selecciones</h2>
+        <div className="categories-grid">
+            <div className="category-card"><h3>VINOS</h3></div>
+            <div className="category-card"><h3>DESTILADOS</h3></div>
+            <div className="category-card"><h3>CERVEZAS</h3></div>
+        </div>
+      </section>
+
+      {/* Sección Producto Destacado 3D */}
+      <section className="section-padding section-dark">
          <TiltedCard 
            imageSrc="https://images.unsplash.com/photo-1584916201218-f4242ceb4809"
-           captionText="Vino Premium Pixel"
+           captionText="Vino Premium - Código Vinario"
            containerHeight="450px"
            containerWidth="320px"
            imageHeight="450px"
