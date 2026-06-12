@@ -13,20 +13,24 @@ const Home = () => {
   ];
 
   return (
-    <div className="home-container">
+    <div style={{ width: '100%', overflowX: 'hidden' }}>
       <Navbar />
       <Hero />
       
-      <section style={{ padding: '40px 0', backgroundColor: '#f9f9f9', minHeight: '100px' }}>
-         <LogoLoop logos={bodegas} speed={60} />
+      {/* Sección Bodegas - Altura controlada */}
+      <section style={{ padding: '60px 0', backgroundColor: '#fdfdfd' }}>
+         <LogoLoop logos={bodegas} speed={40} />
       </section>
 
-      <section style={{ display: 'flex', justifyContent: 'center', padding: '60px', minHeight: '400px' }}>
+      {/* Sección Producto 3D - Tamaño controlado */}
+      <section style={{ padding: '80px 20px', display: 'flex', justifyContent: 'center' }}>
          <TiltedCard 
            imageSrc="https://images.unsplash.com/photo-1584916201218-f4242ceb4809"
            captionText="Vino Premium Pixel"
-           containerHeight="400px"
-           containerWidth="300px"
+           containerHeight="450px"
+           containerWidth="320px"
+           imageHeight="450px"
+           imageWidth="320px"
          />
       </section>
 
