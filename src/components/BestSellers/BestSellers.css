@@ -1,190 +1,83 @@
-/* BestSellers — Grilla de Productos Premium */
-.bestsellers {
-  padding: 80px 20px;
-  background-color: #fdfaf7;
-  /* Fondo hueso */
+.cv-bestsellers {
+  padding: 60px 5%;
+  background-color: var(--color-blanco);
 }
 
-/* --- TÍTULO UNIFICADO --- */
-.bestsellers__header h2 {
-  font-size: clamp(1.5rem, 3vw, 2rem) !important;
-  color: #2b2520;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 10px;
-  font-family: 'Noto Serif', serif;
-  font-weight: 800;
+.section-header {
+  text-align: center;
+  margin-bottom: 40px;
 }
 
-.gold-line {
-  width: 50px;
-  height: 3px;
-  background-color: #a5813a;
-  margin: 0 auto 40px auto;
-  border-radius: 5px;
+.section-header h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-top: 10px;
 }
 
-/* --- GRILLA DE PRODUCTOS --- */
-.bestsellers__grid {
+.products-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 30px;
-  align-items: stretch;
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
-/* --- TARJETA DE PRODUCTO --- */
 .product-card {
-  background: #ffffff;
-  border-radius: 20px;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
   overflow: hidden;
-  /* Esto asegura que nada salga de la tarjeta */
-  box-shadow: 0 10px 25px rgba(43, 37, 32, 0.05);
-  transition: all 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  border: 1px solid rgba(165, 129, 58, 0.1);
-  /* Fundamental para que el badge se posicione relativo a la tarjeta, NO a la imagen */
-  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: var(--color-blanco);
 }
 
 .product-card:hover {
-  box-shadow: 0 20px 40px rgba(43, 37, 32, 0.12);
-  transform: translateY(-8px);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
 }
 
-/* --- CONTENEDOR DE IMAGEN (EL FIX DEFINITIVO DEL ZOOM) --- */
-.product-card__image-wrapper {
-  position: relative;
-  aspect-ratio: 1 / 1.1;
-  background-color: #f9f6f2;
+.product-image {
+  width: 100%;
+  height: 250px;
   overflow: hidden;
-
-  /* Aseguramos el borde redondeado solo arriba */
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-
-  /* La magia "Anti-Desborde" nivel Dios */
-  isolation: isolate;
-  -webkit-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
+  background-color: #f9f9f9;
 }
 
-.product-card__image {
+.product-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-  /* Animación más suave y natural */
-
-  /* Le pasamos el redondeo directamente a la foto también por seguridad extrema */
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  will-change: transform;
-  display: block;
 }
 
-/* Animación de zoom controlada */
-.product-card:hover .product-card__image {
-  transform: scale(1.08);
-}
-
-/* --- ETIQUETA "MÁS VENDIDO" (EL BADGE DORADO) --- */
-.product-card__badge {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  /* Lo muevo a la izquierda para que no choque con nada */
-  background-color: #a5813a !important;
-  /* Fuerza el color dorado */
-  color: #fdfaf7 !important;
-  /* Fuerza el color blanco */
-  padding: 6px 14px;
-  border-radius: 50px;
-  font-size: 0.75rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  z-index: 10;
-  /* Asegura que esté por encima de la imagen */
-  box-shadow: 0 5px 15px rgba(43, 37, 32, 0.3);
-  /* Reseteo de estilos basura que pueda heredar */
-  border: none;
-  margin: 0;
-}
-
-/* --- INFORMACIÓN --- */
-.product-card__info {
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
+.product-info {
+  padding: 20px;
   text-align: center;
 }
 
-.product-card__name {
-  font-family: 'Noto Serif', serif;
-  font-size: 1.15rem;
-  color: #2b2520;
-  margin-bottom: 8px;
-  font-weight: 700;
+.product-info h3 {
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin-bottom: 10px;
+  height: 40px; /* Mantiene la altura pareja si el texto es largo */
 }
 
-.product-card__description {
-  font-size: 0.88rem;
-  color: #6a5f58;
+.price {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-wine); /* Color vino del manual */
   margin-bottom: 15px;
-  line-height: 1.5;
-  flex-grow: 1;
 }
 
-.product-card__price {
-  font-size: 1.4rem;
-  font-weight: 800;
-  color: #a5813a;
-  /* Dorado de marca */
-  margin-bottom: 20px;
-}
-
-/* --- EL BOTÓN --- */
-.product-card__btn {
-  background-color: #2b2520;
-  color: #fdfaf7;
+.add-to-cart-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--color-negro);
+  color: var(--color-blanco);
   border: none;
-  border-radius: 50px;
-  padding: 14px 20px;
+  border-radius: 4px;
+  font-family: var(--font-principal);
   font-weight: 700;
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin-top: auto;
+  transition: background-color 0.3s;
 }
 
-.product-card__btn:hover {
-  background-color: #a5813a;
-  transform: scale(1.02);
-  box-shadow: 0 5px 15px rgba(165, 129, 58, 0.4);
-}
-
-/* --- RESPONSIVE --- */
-@media (max-width: 1024px) {
-  .bestsellers__grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
-}
-
-@media (max-width: 600px) {
-  .bestsellers__grid {
-    grid-template-columns: 1fr;
-    padding: 0 10px;
-  }
+.add-to-cart-btn:hover {
+  background-color: var(--color-wine);
 }

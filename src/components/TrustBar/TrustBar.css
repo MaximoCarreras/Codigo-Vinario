@@ -1,44 +1,30 @@
-/* TrustBar — Dark band with trust indicators */
-.trustbar {
-  background: var(--color-brown-dark);
-  padding: var(--space-lg) var(--space-lg);
-}
-
-.trustbar__container {
+.cv-trustbar {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
+  background-color: #fcfcfc;
+  border-top: 1px solid #eaeaea;
+  border-bottom: 1px solid #eaeaea;
+  padding: 20px 5%;
   flex-wrap: wrap;
-  gap: var(--space-lg);
+  gap: 20px;
 }
 
-.trustbar__item {
+.trust-item {
   display: flex;
   align-items: center;
-  gap: var(--space-sm);
-  color: var(--color-white);
+  gap: 10px;
 }
 
-.trustbar__icon {
-  color: var(--color-gold);
-  font-size: 1.4rem;
+.trust-icon {
+  font-size: 1.5rem;
+  /* Aplicamos el color vino a los íconos si fueran fuentes, con emojis queda normal */
 }
 
-.trustbar__text {
-  font-size: 0.85rem;
-  font-weight: 500;
-  white-space: nowrap;
-}
-
-@media (max-width: 768px) {
-  .trustbar__container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-md);
-  }
-
-  .trustbar__text {
-    font-size: 0.78rem;
-    white-space: normal;
-  }
+.trust-item p {
+  font-family: var(--font-principal);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-negro);
+  margin: 0;
 }

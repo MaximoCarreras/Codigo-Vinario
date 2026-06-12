@@ -1,71 +1,38 @@
-import { useFeaturedProducts } from '../../hooks/useProducts';
-import { useCart } from '../../context/CartContext';
+import React from 'react';
 import './BestSellers.css';
 
-export default function BestSellers() {
-  const { products, loading } = useFeaturedProducts();
-  const { addToCart } = useCart();
-
-  const formatPrice = (price) => {
-    return new Intl.NumberFormat('es-AR', {
-      style: 'currency',
-      currency: 'ARS',
-      minimumFractionDigits: 0,
-    }).format(price);
-  };
+const BestSellers = () => {
+  // Lista temporal de productos para ver el diseño
+  const productos = [
+    { id: 1, nombre: "Vino Pixel Malbec", precio: "$6.500", img: "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" },
+    { id: 2, nombre: "Vino Pixel Blend de Tintas", precio: "$7.200", img: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" },
+    { id: 3, nombre: "Cerveza Chachingo IPA", precio: "$2.800", img: "https://images.unsplash.com/photo-1614316311859-07fb1e0b5220?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" },
+    { id: 4, nombre: "Fernet Branca 750ml", precio: "$8.500", img: "https://images.unsplash.com/photo-1614316311859-07fb1e0b5220?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" } // Podés cambiar las URLs por fotos reales luego
+  ];
 
   return (
-    <section className="bestsellers section" id="productos">
-      <div className="section__container">
+    <section className="cv-bestsellers">
+      <div className="section-header">
+        <span className="cv-code-detail">{'{ DESTACADOS }'}</span>
+        <h2>Los más elegidos</h2>
+      </div>
 
-        {/* Título unificado */}
-        <div className="section__title bestsellers__header">
-          <h2>Nuestros productos más vendidos</h2>
-          <div className="gold-line"></div>
-        </div>
-
-        {loading ? (
-          <p style={{ textAlign: 'center', padding: '50px' }}>Cargando mates seleccionados...</p>
-        ) : (
-          <div className="bestsellers__grid">
-            {products.map((product) => (
-              <article className="product-card" key={product.id}>
-
-                {/* Contenedor de la Imagen y el Badge */}
-                <div className="product-card__image-wrapper">
-                  <img
-                    src={product.image_url}
-                    alt={product.name}
-                    className="product-card__image"
-                    loading="lazy"
-                  />
-
-                  {/* Etiqueta "Más vendido". Solo se muestra si product.badge existe y tiene contenido */}
-                  {product.badge && product.badge.trim() !== '' && (
-                    <span className="product-card__badge">
-                      {product.badge}
-                    </span>
-                  )}
-                </div>
-
-                <div className="product-card__info">
-                  <h3 className="product-card__name">{product.name}</h3>
-                  <p className="product-card__description">{product.description}</p>
-                  <p className="product-card__price">{formatPrice(product.price)}</p>
-
-                  <button
-                    onClick={() => addToCart(product)}
-                    className="btn btn--primary product-card__btn"
-                  >
-                    <span className="material-symbols-outlined">add_shopping_cart</span>
-                    Agregar al Carrito
-                  </button>
-                </div>
-              </article>
-            ))}
+      <div className="products-grid">
+        {productos.map(producto => (
+          <div className="product-card" key={producto.id}>
+            <div className="product-image">
+              <img src={producto.img} alt={producto.nombre} />
+            </div>
+            <div className="product-info">
+              <h3>{producto.nombre}</h3>
+              <p className="price">{producto.precio}</p>
+              <button className="add-to-cart-btn">AGREGAR</button>
+            </div>
           </div>
-        )}
+        ))}
       </div>
     </section>
   );
-}
+};
+
+export default BestSellers;
