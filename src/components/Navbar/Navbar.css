@@ -5,30 +5,31 @@
 /* Navbar principal */
 .cv-navbar-main { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; }
 .logo-text { display: flex; flex-direction: column; align-items: center; text-decoration: none; color: black; }
-.binary-text { font-size: 0.7rem; color: #85123e; }
+.binary-text { font-size: 0.7rem; color: var(--color-vino); }
 .cv-search-container { display: flex; border: 1px solid #ccc; border-radius: 25px; overflow: hidden; width: 400px; }
 .cv-search-input { flex: 1; padding: 10px 15px; border: none; outline: none; }
-.cv-search-btn { background: black; color: white; border: none; padding: 0 20px; cursor: pointer; }
+.cv-search-btn { background: var(--color-negro); color: white; border: none; padding: 0 20px; cursor: pointer; }
 
 /* Menú de categorías */
 .cv-menu-list { display: flex; justify-content: center; list-style: none; padding: 15px 0; gap: 30px; margin: 0; }
 .cv-menu-list li { position: relative; }
 .cv-menu-list a { text-decoration: none; color: black; font-weight: 700; font-size: 0.9rem; }
 
-/* Mega Menú - Aquí estaba el error de diseño */
+.cv-header { width: 100%; border-bottom: 2px solid var(--color-vino); background: white; }
+.cv-topbar { background: var(--color-negro); color: white; text-align: center; padding: 8px; font-size: 0.75rem; }
+.cv-navbar-main { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; }
+
+.cv-categories ul { display: flex; justify-content: center; list-style: none; padding: 15px 0; gap: 40px; margin: 0; }
+.cv-categories a { text-decoration: none; color: var(--color-negro); font-weight: 700; transition: color 0.3s; }
+.cv-categories a:hover { color: var(--color-vino); }
+
+/* Mega Menu actualizado */
 .mega-menu { 
-    position: absolute; 
-    top: 100%; 
-    left: 0; 
-    width: 100vw; 
-    background: #85123e; 
-    color: white; 
-    padding: 30px 10%; 
-    display: none; /* Oculto por defecto */
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2); 
-    z-index: 2000; 
+    position: absolute; top: 100%; left: 0; width: 100%; 
+    background: var(--color-vino); color: white; padding: 40px 10%; 
+    display: none; box-shadow: 0 10px 30px rgba(0,0,0,0.15); z-index: 1000; 
 }
-.has-mega-menu:hover .mega-menu { display: flex; } /* Aparece al hacer hover */
-.mega-menu-content { display: flex; gap: 50px; width: 100%; }
-.mega-column h4 { font-family: monospace; color: #ffb3c6; margin-bottom: 10px; border-bottom: 1px solid #ffffff33; padding-bottom: 5px; }
-.mega-column a { display: block; color: white; font-size: 0.8rem; margin-bottom: 8px; font-weight: 300; }
+.has-mega-menu:hover .mega-menu { display: flex; }
+.mega-column h4 { font-family: monospace; color: var(--color-rosa-claro); border-bottom: 1px solid rgba(255,255,255,0.3); margin-bottom: 15px; padding-bottom: 8px; }
+.mega-column a { color: white; font-size: 0.85rem; margin-bottom: 12px; }
+.mega-column a:hover { color: var(--color-rosa-claro); }

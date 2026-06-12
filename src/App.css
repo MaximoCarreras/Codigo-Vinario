@@ -1,7 +1,13 @@
 :root {
   --color-negro: #1a1a1a;
   --color-blanco: #ffffff;
-  --color-wine: #85123e;
-  --font-principal: 'Montserrat', sans-serif;
+  --color-vino: #85123e;
+  --color-rosa-claro: #ffb3c6;
 }
-body { margin: 0; font-family: var(--font-principal); background-color: var(--color-blanco); }
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--color-blanco);
+  color: var(--color-negro);
+}
