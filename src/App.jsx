@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home/Home'; 
 import Bodegas from './pages/Bodegas/Bodegas';
-import CategoryPage from './pages/CategoryPage/CategoryPage'; /* <-- NUEVO */
+import CategoryPage from './pages/CategoryPage/CategoryPage';
 import './App.css';
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/bodegas" element={<Bodegas />} />
-      <Route path="/categoria" element={<CategoryPage />} /> /* <-- NUEVO */
+      <Route path="/categoria" element={<CategoryPage />} />
     </Routes>
   );
 }
