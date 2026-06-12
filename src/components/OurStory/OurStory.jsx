@@ -1,38 +1,34 @@
-import SpotlightCard from '../Animations/SpotlightCard';
+import React from 'react';
 import './OurStory.css';
 
 export default function OurStory() {
   return (
-    <section className="ourstory ourstory--light" id="nuestra-historia">
-      <div className="section__container">
+    <section className="cv-ourstory-section" id="nuestra-historia">
+      <div className="cv-ourstory-container">
 
-        <SpotlightCard className="ourstory__card" spotlightColor="rgba(165, 129, 58, 0.3)">
-          <div className="ourstory__content">
-            <span className="ourstory__overline">Nuestra Identidad</span>
+        <div className="cv-ourstory-card">
+          <div className="cv-ourstory-content">
+            <span className="cv-code-detail">{'{ NUESTRAS_RAÍCES }'}</span>
+            
+            <h2 className="cv-ourstory-title">El Origen del Código</h2>
 
-            {/* Título ahora con tamaño controlado */}
-            <h2 className="ourstory__title">Nuestra Historia</h2>
-
-            {/* Divisor dorado para mantener la coherencia con el resto de la web */}
-            <div className="gold-line gold-line--small"></div>
-
-            <div className="ourstory__text">
+            <div className="cv-ourstory-text">
               <p>
-                <b>Cuyo Cebado</b> nació de una charla entre dos amigos con una idea clara:
-                encontrar el mate que nos represente. Lo que empezó como un proyecto personal
-                se convirtió en una búsqueda por la <b>calidad artesanal</b>.
+                <b>Código Vinario</b> nace en el corazón de Mendoza con una misión clara:
+                decodificar el fascinante mundo de las bebidas para acercarlo a todos. Lo que comenzó
+                como una pasión por nuestra tierra, evolucionó en una <b>curaduría premium</b>.
               </p>
               <p>
-                Seleccionamos personalmente cada pieza, asegurándonos de que cada mate que llegue
-                a tus manos sea el mismo que elegiríamos para nosotros. Unimos la tradición de
-                nuestra tierra con el ritual diario de compartir.
+                Seleccionamos personalmente cada etiqueta, visitamos las bodegas y nos aseguramos
+                de que cada botella que llegue a tu copa represente la verdadera identidad de nuestra
+                región. Unimos el respeto por la tradición vitivinícola con una visión moderna y accesible.
               </p>
-              <p className="ourstory__thanks">
-                <b>Gracias por ser parte de este comienzo.</b>
+              <p className="cv-ourstory-thanks">
+                <b>Gracias por descorchar esta historia con nosotros.</b>
               </p>
             </div>
           </div>
-        </SpotlightCard>
+        </div>
 
       </div>
     </section>
