@@ -4,6 +4,7 @@ import Hero from '../../components/Hero/Hero';
 import TrustBar from '../../components/TrustBar/TrustBar';
 import CategoryBanners from '../../components/CategoryBanners/CategoryBanners';
 import ProductCarousel from '../../components/ProductCarousel/ProductCarousel';
+import LocalServices from '../../components/LocalServices/LocalServices'; // <-- NUEVO
 import Community from '../../components/Community/Community';
 import Footer from '../../components/Footer/Footer';
 
@@ -14,22 +15,21 @@ const Home = () => {
       <Hero />
       <TrustBar />
       
-      {/* Carrusel de Combos */}
       <ProductCarousel 
         titulo="Combos X6 y X12" 
         etiquetaCodigo="{ cajas_cerradas }" 
       />
 
-      {/* Grilla de Categorías */}
       <CategoryBanners />
 
-      {/* Segundo Carrusel (Botellones/Premium) */}
+      {/* BLOQUE NUEVO: Le da el quiebre de contenido premium que buscabas */}
+      <LocalServices /> 
+
       <ProductCarousel 
         titulo="Botellones y Magnum" 
         etiquetaCodigo="< grandes_formatos >" 
       />
 
-      {/* Comunidad y Cierre */}
       <Community />
       <Footer />
     </div>

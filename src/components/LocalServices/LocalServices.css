@@ -1,0 +1,216 @@
+.cv-local-services {
+  padding: 80px 5%;
+  background-color: var(--color-blanco);
+}
+
+.services-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.services-header h2 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.services-header p {
+  font-size: 1.1rem;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+  font-weight: 300;
+}
+
+/* Grilla Asimétrica */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.service-card {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  min-height: 320px;
+  display: flex;
+  align-items: flex-end;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+}
+
+/* Tarjetas Grandes con Imagen de Fondo */
+.card-large {
+  grid-column: span 1;
+  min-height: 400px;
+  align-items: flex-end;
+}
+
+.card-image-bg {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.5s ease;
+}
+
+.service-card:hover .card-image-bg {
+  transform: scale(1.03);
+}
+
+/* URLs de Placeholders premium de Unsplash para el Local y Foodtruck */
+.img-catas {
+  background-image: url('https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
+}
+
+.img-truck {
+  background-image: url('https://images.unsplash.com/photo-1565123409695-7b5ef63a2efb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
+}
+
+.card-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 30%, rgba(0,0,0,0.2) 100%);
+  z-index: 1;
+}
+
+.card-content {
+  position: relative;
+  z-index: 2;
+  padding: 40px;
+  color: var(--color-blanco);
+}
+
+.card-content h3 {
+  font-size: 1.8rem;
+  margin: 10px 0;
+  font-weight: 700;
+}
+
+.card-content p {
+  font-size: 0.95rem;
+  color: #dddddd;
+  margin-bottom: 20px;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* Tarjetas Chicas de Texto Puro */
+.card-small {
+  background-color: #fafafa;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-content-pure {
+  padding: 40px;
+  width: 100%;
+}
+
+.card-content-pure h3 {
+  font-size: 1.6rem;
+  margin: 10px 0;
+  font-weight: 700;
+}
+
+.card-content-pure p {
+  font-size: 0.95rem;
+  color: #444444;
+  margin-bottom: 25px;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* Variaciones de Fondos Especiales */
+.bg-light {
+  background-color: #f9f9f9;
+  border: 1px solid #eaeaea;
+}
+
+.bg-wine {
+  background-color: var(--color-wine);
+  color: var(--color-blanco);
+}
+
+.bg-wine .card-content-pure p {
+  color: #ffcbd7;
+}
+
+/* Selectores de Código/Etiqutación Técnica */
+.card-tech-tag {
+  font-family: monospace;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  display: block;
+}
+
+.bg-light .card-tech-tag { color: var(--color-wine); }
+.bg-wine .card-tech-tag { color: #ffcbd7; }
+.bg-dark .card-tech-tag { color: #ffb3c6; }
+
+/* Botones con estilos diferenciales */
+.cv-btn-link {
+  background: none;
+  border: none;
+  color: #ffb3c6;
+  font-family: monospace;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+.cv-btn-link:hover {
+  text-decoration: underline;
+}
+
+.cv-btn-wine-sm {
+  background-color: var(--color-negro);
+  color: var(--color-blanco);
+  border: none;
+  padding: 10px 25px;
+  border-radius: 20px;
+  font-family: var(--font-principal);
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cv-btn-wine-sm:hover {
+  background-color: var(--color-wine);
+}
+
+.cv-btn-white-sm {
+  background-color: var(--color-blanco);
+  color: var(--color-wine);
+  border: none;
+  padding: 10px 25px;
+  border-radius: 20px;
+  font-family: var(--font-principal);
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.cv-btn-white-sm:hover {
+  transform: scale(1.05);
+}
+
+/* Responsive para que en celulares pase a una sola columna */
+@media (max-width: 900px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  .card-large {
+    min-height: 350px;
+  }
+}
