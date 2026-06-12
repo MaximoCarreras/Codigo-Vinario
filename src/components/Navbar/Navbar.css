@@ -1,9 +1,8 @@
 .navbar { width: 100%; height: 80px; background-color: #000; border-bottom: 2px solid #85123e; display: flex; align-items: center; z-index: 4000; }
 .navbar__container { width: 95%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
 
-/* NUEVO: Estilo del logo */
-.navbar__brand { display: flex; align-items: center; text-decoration: none; }
-.navbar__logo { height: 50px; width: auto; object-fit: contain; }
+/* Control del Logo */
+.navbar__logo { height: 50px; width: auto; display: block; }
 
 .navbar__center { flex: 1; max-width: 400px; margin: 0 40px; }
 .navbar__search { display: flex; background: #1a1a1a; border: 1px solid #333; border-radius: 50px; padding: 5px 15px; }
@@ -21,5 +20,5 @@
 .dropdown-menu { position: absolute; top: 100%; left: 0; background: #000; border: 1px solid #85123e; padding: 15px; min-width: 140px; display: flex; flex-direction: column; gap: 10px; }
 .dropdown-menu a { color: white; text-decoration: none; font-size: 0.75rem; text-transform: uppercase; }
 
-.navbar__cart-link { color: white; text-decoration: none; position: relative; font-size: 1.5rem; }
+.navbar__cart-link { color: white; text-decoration: none; position: relative; font-size: 1.5rem; display: flex; align-items: center; }
 .cart-count { position: absolute; top: -5px; right: -10px; background: #85123e; color: white; font-size: 10px; padding: 2px 6px; border-radius: 50%; }

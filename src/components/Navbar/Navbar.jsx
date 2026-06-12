@@ -11,7 +11,6 @@ export default function Navbar() {
         {/* LOGO */}
         <div className="navbar__left">
           <Link to="/" className="navbar__brand">
-            {/* Ajusta 'logo.png' al nombre exacto de tu archivo */}
             <img src="/logo/logo.png" alt="Código Vinario" className="navbar__logo" />
           </Link>
         </div>
