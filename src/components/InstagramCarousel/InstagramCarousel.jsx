@@ -2,61 +2,73 @@ import { useState, useEffect } from 'react';
 import { supabase } from '../../lib/supabaseClient';
 import './InstagramCarousel.css';
 
+// Fotos de respaldo por si la base de datos aún no tiene publicaciones cargadas
+const FALLBACK_POSTS = [
+  { image_url: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60', post_url: '#' },
+  { image_url: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60', post_url: '#' },
+  { image_url: 'https://images.unsplash.com/photo-1563203369-26f2e4a5ccf7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60', post_url: '#' },
+  { image_url: 'https://images.unsplash.com/photo-1584916201218-f4242ceb4809?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60', post_url: '#' }
+];
+
 export default function InstagramCarousel() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const { data } = await supabase
-        .from('instagram_posts')
-        .select('*')
-        .order('created_at', { ascending: false });
-      setPosts(data || []);
+      try {
+        const { data, error } = await supabase
+          .from('instagram_posts')
+          .select('*')
+          .order('created_at', { ascending: false });
+        
+        if (error) throw error;
+        
+        // Si hay datos, los usamos. Si no, usamos las fotos de respaldo.
+        setPosts(data && data.length > 0 ? data : FALLBACK_POSTS);
+      } catch (err) {
+        console.error("Error cargando Instagram:", err);
+        setPosts(FALLBACK_POSTS);
+      }
     };
     fetchPosts();
   }, []);
 
-  // Si no hay fotos, no mostramos nada
   if (posts.length === 0) return null;
 
-  // TRUCO MATEMÁTICO: Multiplicamos las fotos si son pocas para garantizar que el 
-  // carrusel sea más ancho que cualquier monitor y no deje espacios en blanco.
+  // Truco matemático: Multiplicar fotos para el bucle infinito
   let repeatedPosts = [...posts];
   while (repeatedPosts.length < 10) {
     repeatedPosts = [...repeatedPosts, ...posts];
   }
 
   return (
-    <section className="ritual-carousel">
-      <div className="ritual-header">
-        <span className="ritual-overline">Comunidad</span>
-        <h2 className="ritual-title">Momentos Cuyo Cebado</h2>
-        <div className="ritual-divider"></div>
+    <section className="cv-insta-carousel">
+      <div className="section-header">
+        <span className="cv-code-detail">{'{ INSTAGRAM }'}</span>
+        <h2>Momentos Código Vinario</h2>
       </div>
 
-      <div className="ritual-marquee">
-        <div className="ritual-track">
+      <div className="cv-insta-marquee">
+        <div className="cv-insta-track">
           {/* GRUPO 1 */}
           {repeatedPosts.map((post, idx) => (
-            <a key={`orig-${idx}`} href={post.post_url} target="_blank" rel="noreferrer" className="ritual-item">
-              <div className="ritual-img-container">
-                <img src={post.image_url} alt="Cuyo Cebado Instagram" className="ritual-main-img" />
-                <div className="ritual-overlay">
-                  {/* ACÁ CARGAMOS TU LOGO */}
-                  <img src="/logo.png" alt="Logo Cuyo Cebado" className="ritual-overlay-logo" />
+            <a key={`orig-${idx}`} href={post.post_url} target="_blank" rel="noreferrer" className="cv-insta-item">
+              <div className="cv-insta-img-container">
+                <img src={post.image_url} alt="Código Vinario Instagram" className="cv-insta-main-img" loading="lazy" />
+                <div className="cv-insta-overlay">
+                  <img src="/logo.png" alt="Logo Código Vinario" className="cv-insta-overlay-logo" />
                 </div>
               </div>
             </a>
           ))}
           
-          {/* GRUPO 2 (Idéntico al Grupo 1, necesario para el bucle perfecto) */}
+          {/* GRUPO 2 (Idéntico al Grupo 1, para el bucle perfecto) */}
           {repeatedPosts.map((post, idx) => (
-            <a key={`clone-${idx}`} href={post.post_url} target="_blank" rel="noreferrer" className="ritual-item">
-              <div className="ritual-img-container">
-                <img src={post.image_url} alt="Cuyo Cebado Instagram" className="ritual-main-img" />
-                <div className="ritual-overlay">
-                  {/* ACÁ CARGAMOS TU LOGO */}
-                  <img src="/logo.png" alt="Logo Cuyo Cebado" className="ritual-overlay-logo" />
+            <a key={`clone-${idx}`} href={post.post_url} target="_blank" rel="noreferrer" className="cv-insta-item">
+              <div className="cv-insta-img-container">
+                <img src={post.image_url} alt="Código Vinario Instagram" className="cv-insta-main-img" loading="lazy" />
+                <div className="cv-insta-overlay">
+                  <img src="/logo.png" alt="Logo Código Vinario" className="cv-insta-overlay-logo" />
                 </div>
               </div>
             </a>
