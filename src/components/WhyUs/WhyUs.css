@@ -1,97 +1,112 @@
-/* WhyUs — Sección inicial de Nosotros */
-.whyus {
-    background-color: #fdfaf7;
-    padding: 80px 20px 40px 20px;
+.cv-whyus-section {
+    background-color: #ffffff;
+    padding: 80px 5%;
 }
 
-.whyus__header h2 {
-    font-size: clamp(1.5rem, 3vw, 2rem) !important;
-    color: #2b2520;
-    text-transform: uppercase;
+.cv-whyus-container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Reutilizamos el estilo del título global */
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.cv-code-detail {
+    color: #85123e;
+    font-family: monospace;
+    font-size: 0.9rem;
     letter-spacing: 2px;
+    display: block;
     margin-bottom: 10px;
-    font-family: 'Noto Serif', serif;
-    font-weight: 800;
 }
 
-.gold-line {
-    width: 50px;
-    height: 3px;
-    background-color: #a5813a;
-    margin: 0 auto 40px auto;
-    border-radius: 5px;
+.section-header h2 {
+    font-size: 2.2rem;
+    color: #000;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin: 0;
 }
 
-.whyus__grid {
+/* --- GRILLA DE VALORES --- */
+.cv-whyus-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 40px;
     text-align: center;
-    max-width: 1000px;
-    margin: 0 auto;
 }
 
-.whyus__card {
+.cv-whyus-card {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.whyus__icon {
-    width: 80px;
-    height: 80px;
+/* Contenedor del ícono */
+.cv-whyus-icon {
+    width: 85px;
+    height: 85px;
     border-radius: 50%;
-    background: #fdfaf7;
-    border: 2px solid rgba(165, 129, 58, 0.3);
+    background: #ffffff;
+    border: 2px solid rgba(133, 18, 62, 0.2); /* Borde sutil color vino */
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     transition: all 0.3s ease;
 }
 
-.whyus__card:hover .whyus__icon {
-    background: #a5813a;
-    border-color: #a5813a;
+/* Efecto al pasar el mouse */
+.cv-whyus-card:hover .cv-whyus-icon {
+    background: #85123e;
+    border-color: #85123e;
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(165, 129, 58, 0.2);
+    box-shadow: 0 10px 20px rgba(133, 18, 62, 0.2);
 }
 
-.whyus__card:hover .whyus__icon .material-symbols-outlined {
-    color: #fdfaf7;
-}
-
-.whyus__icon .material-symbols-outlined {
-    font-size: 2rem;
-    color: #a5813a;
+.cv-whyus-icon .material-symbols-outlined {
+    font-size: 2.2rem;
+    color: #85123e;
     transition: color 0.3s ease;
 }
 
-.whyus__card h3 {
-    font-size: 1.1rem;
-    margin-bottom: 10px;
-    color: #2b2520;
-    font-weight: 700;
+.cv-whyus-card:hover .cv-whyus-icon .material-symbols-outlined {
+    color: #ffffff;
 }
 
-.whyus__card p {
+/* Textos */
+.cv-whyus-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: #000;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.cv-whyus-card p {
     font-size: 0.95rem;
-    color: #5a5048;
+    color: #555;
     max-width: 280px;
     line-height: 1.6;
+    margin: 0;
 }
 
+/* --- RESPONSIVE --- */
 @media (max-width: 768px) {
-    .whyus {
-        padding: 60px 15px 10px 15px; /* Menos espacio en celular */
+    .cv-whyus-section {
+        padding: 60px 5%;
     }
 
-    .whyus__grid {
+    .cv-whyus-grid {
         grid-template-columns: 1fr;
-        gap: 25px; /* Más pegados en celu */
+        gap: 40px;
     }
-
-    .gold-line {
-        margin-bottom: 30px;
+    
+    .cv-whyus-icon {
+        margin-bottom: 15px;
     }
 }
