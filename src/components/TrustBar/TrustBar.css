@@ -1,30 +1,73 @@
 .cv-trustbar {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background-color: #fcfcfc;
-  border-top: 1px solid #eaeaea;
-  border-bottom: 1px solid #eaeaea;
-  padding: 20px 5%;
-  flex-wrap: wrap;
-  gap: 20px;
+    background-color: #000000;
+    padding: 30px 5%;
+    border-bottom: 2px solid #85123e; /* Detalle de marca inferior */
 }
 
-.trust-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.cv-trustbar-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.trust-icon {
-  font-size: 1.5rem;
-  /* Aplicamos el color vino a los íconos si fueran fuentes, con emojis queda normal */
+.cv-trustbar-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: #ffffff;
+    transition: transform 0.3s ease;
 }
 
-.trust-item p {
-  font-family: var(--font-principal);
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: var(--color-negro);
-  margin: 0;
+.cv-trustbar-item:hover {
+    transform: translateY(-2px);
+}
+
+.cv-trustbar-icon {
+    color: #85123e;
+    font-size: 2.2rem !important;
+}
+
+.cv-trustbar-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.cv-trustbar-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 0 0 4px 0;
+    letter-spacing: 0.5px;
+}
+
+.cv-trustbar-desc {
+    font-size: 0.8rem;
+    color: #cccccc;
+    margin: 0;
+}
+
+/* =========================================
+   RESPONSIVE MÓVIL
+   ========================================= */
+@media (max-width: 900px) {
+    .cv-trustbar-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px 20px;
+    }
+}
+
+@media (max-width: 500px) {
+    .cv-trustbar-container {
+        grid-template-columns: 1fr; /* Una columna en celulares chicos */
+        gap: 25px;
+    }
+    
+    .cv-trustbar-item {
+        justify-content: center;
+        text-align: center;
+        flex-direction: column;
+        gap: 10px;
+    }
 }
