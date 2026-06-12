@@ -1,8 +1,5 @@
-/**
- * Newsletter — "Club del Mate" signup section.
- */
 import { useState } from 'react';
-import { supabase } from '../../lib/supabase';
+import { supabase } from '../../lib/supabaseClient';
 import './Newsletter.css';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
@@ -40,50 +37,51 @@ export default function Newsletter() {
   };
 
   return (
-    <section className="newsletter section" id="contacto">
-      <div className="newsletter__container">
+    <section className="cv-newsletter-section" id="newsletter">
+      <div className="cv-newsletter-container">
 
-        {/* Título unificado con línea dorada */}
-        <div className="section__title newsletter__header">
-          <h2>Unite al Club del Mate</h2>
-          <div className="gold-line"></div>
+        {/* Título estandarizado */}
+        <div className="section-header">
+          <span className="cv-code-detail">{'{ CLUB_VINARIO }'}</span>
+          <h2>Unite a nuestra comunidad</h2>
         </div>
 
-        <p className="newsletter__subtitle">
-          Recibí un 10% OFF en tu primera compra + tips de curado exclusivos
+        <p className="cv-newsletter-subtitle">
+          Recibí un 10% OFF en tu primera compra y enterate antes de nuestras catas exclusivas.
         </p>
 
-        <form className="newsletter__form" onSubmit={handleSubmit}>
+        <form className="cv-newsletter-form" onSubmit={handleSubmit}>
           <input
             type="email"
-            placeholder="Tu email..."
+            placeholder="Ingresá tu email..."
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="newsletter__input"
+            className="cv-newsletter-input"
             required
           />
           <button
             type="submit"
-            className="newsletter__btn"
+            className="cv-newsletter-btn"
             disabled={status === 'loading'}
           >
-            {status === 'loading' ? 'Enviando...' : 'Suscribirme'}
+            {status === 'loading' ? 'ENVIANDO...' : 'SUSCRIBIRME'}
           </button>
         </form>
 
+        {/* Mensajes sin emojis, estilo profesional */}
         {status === 'success' && (
-          <p className="newsletter__message newsletter__message--success">
-            ✅ ¡Te suscribiste! Revisá tu email para el cupón.
+          <p className="cv-newsletter-message cv-newsletter-message--success">
+            ¡Te suscribiste con éxito! Revisá tu bandeja de entrada para ver el cupón.
           </p>
         )}
         {status === 'error' && (
-          <p className="newsletter__message newsletter__message--error">
-            ❌ Hubo un error. Intentá de nuevo.
+          <p className="cv-newsletter-message cv-newsletter-message--error">
+            Ocurrió un error al procesar tu solicitud. Por favor, intentá nuevamente.
           </p>
         )}
 
-        <p className="newsletter__disclaimer">
-          Sin spam. Cancelá cuando quieras.
+        <p className="cv-newsletter-disclaimer">
+          Cero spam. Podés cancelar tu suscripción cuando quieras.
         </p>
       </div>
     </section>
