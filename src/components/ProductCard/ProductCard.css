@@ -1,0 +1,123 @@
+.cv-premium-card {
+  position: relative;
+  background-color: var(--color-blanco);
+  border-radius: 4px;
+  padding: 20px 15px;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 1px solid transparent; /* Para el hover */
+}
+
+/* Efecto hover: borde sutil y sombra elegante */
+.cv-premium-card:hover {
+  border-color: #eaeaea;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+  transform: translateY(-5px);
+}
+
+.cv-badge-discount {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background-color: var(--color-wine); /* Pantone WINE 7420 CP */
+  color: var(--color-blanco);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 5px 8px;
+  border-radius: 50%; /* Círculo como en La Barrica */
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  line-height: 1;
+}
+
+.cv-card-image-wrapper {
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.cv-card-image {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  transition: transform 0.5s ease;
+}
+
+.cv-premium-card:hover .cv-card-image {
+  transform: scale(1.05); /* Zoom sutil a la botella al pasar el mouse */
+}
+
+.cv-bodega-tech {
+  display: block;
+  font-family: monospace;
+  color: #888;
+  font-size: 0.75rem;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.cv-product-title {
+  font-family: var(--font-principal);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--color-negro);
+  height: 45px; /* Mantiene la grilla pareja */
+  margin-bottom: 15px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Corta el texto si es muy largo */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.cv-price-container {
+  margin-bottom: 5px;
+}
+
+.cv-price-old {
+  font-size: 0.85rem;
+  color: #aaa;
+  text-decoration: line-through;
+  margin-right: 10px;
+}
+
+.cv-price-current {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-wine); /* Precio destacado en tu rojo */
+}
+
+.cv-transfer-text {
+  font-size: 0.75rem;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.cv-btn-add {
+  width: 100%;
+  background-color: var(--color-blanco);
+  color: var(--color-wine);
+  border: 2px solid var(--color-wine);
+  padding: 10px 0;
+  font-family: var(--font-principal);
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0; /* Oculto por defecto */
+  transform: translateY(10px);
+}
+
+/* El botón aparece de abajo hacia arriba al pasar el mouse */
+.cv-premium-card:hover .cv-btn-add {
+  opacity: 1;
+  transform: translateY(0);
+  background-color: var(--color-wine);
+  color: var(--color-blanco);
+}
