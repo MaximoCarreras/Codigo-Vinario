@@ -9,7 +9,6 @@ export default function Navbar() {
     <nav className="navbar">
       <div className="navbar__container">
         {/* LOGO */}
-        // ... dentro del return de Navbar ...
         <div className="navbar__left">
           <Link to="/" className="navbar__brand">
             {/* Si el archivo está en public, la ruta es /logo.png */}
