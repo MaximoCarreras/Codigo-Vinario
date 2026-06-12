@@ -1,39 +1,38 @@
 import React from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import Hero from '../../components/Hero/Hero';
-import TrustBar from '../../components/TrustBar/TrustBar';
-import CategoryBanners from '../../components/CategoryBanners/CategoryBanners';
-import ProductCarousel from '../../components/ProductCarousel/ProductCarousel';
-import LocalServices from '../../components/LocalServices/LocalServices'; // <-- NUEVO
-import Community from '../../components/Community/Community';
-import Footer from '../../components/Footer/Footer';
+// Importamos los nuevos componentes
+import TiltedCard from '../../components/ReactBits/TiltedCard';
+import InfiniteMenu from '../../components/ReactBits/InfiniteMenu';
 
 const Home = () => {
+  // Lista de tus bodegas para el menú 3D
+  const bodegas = [
+    { image: 'url_a_tu_logo_pixel.png', title: 'PIXEL', description: 'Vinos de vanguardia', link: '/categoria/pixel' },
+    { image: 'url_a_tu_logo_chachingo.png', title: 'CHACHINGO', description: 'Cervecería artesanal', link: '/categoria/cervezas' }
+  ];
+
   return (
     <div>
       <Navbar />
       <Hero />
-      <TrustBar />
-      
-      <ProductCarousel 
-        titulo="Combos X6 y X12" 
-        etiquetaCodigo="{ cajas_cerradas }" 
-      />
 
-      <CategoryBanners />
+      {/* SECCIÓN BODEGAS 3D - Reemplaza tu anterior sección */}
+      <section style={{ height: '500px', backgroundColor: '#000' }}>
+        <InfiniteMenu items={bodegas} scale={1.0} />
+      </section>
 
-      {/* BLOQUE NUEVO: Le da el quiebre de contenido premium que buscabas */}
-      <LocalServices /> 
-
-      <ProductCarousel 
-        titulo="Botellones y Magnum" 
-        etiquetaCodigo="< grandes_formatos >" 
-      />
-
-      <Community />
-      <Footer />
+      {/* SECCIÓN PRODUCTOS DESTACADOS CON EFECTO TILTED */}
+      <section style={{ padding: '50px 5%' }}>
+        <TiltedCard 
+           imageSrc="https://images.unsplash.com/photo-1584916201218-f4242ceb4809"
+           captionText="Vino Pixel Malbec"
+           containerHeight="400px"
+           imageHeight="350px"
+           imageWidth="250px"
+           rotateAmplitude={10}
+        />
+      </section>
     </div>
   );
 };
-
-export default Home;
