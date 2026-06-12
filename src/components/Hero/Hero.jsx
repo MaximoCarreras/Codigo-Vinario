@@ -1,47 +1,54 @@
 import React from 'react';
-import Navbar from '../../components/Navbar/Navbar';
-import Hero from '../../components/Hero/Hero';
-import LogoLoop from '../../components/ReactBits/LogoLoop';
-import Categories from '../../components/Categories/Categories';
-import BestSellers from '../../components/BestSellers/BestSellers';
-import Community from '../../components/Community/Community';
-import Footer from '../../components/Footer/Footer';
-import './Home.css';
+import { Link } from 'react-router-dom';
+import BlurText from '../ReactBits/BlurText';
+import DecryptedText from '../ReactBits/DecryptedText';
+import './Hero.css';
 
-const Home = () => {
-  // Estos son los logos de las bodegas para el carrusel
-  const bodegas = [
-    { src: 'https://placehold.co/150x50/000000/FFF?text=PIXEL', alt: 'Pixel' },
-    { src: 'https://placehold.co/150x50/000000/FFF?text=CHACHINGO', alt: 'Chachingo' },
-    { src: 'https://placehold.co/150x50/000000/FFF?text=LAMADRID', alt: 'Lamadrid' },
-  ];
-
+const Hero = () => {
   return (
-    <div className="home-container">
-      {/* 1. Navegación */}
-      <Navbar />
+    <section className="cv-hero">
+      {/* 1. Capa de fondo inmersivo (Foto con máscara de degradado) */}
+      <div
+        className="cv-hero__bg-image"
+        style={{ backgroundImage: `url('https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')` }}
+      ></div>
 
-      {/* 2. Portada Principal */}
-      <Hero />
-      
-      {/* 3. Cinta de Bodegas (Separador visual) */}
-      <section style={{ padding: '40px 0', backgroundColor: '#fdfdfd', borderBottom: '1px solid #eaeaea' }}>
-         <LogoLoop logos={bodegas} speed={40} />
-      </section>
+      {/* 2. Capa de contenido */}
+      <div className="cv-hero__container">
+        <div className="cv-hero__content">
+          
+          {/* El detalle técnico con efecto Matrix Binario */}
+          <div className="cv-code-detail">
+            <DecryptedText
+              text="C:\> RUN_STORE"
+              animateOn="view"
+              speed={70}
+              maxIterations={20}
+              characters="01"
+              encryptedClassName="encrypted-glitch"
+            />
+          </div>
 
-      {/* 4. Categorías de Bebidas */}
-      <Categories />
+          {/* El título con revelado cinematográfico */}
+          <BlurText
+            text="La experiencia del vino, decodificada."
+            delay={50}
+            animateBy="words"
+            direction="top"
+            className="cv-hero-title"
+          />
 
-      {/* 5. Los Más Vendidos (Productos) */}
-      <BestSellers />
-
-      {/* 6. Redes y Contacto */}
-      <Community />
-
-      {/* 7. Pie de página */}
-      <Footer />
-    </div>
+          <p className="cv-hero-subtitle">
+            Tu selección exclusiva de bodegas, cervezas y destilados con envíos a todo el país.
+          </p>
+          
+          <div className="cv-hero-actions">
+            <Link to="/productos" className="cv-btn-wine">VER SELECCIÓN</Link>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 };
 
-export default Home;
+export default Hero;
