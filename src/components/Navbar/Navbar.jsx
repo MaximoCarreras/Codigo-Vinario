@@ -16,7 +16,7 @@ export default function Navbar() {
             <img src="/logo.png" alt="Código Vinario" className="navbar__logo" />
           </Link>
         </div>
-// ... resto del código ...
+
 
         {/* BUSCADOR */}
         <div className="navbar__center">
