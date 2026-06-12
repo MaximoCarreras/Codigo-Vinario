@@ -9,11 +9,14 @@ export default function Navbar() {
     <nav className="navbar">
       <div className="navbar__container">
         {/* LOGO */}
+        // ... dentro del return de Navbar ...
         <div className="navbar__left">
           <Link to="/" className="navbar__brand">
-            <img src="/logo/logo.png" alt="Código Vinario" className="navbar__logo" />
+            {/* Si el archivo está en public, la ruta es /logo.png */}
+            <img src="/logo.png" alt="Código Vinario" className="navbar__logo" />
           </Link>
         </div>
+// ... resto del código ...
 
         {/* BUSCADOR */}
         <div className="navbar__center">

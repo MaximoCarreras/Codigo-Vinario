@@ -2,7 +2,7 @@
 .navbar__container { width: 95%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
 
 /* Control del Logo */
-.navbar__logo { height: 50px; width: auto; display: block; }
+.navbar__logo { height: 60px; width: auto; display: block; object-fit: contain; }
 
 .navbar__center { flex: 1; max-width: 400px; margin: 0 40px; }
 .navbar__search { display: flex; background: #1a1a1a; border: 1px solid #333; border-radius: 50px; padding: 5px 15px; }
