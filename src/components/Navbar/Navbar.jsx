@@ -19,11 +19,21 @@ const Navbar = () => {
 
         <div className="cv-search-container">
           <input type="text" placeholder="Buscar vinos, cervezas, bodegas..." className="cv-search-input" />
-          <button className="cv-search-btn">🔍</button>
+          <button className="cv-search-btn" aria-label="Buscar">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
         </div>
 
         <div className="cv-cart-container">
-          🛒 <span className="cart-badge">0</span>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <span className="cart-badge">0</span>
         </div>
       </div>
 
@@ -31,7 +41,7 @@ const Navbar = () => {
         <ul className="cv-menu-list">
           <li><Link to="/bodegas">BODEGAS</Link></li>
           <li className="has-mega-menu">
-            <Link to="/categoria/vinos" className="menu-link">VINOS ▾</Link>
+            <Link to="/categoria/vinos" className="menu-link">VINOS</Link>
             <div className="mega-menu">
               <div className="mega-menu-content">
                 <div className="mega-column">
