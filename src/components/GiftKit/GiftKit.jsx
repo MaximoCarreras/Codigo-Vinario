@@ -1,66 +1,63 @@
-/**
- * GiftKit — Sección de Kit de Regalo Premium.
- */
+import React from 'react';
 import { useCart } from '../../context/CartContext';
-import kitImage from '../../assets/kit_regalo.png';
 import './GiftKit.css';
 
 export default function GiftKit() {
   const { addToCart } = useCart();
 
   const kitProduct = {
-    id: 'kit-regalo-premium',
-    name: 'Kit Regalo Premium',
-    price: 89000,
-    image_url: kitImage,
-    stock: 10
+    id: 'estuche-degustacion-premium',
+    name: 'Estuche Degustación Premium',
+    price: 45000,
+    image_url: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    stock: 15
   };
 
   return (
-    <section className="giftkit section" id="kit-regalo">
-      <div className="giftkit__container section__container">
+    <section className="cv-giftkit" id="kit-regalo">
+      <div className="cv-giftkit__container">
 
         {/* Izquierda — Imagen con insignia */}
-        <div className="giftkit__image-wrapper">
-          <img src={kitImage} alt="Kit Regalo Premium Cuyo Cebado" loading="lazy" />
-          <span className="giftkit__badge">La opción más elegida</span>
+        <div className="cv-giftkit__image-wrapper">
+          <img src={kitProduct.image_url} alt="Estuche Degustación Código Vinario" loading="lazy" />
+          <span className="cv-giftkit__badge">Edición Limitada</span>
         </div>
 
         {/* Derecha — Detalles del producto */}
-        <div className="giftkit__content">
-          <h2 className="giftkit__title">
-            El regalo perfecto para el verdadero matero
+        <div className="cv-giftkit__content">
+          <span className="cv-code-detail">{'{ REGALO_IDEAL }'}</span>
+          <h2 className="cv-giftkit__title">
+            La experiencia de cata definitiva
           </h2>
 
           {/* Lista de ítems incluidos */}
-          <ul className="giftkit__items">
+          <ul className="cv-giftkit__items">
             <li>
               <span className="material-symbols-outlined">done</span>
-              Mate de madera noble seleccionado
+              2 Botellas Reserva de selección exclusiva
             </li>
             <li>
               <span className="material-symbols-outlined">done</span>
-              Bombilla de alpaca o acero premium
+              Estuche de madera de roble grabado
             </li>
             <li>
               <span className="material-symbols-outlined">done</span>
-              Caja artesanal de madera
+              Sacacorchos profesional de dos tiempos
             </li>
             <li>
               <span className="material-symbols-outlined">done</span>
-              Guía de curado y cuidado paso a paso
+              Guía de cata y recomendaciones de maridaje
             </li>
           </ul>
 
-          <p className="giftkit__price">$ 89.000</p>
+          <p className="cv-giftkit__price">$ 45.000</p>
 
-          {/* Botón Premium igual al de los productos (Sin la leyenda abajo) */}
           <button
             onClick={() => addToCart(kitProduct)}
-            className="btn btn--gold giftkit__btn"
+            className="cv-giftkit__btn"
           >
             <span className="material-symbols-outlined">shopping_cart</span>
-            Agregar al carrito
+            AGREGAR AL CARRITO
           </button>
         </div>
       </div>
