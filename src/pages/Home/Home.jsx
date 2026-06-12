@@ -17,7 +17,7 @@ const Home = () => {
       <Navbar />
       <Hero />
       
-      <section style={{ padding: '40px 0', backgroundColor: '#f9f9f9', minHeight: '150px' }}>
+      <section style={{ padding: '40px 0', backgroundColor: '#f9f9f9', minHeight: '100px' }}>
          <LogoLoop logos={bodegas} speed={60} />
       </section>
 

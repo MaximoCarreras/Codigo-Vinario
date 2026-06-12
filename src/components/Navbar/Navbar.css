@@ -1,5 +1,11 @@
 .cv-header { width: 100%; border-bottom: 1px solid #eaeaea; background-color: white; position: relative; z-index: 1000; }
 .cv-topbar { background-color: black; color: white; text-align: center; padding: 8px 15px; font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; }
 .cv-navbar-main { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; }
-.mega-menu { position: absolute; top: 100%; left: 0; width: 100%; background-color: #85123e; color: white; padding: 40px 10%; display: flex; opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 1000; }
+.cv-logo { cursor: pointer; }
+.cv-categories ul { display: flex; justify-content: center; list-style: none; padding: 15px 0; gap: 40px; margin: 0; }
+.cv-categories a { text-decoration: none; color: black; font-weight: 700; }
+.mega-menu { position: absolute; top: 100%; left: 0; width: 100%; background-color: #85123e; color: white; padding: 40px 10%; display: flex; opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 1000; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
 .has-mega-menu:hover .mega-menu { opacity: 1; visibility: visible; }
+.mega-menu-content { display: flex; gap: 60px; }
+.mega-column h4 { font-family: monospace; color: #ffb3c6; border-bottom: 1px solid rgba(255,255,255,0.2); margin-bottom: 15px; }
+.mega-column a { display: block; color: white; font-size: 0.85rem; margin-bottom: 12px; }

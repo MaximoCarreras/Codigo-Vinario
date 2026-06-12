@@ -1,0 +1,3 @@
+.tilted-card-figure { perspective: 1000px; position: relative; display: flex; justify-content: center; align-items: center; }
+.tilted-card-inner { position: relative; transform-style: preserve-3d; display: flex; justify-content: center; align-items: center; }
+.tilted-card-img { object-fit: cover; border-radius: 8px; }
