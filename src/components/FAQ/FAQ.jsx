@@ -1,29 +1,26 @@
-/**
- * FAQ — Preguntas frecuentes premium para Cuyo Cebado.
- */
 import { useState } from 'react';
 import './FAQ.css';
 
 const FAQ_ITEMS = [
   {
-    q: '¿Cómo es el proceso de compra si quiero un mate?',
-    a: 'Elegimos el contacto directo para brindarte una experiencia personalizada. Una vez que veas un modelo que te guste, hacés clic en el botón de WhatsApp y coordinamos todo por ahí: te enviamos fotos del stock real, despejamos tus dudas y definimos la entrega. Al ser piezas únicas talladas a mano, nos gusta que elijas exactamente el que te vas a llevar.',
-  },
-  {
-    q: '¿Hacen envíos a todo el país y cómo entregan en Mendoza?',
-    a: '¡Llegamos a cada rincón de Argentina! Realizamos envíos nacionales a través de correo privado, asegurando que tu mate viaje bien protegido. Si estás en Mendoza, podemos coordinar un punto de encuentro para que veas la calidad del producto en persona antes de retirarlo.',
+    q: '¿Hacen envíos a domicilio?',
+    a: 'Sí, realizamos envíos gratis en Las Heras y Gran Mendoza para compras superiores a $50.000. También coordinamos envíos a todo el país mediante correo seguro para que tu pedido llegue en perfectas condiciones.',
   },
   {
     q: '¿Qué métodos de pago aceptan?',
-    a: 'Para tu comodidad y seguridad, aceptamos transferencia bancaria (te enviamos el Alias por WhatsApp) y efectivo al momento de la entrega si te encontrás en Mendoza. Trabajamos de esta manera para evitar comisiones extra y mantener el precio más justo por un trabajo artesanal de exportación.',
+    a: 'Aceptamos transferencias bancarias, tarjetas de crédito y débito. Además, ofrecemos 3 cuotas sin interés para que puedas disfrutar de tus etiquetas favoritas con mayor comodidad.',
   },
   {
-    q: '¿De qué materiales están hechos los mates y qué garantía tienen?',
-    a: 'Utilizamos exclusivamente maderas nobles (como algarrobo o caldén) y calabazas premium seleccionadas, todas trabajadas artesanalmente al pie de la cordillera. Confiamos tanto en nuestra calidad que, si el mate presenta alguna falla de fabricación, te lo cambiamos sin cargo.',
+    q: '¿Cómo garantizan la calidad de los productos?',
+    a: 'Trabajamos de forma directa con bodegas, cervecerías y destilerías. Esto nos permite garantizar la autenticidad, la correcta conservación y la trazabilidad de cada botella que llega a tus manos.',
   },
   {
-    q: '¿El mate viene listo para usar o debo curarlo?',
-    a: 'Nuestros mates se entregan en su estado natural para que el proceso de curado lo realice el dueño original, asegurando que la pieza se adapte a su gusto personal. No te preocupes: junto con tu compra, te entregamos una guía paso a paso para que realices un curado perfecto y profesional.',
+    q: '¿Me pueden asesorar para hacer un regalo o elegir un vino?',
+    a: '¡Por supuesto! Nuestro equipo está capacitado para recomendarte la mejor opción según tu presupuesto, tus preferencias o el maridaje que busques. Contactanos por WhatsApp y te ayudamos en el momento.',
+  },
+  {
+    q: '¿Venden bebidas para eventos o compras mayoristas?',
+    a: 'Sí, armamos presupuestos a medida para casamientos, cumpleaños, eventos corporativos y compras por volumen. Escribinos a nuestro correo o WhatsApp indicando lo que necesitás y te enviaremos una cotización especial.',
   },
 ];
 
@@ -35,32 +32,31 @@ export default function FAQ() {
   };
 
   return (
-    <section className="faq section" id="faq">
-      <div className="section__container">
-        {/* Clase específica faq__header para domar el tamaño del título */}
-        <div className="section__title faq__header">
-          <h2>Preguntas frecuentes</h2>
-          <div className="gold-line"></div>
+    <section className="cv-faq-section" id="faq">
+      <div className="cv-faq-container">
+        <div className="section-header">
+          <span className="cv-code-detail">{'{ INFO_ÚTIL }'}</span>
+          <h2>Preguntas Frecuentes</h2>
         </div>
 
-        <div className="faq__list">
+        <div className="cv-faq-list">
           {FAQ_ITEMS.map((item, i) => (
             <div
-              className={`faq__item ${openIndex === i ? 'faq__item--open' : ''}`}
+              className={`cv-faq-item ${openIndex === i ? 'cv-faq-item--open' : ''}`}
               key={i}
             >
               <button
-                className="faq__question"
+                className="cv-faq-question"
                 onClick={() => toggleItem(i)}
                 aria-expanded={openIndex === i}
               >
                 <span>{item.q}</span>
-                <span className="material-symbols-outlined faq__icon">
-                  {openIndex === i ? 'expand_less' : 'expand_more'}
+                <span className="material-symbols-outlined cv-faq-icon">
+                  {openIndex === i ? 'remove' : 'add'}
                 </span>
               </button>
 
-              <div className="faq__answer">
+              <div className="cv-faq-answer">
                 <p>{item.a}</p>
               </div>
             </div>

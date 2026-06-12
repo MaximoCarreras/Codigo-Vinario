@@ -1,109 +1,114 @@
-/* FAQ — Diseño Premium, Minimalista y sin botones grises */
-.faq {
-  background-color: #fdfaf7;
-  /* Fondo hueso */
-  padding: 40px 20px 100px 20px;
+.cv-faq-section {
+    padding: 80px 5%;
+    background-color: #ffffff;
 }
 
-/* --- DOMANDO EL TÍTULO --- */
-.faq__header h2 {
-  font-size: clamp(1.5rem, 3vw, 2rem) !important;
-  color: #2b2520;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 10px;
-  font-family: 'Noto Serif', serif;
-  font-weight: 800;
+.cv-faq-container {
+    max-width: 900px;
+    margin: 0 auto;
 }
 
-/* --- LISTA DE PREGUNTAS (Estilo Tarjeta) --- */
-.faq__list {
-  max-width: 850px;
-  margin: 0 auto;
-  background: #ffffff;
-  border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(43, 37, 32, 0.05);
-  /* Sombra elegante */
-  padding: 20px 50px;
-  border: 1px solid rgba(165, 129, 58, 0.1);
+/* Reutilizamos las clases del header global que armamos antes */
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
 }
 
-.faq__item {
-  border-bottom: 1px solid rgba(165, 129, 58, 0.2);
-}
-
-.faq__item:last-child {
-  border-bottom: none;
-}
-
-/* --- EL BOTÓN DE LA PREGUNTA (Limpieza total) --- */
-.faq__question {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 25px 0;
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #2b2520;
-  background: none;
-  /* Anula el fondo gris nativo */
-  border: none;
-  /* Anula el borde 3D nativo */
-  text-align: left;
-  cursor: pointer;
-  font-family: 'Inter', sans-serif;
-  transition: color 0.3s ease;
-}
-
-.faq__question:hover {
-  color: #a5813a;
-  /* Dorado al pasar el mouse */
-}
-
-.faq__icon {
-  color: #a5813a;
-  flex-shrink: 0;
-  font-weight: 700;
-  font-size: 1.5rem;
-  transition: transform 0.3s ease;
-}
-
-/* --- ANIMACIÓN DE LA RESPUESTA --- */
-.faq__answer {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease, padding 0.4s ease, opacity 0.3s ease;
-  opacity: 0;
-}
-
-.faq__item--open .faq__answer {
-  max-height: 400px;
-  padding-bottom: 25px;
-  opacity: 1;
-}
-
-.faq__answer p {
-  font-size: 0.95rem;
-  color: #5a5048;
-  /* Gris oscuro para lectura cómoda */
-  line-height: 1.8;
-  margin: 0;
-}
-
-/* --- RESPONSIVE --- */
-@media (max-width: 768px) {
-  .faq__list {
-    padding: 10px 25px;
-    border-radius: 15px;
-  }
-
-  .faq__question {
-    font-size: 1rem;
-    padding: 20px 0;
-  }
-
-  .faq__answer p {
+.cv-code-detail {
+    color: #85123e;
+    font-family: monospace;
     font-size: 0.9rem;
-  }
+    letter-spacing: 2px;
+}
+
+.section-header h2 {
+    font-size: 2.2rem;
+    color: #000;
+    margin-top: 10px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+/* Estructura de la lista */
+.cv-faq-list {
+    background: #fff;
+    border-top: 2px solid #000; /* Línea de inicio fuerte */
+}
+
+.cv-faq-item {
+    border-bottom: 1px solid #eaeaea; /* Líneas separadoras suaves */
+}
+
+/* El botón de la pregunta */
+.cv-faq-question {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #000;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    font-family: inherit;
+}
+
+.cv-faq-question:hover {
+    color: #85123e;
+}
+
+.cv-faq-icon {
+    color: #85123e;
+    flex-shrink: 0;
+    font-weight: 700;
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+/* Animación de giro para el ícono (opcional) */
+.cv-faq-item--open .cv-faq-icon {
+    transform: rotate(180deg);
+}
+
+/* Animación de la respuesta */
+.cv-faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease, opacity 0.3s ease;
+    opacity: 0;
+}
+
+.cv-faq-item--open .cv-faq-answer {
+    max-height: 300px; /* Suficiente para el texto */
+    padding-bottom: 25px;
+    opacity: 1;
+}
+
+.cv-faq-answer p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.8;
+    margin: 0;
+    padding-right: 40px; /* Deja espacio para que no choque con el icono */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .cv-faq-section {
+        padding: 60px 5%;
+    }
+
+    .cv-faq-question {
+        font-size: 1rem;
+        padding: 20px 0;
+    }
+
+    .cv-faq-answer p {
+        font-size: 0.9rem;
+        padding-right: 10px;
+    }
 }
