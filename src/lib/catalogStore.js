@@ -1,5 +1,7 @@
 import { supabase } from './supabaseClient';
 
+// Utilizamos un Singleton (fetchPromise) para evitar que la aplicación 
+// haga múltiples llamadas a la base de datos innecesariamente.
 let fetchPromise = null;
 
 export const getGlobalCatalog = () => {
@@ -14,7 +16,7 @@ export const getGlobalCatalog = () => {
             categories: catData.data || [] 
         };
     }).catch(error => {
-        console.error("Error cargando catálogo global:", error);
+        console.error("Error cargando el catálogo de Código Vinario:", error);
         fetchPromise = null; 
         return { products: [], categories: [] };
     });
