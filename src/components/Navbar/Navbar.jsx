@@ -12,7 +12,6 @@ const Navbar = () => {
       {/* Main Navbar */}
       <div className="cv-navbar-main">
         <div className="cv-logo">
-          {/* Aquí luego puedes poner la etiqueta <img> con tu logo real */}
           <div className="logo-text">
             <span className="binary-text">01010110</span>
             <h1>CÓDIGO VINARIO</h1>
@@ -30,15 +29,58 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Menú de categorías */}
+      {/* Menú de categorías con Mega Menu */}
       <nav className="cv-categories">
         <ul>
           <li><a href="#bodegas">BODEGAS</a></li>
-          <li><a href="#vinos">VINOS</a></li>
+          
+          {/* Este es el ítem que despliega el Mega Menú */}
+          <li className="has-mega-menu">
+            <a href="#vinos">VINOS <span>▾</span></a>
+            
+            {/* Contenedor del Mega Menú */}
+            <div className="mega-menu">
+              <div className="mega-menu-content">
+                <div className="mega-column">
+                  <h4>// TINTOS</h4>
+                  <a href="#malbec">Malbec</a>
+                  <a href="#cabernet">Cabernet Sauvignon</a>
+                  <a href="#cabernet-franc">Cabernet Franc</a>
+                  <a href="#blend">Blend</a>
+                  <a href="#pinot">Pinot Noir</a>
+                </div>
+                <div className="mega-column">
+                  <h4>// BLANCOS</h4>
+                  <a href="#chardonnay">Chardonnay</a>
+                  <a href="#sauvignon">Sauvignon Blanc</a>
+                  <a href="#torrontes">Torrontés</a>
+                  <a href="#semillon">Semillón</a>
+                </div>
+                <div className="mega-column">
+                  <h4>// ESPUMANTES</h4>
+                  <a href="#brut-nature">Brut Nature</a>
+                  <a href="#extra-brut">Extra Brut</a>
+                  <a href="#dulce">Espumante Dulce</a>
+                </div>
+                <div className="mega-column">
+                  <h4>// OTROS</h4>
+                  <a href="#rosados">Rosados</a>
+                  <a href="#naranjos">Naranjos</a>
+                  <a href="#organicos">Orgánicos</a>
+                </div>
+              </div>
+              
+              <div className="mega-menu-promo">
+                <button className="cv-btn-white">VER SELECCIÓN</button>
+                {/* Acá podés poner una foto horizontal de las botellas como tienen ellos */}
+                <img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Selección de Vinos" />
+              </div>
+            </div>
+          </li>
+
+          <li><a href="#destilados">DESTILADOS</a></li>
           <li><a href="#cervezas">CERVEZAS</a></li>
-          <li><a href="#espumantes">ESPUMANTES</a></li>
           <li><a href="#combos">COMBOS</a></li>
-          <li><a href="#promos">PROMOCIONES</a></li>
         </ul>
       </nav>
     </header>
