@@ -7,8 +7,10 @@ import WhatsAppBubble from './components/WhatsAppBubble/WhatsAppBubble';
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 
-/* --- VISTAS TEMPORALES (Las cambiaremos cuando armemos la carpeta pages) --- */
-const Home = () => <div style={{ padding: '120px 5%', minHeight: '60vh' }}><span className="cv-code-text">/vista_principal</span><h1>Código Vinario</h1></div>;
+/* --- PÁGINAS --- */
+import Home from './pages/Home/Home';
+
+/* --- VISTAS TEMPORALES (Las cambiaremos cuando armemos estas páginas) --- */
 const Shop = () => <div style={{ padding: '120px 5%', minHeight: '60vh' }}><span className="cv-code-text">/catalogo_general</span><h1>Catálogo de Etiquetas</h1></div>;
 const ProductDetail = () => <div style={{ padding: '120px 5%', minHeight: '60vh' }}><span className="cv-code-text">/detalle_producto</span><h1>Especificación Técnica</h1></div>;
 
