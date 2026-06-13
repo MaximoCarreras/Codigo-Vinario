@@ -110,15 +110,15 @@ export default function Checkout() {
                     <div className="cv-map-container">
                       {/* Mapa de Google con ubicación exacta y Modo Oscuro */}
                       <iframe 
-                        title="Ubicación Código Vinario"
-                        src="https://www.google.com/maps?q=Av.+Col%C3%B3n+y+Per%C3%BA,+Mendoza,+Argentina&output=embed" 
-                        width="100%" 
-                        height="250" 
-                        style={{border: 0}} 
-                        allowFullScreen="" 
-                        loading="lazy" 
-                        referrerPolicy="no-referrer-when-downgrade">
-                      </iframe>
+  title="Ubicación Código Vinario"
+  src="https://maps.google.com/maps?q=Av.%20Col%C3%B3n%20y%20Per%C3%BA,%20Mendoza,%20Argentina&t=&z=16&ie=UTF8&iwloc=&output=embed" 
+  width="100%" 
+  height="250" 
+  style={{border: 0}} 
+  allowFullScreen="" 
+  loading="lazy" 
+  referrerPolicy="no-referrer-when-downgrade">
+</iframe>
                     </div>
                   </div>
                 )}

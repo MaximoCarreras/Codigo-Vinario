@@ -71,9 +71,16 @@
 }
 
 .cv-cart-card-title {
-    font-weight: 700; font-size: 1.05rem; color: #111; text-decoration: none;
+    font-weight: 700; 
+    font-size: 1.05rem; 
+    color: var(--color-white); /* Acá estaba el error, ahora es blanco puro */
+    text-decoration: none;
+    transition: color 0.3s;
 }
-.cv-cart-card-title:hover { color: var(--color-wine); }
+
+.cv-cart-card-title:hover {
+    color: var(--color-wine);
+}
 
 .cv-cart-card-cat { font-family: var(--font-code); font-size: 0.75rem; color: #666; margin-bottom: 5px; }
 .cv-cart-card-unit-price { font-size: 0.9rem; color: #555; }
