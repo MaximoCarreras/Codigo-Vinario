@@ -13,6 +13,9 @@ import Cart from './pages/Cart/Cart';
 import Checkout from './pages/Checkout/Checkout';
 import NotFound from './pages/NotFound/NotFound';
 
+// Importamos el nuevo componente de Mi Cuenta
+import Account from './pages/Account/Account';
+
 // Importamos TODAS las vistas secundarias desde InfoPages
 import { Origen, Compromiso, Comunidad, Eventos, Bodegas } from './pages/InfoPages/InfoPages';
 
@@ -37,8 +40,8 @@ export default function App() {
           <Route path="/compromiso" element={<Compromiso />} />
           <Route path="/comunidad" element={<Comunidad />} />
           
-          {/* Futuro panel de usuario (Placeholder por ahora) */}
-          <Route path="/mi-cuenta" element={<div style={{padding: '150px 5%', textAlign: 'center', color: 'white', minHeight: '60vh'}}><h1 style={{fontFamily: 'monospace', color: '#85123e'}}>_INICIALIZANDO PORTAL DE USUARIO</h1><p>Próximamente: Integración con Supabase</p></div>} />
+          {/* Panel de usuario Real (Login / Registro) */}
+          <Route path="/mi-cuenta" element={<Account />} />
 
           {/* Manejo de Errores */}
           <Route path="*" element={<NotFound />} />
