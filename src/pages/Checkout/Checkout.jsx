@@ -9,8 +9,8 @@ export default function Checkout() {
   const [loading, setLoading] = useState(false);
   
   // Opciones seleccionables
-  const [deliveryMethod, setDeliveryMethod] = useState('store');
-  const [paymentMethod, setPaymentMethod] = useState('mercadopago');
+  const [deliveryMethod, setDeliveryMethod] = useState('store'); // 'store' o 'home'
+  const [paymentMethod, setPaymentMethod] = useState('mercadopago'); // 'mercadopago' o 'cash'
 
   if (cart.length === 0) {
     navigate('/tienda');
@@ -86,7 +86,7 @@ export default function Checkout() {
                   </div>
                 </div>
                 
-                {/* Opciones Dinámicas de Entrega (MAPA INCLUIDO ACÁ) */}
+                {/* Opciones Dinámicas de Entrega ANIDADAS CORRECTAMENTE */}
                 {deliveryMethod === 'home' && (
                   <div className="cv-conditional-form">
                     <div className="cv-input-group">
@@ -108,10 +108,10 @@ export default function Checkout() {
                     </div>
                     
                     <div className="cv-map-container">
-                      {/* Mapa de Google con Modo Oscuro */}
+                      {/* Mapa de Google con ubicación exacta y Modo Oscuro */}
                       <iframe 
                         title="Ubicación Código Vinario"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3350.315998246415!2d-68.8475878!3d-32.8897585!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x967e091aba6f9911%3A0xc34cfdfdf786720f!2sAv.%20Col%C3%B3n%20%26%20Per%C3%BA%2C%20Mendoza!5e0!3m2!1ses!2sar!4v1717462000000!5m2!1ses!2sar" 
+                        src="https://www.google.com/maps?q=Av.+Col%C3%B3n+y+Per%C3%BA,+Mendoza,+Argentina&output=embed" 
                         width="100%" 
                         height="250" 
                         style={{border: 0}} 
@@ -147,7 +147,7 @@ export default function Checkout() {
                 </div>
               </div>
 
-              {/* Botón de Pago que cambia según selección */}
+              {/* Botón de Pago */}
               <button 
                 type="submit" 
                 className="cv-btn-pay-action"
@@ -159,7 +159,7 @@ export default function Checkout() {
             </form>
           </div>
 
-          {/* Columna Derecha: Resumen del Pedido limpio */}
+          {/* Columna Derecha: Resumen del Pedido */}
           <div className="cv-checkout-right">
             <div className="cv-order-summary">
               <h2 className="cv-box-title">Resumen del pedido</h2>

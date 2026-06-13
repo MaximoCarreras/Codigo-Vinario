@@ -49,10 +49,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #ffffff; /* Fondo blanco para las tarjetas como en tu referencia */
+    background-color: #0a0a0a; /* Fondo oscuro */
     border-radius: 8px;
     padding: 15px 20px;
-    color: #000;
+    border: 1px solid #1a1a1a;
+    color: #eee; /* Texto claro */
 }
 
 .cv-cart-card-img {
@@ -79,15 +80,16 @@
 
 /* Controles de Cantidad */
 .cv-qty-box {
-    display: flex; align-items: center; background-color: #f5f5f5;
+    display: flex; align-items: center; background-color: #111;
+    border: 1px solid #333;
     border-radius: 20px; padding: 5px; gap: 10px; margin-right: 20px;
 }
 .cv-qty-box button {
     width: 25px; height: 25px; border-radius: 50%; border: none;
-    background-color: #ddd; color: #000; cursor: pointer; font-weight: bold;
+    background-color: #222; color: #fff; cursor: pointer; font-weight: bold;
 }
-.cv-qty-box button:hover { background-color: #ccc; }
-.cv-qty-box span { font-family: var(--font-code); font-weight: bold; width: 20px; text-align: center; }
+.cv-qty-box button:hover { background-color: var(--color-wine); }
+.cv-qty-box span { color: #fff; }
 
 /* Precio total y Borrar */
 .cv-cart-card-total {
@@ -103,10 +105,13 @@
 .cv-cart-summary-sidebar { position: sticky; top: 100px; }
 
 .cv-summary-box {
-    background-color: #ffffff; /* Resumen en blanco estilo Huellitas */
-    border-radius: 8px; padding: 25px; color: #000;
+    background-color: #0a0a0a; 
+    border: 1px solid #1a1a1a;
+    border-radius: 8px; padding: 25px; color: #eee;
 }
-
+.cv-summary-line { color: #aaa; }
+.cv-link-continue { color: #888; }
+.cv-link-continue:hover { color: #fff; }
 .cv-summary-title { font-size: 1.2rem; margin-bottom: 20px; font-weight: 800; color: var(--color-wine); }
 
 .cv-summary-line {
