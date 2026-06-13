@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
+import { useLanguage } from '../../context/LanguageContext';
 import './Cart.css';
 
 export default function Cart() {
   const cartContext = useCart();
+  const { t } = useLanguage();
   
   // Protección contra pantallas blancas (Crash Fix)
   if (!cartContext || !cartContext.cart) {
@@ -15,12 +17,11 @@ export default function Cart() {
 
   if (cart.length === 0) {
     return (
-
-  if (cart.length === 0) {
-    return (
       <div className="cv-page-cart cv-empty-cart">
-        <h2>{t('carrito_vacio')}</h2>
-        <Link to="/tienda" className="cv-btn-primary" style={{marginTop: '20px'}}>{t('seguir_comprando')}</Link>
+        <h2>{t.carrito_vacio}</h2>
+        <Link to="/tienda" className="cv-btn-primary" style={{ marginTop: '20px' }}>
+          {t.seguir_comprando}
+        </Link>
       </div>
     );
   }
@@ -57,24 +58,24 @@ export default function Cart() {
           </div>
 
           <div className="cv-cart-summary-card">
-            <h3>{t('resumen')}</h3>
+            <h3>{t.resumen}</h3>
             <div className="cv-summary-line">
-              <span>{t('subtotal')}</span>
+              <span>{t.subtotal}</span>
               <span>${cartTotal.toLocaleString('es-AR')}</span>
             </div>
             <div className="cv-summary-line">
-              <span>{t('envio')}</span>
-              <span>{t('a_coordinar')}</span>
+              <span>{t.envio}</span>
+              <span>{t.a_coordinar}</span>
             </div>
             <div className="cv-summary-line cv-total-line">
-              <span>{t('total')}</span>
+              <span>{t.total}</span>
               <span>${cartTotal.toLocaleString('es-AR')}</span>
             </div>
             
             <Link to="/checkout" className="cv-btn-primary cv-checkout-btn">
-  <span className="cv-code-symbol">{'>'}</span> IR A PAGAR
-</Link>
-            <Link to="/tienda" className="cv-link-continue">— {t('seguir_comprando')}</Link>
+              <span className="cv-code-symbol">{'>'}</span> IR A PAGAR
+            </Link>
+            <Link to="/tienda" className="cv-link-continue">— {t.seguir_comprando}</Link>
           </div>
         </div>
       </div>
