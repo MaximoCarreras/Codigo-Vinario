@@ -12,7 +12,9 @@ import ProductDetail from './pages/ProductDetail/ProductDetail';
 import Cart from './pages/Cart/Cart';
 import Checkout from './pages/Checkout/Checkout';
 import NotFound from './pages/NotFound/NotFound';
-import { Origen, Compromiso, Comunidad } from './pages/InfoPages/InfoPages';
+
+// Importamos TODAS las vistas secundarias desde InfoPages
+import { Origen, Compromiso, Comunidad, Eventos, Bodegas } from './pages/InfoPages/InfoPages';
 
 export default function App() {
   return (
@@ -21,17 +23,24 @@ export default function App() {
       <Navbar />
       <main className="cv-main-content">
         <Routes>
+          {/* Flujo de E-commerce */}
           <Route path="/" element={<Home />} />
           <Route path="/tienda" element={<Shop />} />
           <Route path="/producto/:slug" element={<ProductDetail />} />
           <Route path="/carrito" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           
-          {/* Nuevas páginas independientes */}
+          {/* Páginas Informativas y de Marca */}
           <Route path="/origen" element={<Origen />} />
+          <Route path="/bodegas" element={<Bodegas />} />
+          <Route path="/eventos" element={<Eventos />} />
           <Route path="/compromiso" element={<Compromiso />} />
           <Route path="/comunidad" element={<Comunidad />} />
           
+          {/* Futuro panel de usuario (Placeholder por ahora) */}
+          <Route path="/mi-cuenta" element={<div style={{padding: '150px 5%', textAlign: 'center', color: 'white', minHeight: '60vh'}}><h1 style={{fontFamily: 'monospace', color: '#85123e'}}>_INICIALIZANDO PORTAL DE USUARIO</h1><p>Próximamente: Integración con Supabase</p></div>} />
+
+          {/* Manejo de Errores */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
