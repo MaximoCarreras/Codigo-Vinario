@@ -1,0 +1,153 @@
+.cv-page-checkout {
+    background-color: var(--color-black);
+    min-height: 100vh;
+    padding: 120px 5% 80px;
+    color: var(--color-white);
+}
+
+.cv-checkout-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.cv-checkout-header {
+    margin-bottom: 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 20px;
+}
+
+.cv-checkout-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+.cv-checkout-subtitle {
+    font-family: var(--font-code);
+    color: var(--color-wine);
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+/* Formularios */
+.cv-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cv-form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.cv-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-grow: 1;
+}
+
+.cv-input-group label {
+    font-size: 0.85rem;
+    color: var(--color-grey-medium);
+}
+
+.cv-input-group input {
+    background-color: #080808;
+    border: 1px solid #333;
+    color: var(--color-white);
+    padding: 15px;
+    font-family: var(--font-primary);
+    transition: var(--transition-smooth);
+    outline: none;
+}
+
+.cv-input-group input:focus {
+    border-color: var(--color-wine);
+    box-shadow: 0 0 10px rgba(133, 18, 62, 0.2);
+}
+
+.cv-pay-btn {
+    margin-top: 30px;
+    width: 100%;
+    justify-content: center;
+    padding: 20px;
+    font-size: 1.1rem;
+}
+
+/* El Ticket estilo consola */
+.cv-checkout-summary {
+    position: sticky;
+    top: 100px;
+}
+
+.cv-ticket {
+    background-color: #050505;
+    border: 1px solid #222;
+    padding: 30px;
+    font-family: var(--font-code);
+}
+
+.cv-ticket-header {
+    text-align: center;
+    border-bottom: 1px dashed #444;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.cv-ticket-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 0.85rem;
+    color: #ccc;
+}
+
+.cv-ticket-totals {
+    margin-top: 30px;
+    border-top: 1px dashed #444;
+    padding-top: 20px;
+}
+
+.cv-ticket-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    color: #888;
+}
+
+.cv-ticket-final {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: var(--color-wine);
+    font-weight: bold;
+}
+
+.cv-ticket-footer {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.cv-back-cart-link {
+    color: #666;
+    font-size: 0.8rem;
+    transition: color 0.3s;
+}
+
+.cv-back-cart-link:hover {
+    color: var(--color-white);
+}
+
+@media (max-width: 992px) {
+    .cv-checkout-grid {
+        grid-template-columns: 1fr;
+    }
+    .cv-form-row {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
