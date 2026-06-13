@@ -1,43 +1,45 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
+import { useLanguage } from '../../context/LanguageContext';
 import './Navbar.css';
 
 export default function Navbar() {
   const { cartCount } = useCart();
-  const [lang, setLang] = useState('ES');
+  const { lang, setLang, t } = useLanguage();
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <header className="cv-navbar">
       <div className="cv-nav-container">
         
-        {/* Logo a la izquierda */}
+        {/* Logo Real a la Izquierda */}
         <Link to="/" className="cv-nav-logo" onClick={() => setMenuOpen(false)}>
-          <span className="cv-logo-binary">01010110</span>
+          {/* El sistema buscará el archivo logo.png en la carpeta public */}
+          <img src="/logo.png" alt="Código Vinario" className="cv-nav-logo-img" onError={(e) => e.target.style.display='none'} />
           <div className="cv-logo-text">
             <span className="cv-logo-title">CÓDIGO VINARIO</span>
             <span className="cv-logo-subtitle">WINE STOP</span>
           </div>
         </Link>
 
-        {/* Links a páginas independientes */}
+        {/* Menú Traducido Dinámicamente */}
         <nav className={`cv-nav-menu ${menuOpen ? 'is-active' : ''}`}>
+          <Link to="/" className="cv-nav-link" onClick={() => setMenuOpen(false)}>
+            <span className="cv-code-symbol">/</span>{t.nav_inicio}
+          </Link>
           <Link to="/tienda" className="cv-nav-link" onClick={() => setMenuOpen(false)}>
-            <span className="cv-code-symbol">/</span>tienda
+            <span className="cv-code-symbol">/</span>{t.nav_tienda}
+          </Link>
+          <Link to="/eventos" className="cv-nav-link" onClick={() => setMenuOpen(false)}>
+            <span className="cv-code-symbol">/</span>{t.nav_eventos}
           </Link>
           <Link to="/origen" className="cv-nav-link" onClick={() => setMenuOpen(false)}>
-            <span className="cv-code-symbol">/</span>origen
-          </Link>
-          <Link to="/compromiso" className="cv-nav-link" onClick={() => setMenuOpen(false)}>
-            <span className="cv-code-symbol">/</span>compromiso
-          </Link>
-          <Link to="/comunidad" className="cv-nav-link" onClick={() => setMenuOpen(false)}>
-            <span className="cv-code-symbol">/</span>comunidad
+            <span className="cv-code-symbol">/</span>{t.nav_origen}
           </Link>
         </nav>
 
-        {/* Selector de idioma y Carrito */}
+        {/* Idiomas y Carrito Real */}
         <div className="cv-nav-actions">
           <div className="cv-lang-selector">
             {['ES', 'EN', 'PT'].map((l) => (
@@ -53,7 +55,7 @@ export default function Navbar() {
 
           <Link to="/carrito" className="cv-nav-cart">
             <span className="material-symbols-outlined cv-cart-icon">shopping_cart</span>
-            <span className="cv-cart-badge">{`[ ${cartCount} ]`}</span>
+            <span className="cv-cart-badge">{`[ ${cartCount || 0} ]`}</span>
           </Link>
 
           <button className="cv-menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>

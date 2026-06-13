@@ -1,12 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
-import { useLanguage } from '../../context/LanguageContext';
 import './Cart.css';
 
 export default function Cart() {
-  const { cart, cartTotal, removeFromCart, updateQuantity, clearCart } = useCart();
-  const { t } = useLanguage();
+  const cartContext = useCart();
+  
+  // Protección contra pantallas blancas (Crash Fix)
+  if (!cartContext || !cartContext.cart) {
+    return <div className="cv-page-cart"><span className="cv-code-text">/ cargando_datos...</span></div>;
+  }
+
+  const { cart, cartTotal, removeFromCart, updateQuantity, clearCart } = cartContext;
+
+  if (cart.length === 0) {
+    return (
 
   if (cart.length === 0) {
     return (
