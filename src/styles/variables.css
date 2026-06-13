@@ -1,0 +1,30 @@
+/* Importamos Montserrat (oficial) y Space Mono (para el efecto código) */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root {
+  /* Paleta de la Marca */
+  --color-wine: #85123e;
+  --color-black: #000000;
+  --color-white: #ffffff;
+
+  /* Tonos neutros para generar profundidad y elegancia */
+  --color-grey-dark: #121212;
+  --color-grey-medium: #555555;
+  --color-grey-light: #f9f9f9;
+
+  /* Tipografías */
+  --font-primary: 'Montserrat', sans-serif;
+  --font-code: 'Space Mono', monospace;
+
+  /* Espaciados (Para mantener un diseño que respire y se vea caro) */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2.5rem;
+  --space-lg: 5rem;
+  --space-xl: 10rem;
+
+  /* Efectos Premium (Sombras y Transiciones) */
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.05);
+  --shadow-wine: 0 15px 40px rgba(133, 18, 62, 0.15);
+  --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}

@@ -1,0 +1,108 @@
+@import './variables.css';
+
+/* Reseteo Global */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Preparamos el terreno para traducciones y un scroll elegante */
+}
+
+body {
+  font-family: var(--font-primary);
+  background-color: var(--color-white);
+  color: var(--color-black);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Tipografía de Títulos (Letras fuertes, separadas y en mayúscula) */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  line-height: 1.2;
+}
+
+/* Párrafos legibles y sutiles */
+p {
+  font-weight: 300;
+  color: var(--color-grey-medium);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* =========================================
+   EFECTOS "CÓDIGO VINARIO" (El toque Tech)
+   ========================================= */
+
+/* Texto estilo terminal para subtítulos o detalles (ej: /degustación) */
+.cv-code-text {
+  font-family: var(--font-code);
+  color: var(--color-wine);
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  text-transform: none;
+}
+
+/* Animación de cursor de programación titilando */
+.cv-blinking-cursor::after {
+  content: '_';
+  font-family: var(--font-code);
+  color: var(--color-wine);
+  animation: blink 1s step-end infinite;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Marca de agua binaria de fondo (01010110) para secciones oscuras */
+.cv-binary-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.cv-binary-bg::before {
+  content: '01010110';
+  font-family: var(--font-code);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 15vw;
+  color: rgba(255, 255, 255, 0.03);
+  z-index: 0;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+/* =========================================
+   UTILIDADES ESTRUCTURALES
+   ========================================= */
+   
+.container {
+  max-width: 1400px; /* Ancho amplio para mostrar muchas etiquetas */
+  margin: 0 auto;
+  padding: 0 5%;
+}
+
+.section-dark {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+.section-dark p {
+  color: #bbbbbb;
+}
