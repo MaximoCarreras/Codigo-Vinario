@@ -2,15 +2,17 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useProducts } from '../../hooks/useProducts';
 import { useCart } from '../../context/CartContext';
+import { useLanguage } from '../../context/LanguageContext';
 import './Shop.css';
 
 export default function Shop() {
+  const { t } = useLanguage();
   const [activeCategory, setActiveCategory] = useState(null);
   const { products, loading } = useProducts(activeCategory);
   const { addToCart } = useCart();
 
   const categories = [
-    { id: null, label: 'TODO EL CATÁLOGO' },
+    { id: null, label: t.filter_all },
     { id: 'vinos', label: 'VINOS' },
     { id: 'destilados', label: 'DESTILADOS' },
     { id: 'cervezas', label: 'CERVEZAS' },
@@ -19,8 +21,6 @@ export default function Shop() {
 
   return (
     <div className="cv-page-shop">
-      
-      {/* Cabecera del Catálogo */}
       <div className="cv-shop-header cv-binary-bg">
         <div className="cv-shop-header-content">
           <span className="cv-code-text cv-blinking-cursor">/ explorando_inventario</span>
@@ -29,7 +29,6 @@ export default function Shop() {
       </div>
 
       <div className="cv-shop-container">
-        {/* Barra de Filtros */}
         <div className="cv-shop-filters">
           <span className="cv-filter-label">/ filtrar_por:</span>
           <div className="cv-filter-buttons">
@@ -45,7 +44,6 @@ export default function Shop() {
           </div>
         </div>
 
-        {/* Grid de Productos (Reutilizamos la estructura visual de BestSellers) */}
         {loading ? (
           <div className="cv-shop-loading">
             <span className="cv-code-text cv-blinking-cursor">/ cargando_datos...</span>
@@ -55,7 +53,6 @@ export default function Shop() {
             {products.length > 0 ? (
               products.map((product) => (
                 <div key={product.id} className="cv-product-card">
-                  
                   {product.badge && (
                     <div className="cv-product-badge">
                       <span className="cv-code-text">[{product.badge}]</span>
@@ -71,7 +68,7 @@ export default function Shop() {
                     <Link to={`/producto/${product.id}`}>
                       <h3 className="cv-product-name">{product.name}</h3>
                     </Link>
-                    <p className="cv-product-price">${product.price.toLocaleString('es-AR')}</p>
+                    <p className="cv-product-price">{`$${product.price.toLocaleString('es-AR')}`}</p>
                     
                     <button 
                       className="cv-btn-add-cart"
@@ -79,9 +76,9 @@ export default function Shop() {
                       disabled={product.stock <= 0}
                     >
                       {product.stock > 0 ? (
-                        <><span className="cv-code-symbol">[+]</span> AGREGAR AL CÓDIGO</>
+                        <><span className="cv-code-symbol">[+]</span> {t.btn_add}</>
                       ) : (
-                        <><span className="cv-code-symbol">[x]</span> SIN STOCK</>
+                        <><span className="cv-code-symbol">[x]</span> {t.btn_no_stock}</>
                       )}
                     </button>
                   </div>

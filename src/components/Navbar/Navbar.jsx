@@ -13,21 +13,56 @@ export default function Navbar() {
     <header className="cv-navbar">
       <div className="cv-nav-container">
         
-        {/* Logo Solitario y Limpio */}
+        {/* Logo de la empresa en la esquina izquierda (Agrandado por CSS) */}
         <Link to="/" className="cv-nav-logo" onClick={() => setMenuOpen(false)}>
-          <img src="/logo.png" alt="Código Vinario" className="cv-nav-logo-img" onError={(e) => e.target.style.display='none'} />
+          <img src="/logo.png" alt="Código Vinario" className="cv-nav-logo-img" />
         </Link>
 
-        {/* Menú de Navegación Ampliado */}
+        {/* Menú de Navegación con Mega Menú Integrado */}
         <nav className={`cv-nav-menu ${menuOpen ? 'is-active' : ''}`}>
           <Link to="/" className="cv-nav-link" onClick={() => setMenuOpen(false)}>
             <span className="cv-code-symbol">/</span>{t.nav_inicio}
           </Link>
-          <Link to="/tienda" className="cv-nav-link" onClick={() => setMenuOpen(false)}>
-            <span className="cv-code-symbol">/</span>{t.nav_tienda}
-          </Link>
+          
+          {/* Item con MegaMenú Desplegable */}
+          <div className="cv-nav-item-has-mega">
+            <Link to="/tienda" className="cv-nav-link" onClick={() => setMenuOpen(false)}>
+              <span className="cv-code-symbol">/</span>{t.nav_tienda}
+            </Link>
+            
+            {/* Contenedor del Mega Menú Estilo Catálogo Premium */}
+            <div className="cv-megamenu">
+              <div className="cv-megamenu-grid">
+                <div className="cv-mega-col">
+                  <h3>{`// ${t.cat_tintos}`}</h3>
+                  <Link to="/tienda" onClick={() => setMenuOpen(false)}>Malbec</Link>
+                  <Link to="/tienda" onClick={() => setMenuOpen(false)}>Cabernet Sauvignon</Link>
+                  <Link to="/tienda" onClick={() => setMenuOpen(false)}>Blend de Tintas</Link>
+                  <Link to="/tienda" onClick={() => setMenuOpen(false)}>Pinot Noir</Link>
+                </div>
+                <div className="cv-mega-col">
+                  <h3>{`// ${t.cat_blancos}`}</h3>
+                  <Link to="/tienda" onClick={() => setMenuOpen(false)}>Chardonnay</Link>
+                  <Link to="/tienda" onClick={() => setMenuOpen(false)}>Sauvignon Blanc</Link>
+                  <Link to="/tienda" onClick={() => setMenuOpen(false)}>Torrontés</Link>
+                </div>
+                <div className="cv-mega-col">
+                  <h3>{`// ${t.cat_espumantes}`}</h3>
+                  <Link to="/tienda" onClick={() => setMenuOpen(false)}>Brut Nature</Link>
+                  <Link to="/tienda" onClick={() => setMenuOpen(false)}>Extra Brut</Link>
+                  <Link to="/tienda" onClick={() => setMenuOpen(false)}>Cosechas Históricas</Link>
+                </div>
+                <div className="cv-mega-col">
+                  <h3>{`// complementos`}</h3>
+                  <Link to="/tienda" onClick={() => setMenuOpen(false)}>{t.cat_destilados}</Link>
+                  <Link to="/tienda" onClick={() => setMenuOpen(false)}>Estuches & Regalos</Link>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <Link to="/bodegas" className="cv-nav-link" onClick={() => setMenuOpen(false)}>
-            <span className="cv-code-symbol">/</span>bodegas
+            <span className="cv-code-symbol">/</span>{t.nav_bodegas}
           </Link>
           <Link to="/eventos" className="cv-nav-link" onClick={() => setMenuOpen(false)}>
             <span className="cv-code-symbol">/</span>{t.nav_eventos}
@@ -37,7 +72,7 @@ export default function Navbar() {
           </Link>
         </nav>
 
-        {/* Acciones: Idioma, Cuenta y Carrito */}
+        {/* selectores y carrito */}
         <div className="cv-nav-actions">
           <div className="cv-lang-selector">
             {['ES', 'EN', 'PT'].map((l) => (
@@ -51,7 +86,6 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Botón Mi Cuenta (Futuro Supabase) */}
           <Link to="/mi-cuenta" className="cv-nav-account" title="Mi Perfil">
             <span className="material-symbols-outlined cv-cart-icon">person</span>
           </Link>
