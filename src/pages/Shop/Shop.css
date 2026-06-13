@@ -1,0 +1,85 @@
+.cv-page-shop {
+    background-color: var(--color-black);
+    min-height: 100vh;
+    padding-top: 70px; /* Compensa la Navbar */
+}
+
+.cv-shop-header {
+    background-color: var(--color-grey-dark);
+    padding: 80px 5%;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.cv-shop-header-content {
+    position: relative;
+    z-index: 2;
+}
+
+.cv-shop-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 50px 5%;
+}
+
+/* --- FILTROS --- */
+.cv-shop-filters {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 50px;
+}
+
+.cv-filter-label {
+    font-family: var(--font-code);
+    color: var(--color-wine);
+    font-size: 0.9rem;
+}
+
+.cv-filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.cv-filter-btn {
+    background-color: transparent;
+    color: var(--color-grey-medium);
+    border: 1px solid #333;
+    padding: 8px 20px;
+    font-family: var(--font-primary);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.cv-filter-btn:hover {
+    color: var(--color-white);
+    border-color: #666;
+}
+
+.cv-filter-btn.is-active {
+    background-color: var(--color-wine);
+    color: var(--color-white);
+    border-color: var(--color-wine);
+}
+
+/* --- ESTADOS DE CARGA Y VACÍO --- */
+.cv-shop-loading, .cv-shop-empty {
+    text-align: center;
+    padding: 100px 0;
+    color: var(--color-grey-medium);
+}
+
+.cv-shop-empty p {
+    margin-top: 15px;
+    font-size: 1.1rem;
+}
+
+/* El CSS del Grid de productos ya lo hereda de BestSellers gracias a que usamos las mismas clases (cv-products-grid, cv-product-card, etc.) globales o reusadas */

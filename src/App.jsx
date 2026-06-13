@@ -9,9 +9,9 @@ import Footer from './components/Footer/Footer';
 
 /* --- PÁGINAS --- */
 import Home from './pages/Home/Home';
+import Shop from './pages/Shop/Shop'; // <-- Acá importamos el Catálogo real
 
 /* --- VISTAS TEMPORALES (Las cambiaremos cuando armemos estas páginas) --- */
-const Shop = () => <div style={{ padding: '120px 5%', minHeight: '60vh' }}><span className="cv-code-text">/catalogo_general</span><h1>Catálogo de Etiquetas</h1></div>;
 const ProductDetail = () => <div style={{ padding: '120px 5%', minHeight: '60vh' }}><span className="cv-code-text">/detalle_producto</span><h1>Especificación Técnica</h1></div>;
 
 export default function App() {
