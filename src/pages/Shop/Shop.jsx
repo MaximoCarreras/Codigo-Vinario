@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useProducts } from '../../hooks/useProducts';
 import { useCart } from '../../context/CartContext';
@@ -11,6 +11,21 @@ export default function Shop() {
   const { products, loading } = useProducts(activeCategory);
   const { addToCart } = useCart();
 
+  // Lógica del Carrusel de Cabecera
+  const [currentBg, setCurrentBg] = useState(0);
+  const bgImages = [
+    'https://images.unsplash.com/photo-1584916201218-f4242ceb4809?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
+    'https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
+    'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentBg((prev) => (prev + 1) % bgImages.length);
+    }, 4000); // Cambia cada 4 segundos
+    return () => clearInterval(interval);
+  }, [bgImages.length]);
+
   const categories = [
     { id: null, label: t.filter_all },
     { id: 'vinos', label: 'VINOS' },
@@ -21,9 +36,20 @@ export default function Shop() {
 
   return (
     <div className="cv-page-shop">
-      <div className="cv-shop-header cv-binary-bg">
+      
+      {/* Cabecera con Carrusel Animado */}
+      <div className="cv-shop-header">
+        {bgImages.map((img, index) => (
+          <div 
+            key={index}
+            className={`cv-shop-header-bg ${index === currentBg ? 'active' : ''}`}
+            style={{ backgroundImage: `url(${img})` }}
+          />
+        ))}
+        <div className="cv-shop-header-overlay"></div>
+        
         <div className="cv-shop-header-content">
-          <span className="cv-code-text cv-blinking-cursor">/ explorando_inventario</span>
+          <span className="cv-code-text cv-blinking-cursor">/ explorando_inventario_</span>
           <h1 className="cv-section-title">NUESTRA <span className="cv-text-wine">CAVA</span></h1>
         </div>
       </div>
