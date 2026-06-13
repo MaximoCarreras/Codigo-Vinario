@@ -1,6 +1,7 @@
 import React from 'react';
 import Hero from '../../components/Hero/Hero';
 import TrustBar from '../../components/TrustBar/TrustBar';
+import BestSellers from '../../components/BestSellers/BestSellers';
 import Newsletter from '../../components/Newsletter/Newsletter';
 
 export default function Home() {
@@ -13,9 +14,8 @@ export default function Home() {
       {/* Barra de Confianza */}
       <TrustBar />
 
-      <div style={{ padding: '80px 10%', textAlign: 'center', background: '#000' }}>
-          <p style={{fontFamily: 'monospace', color: '#85123e'}} className="cv-blinking-cursor">_Construyendo catálogo...</p>
-      </div>
+      {/* Catálogo Destacado (Acá entran los vinos) */}
+      <BestSellers />
 
       {/* Cierre con captura de leads */}
       <Newsletter />
