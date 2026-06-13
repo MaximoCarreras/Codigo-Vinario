@@ -12,7 +12,7 @@ export default function Navbar() {
     <header className="cv-navbar">
       <div className="cv-nav-container">
         
-        {/* Identidad de Marca Unificada */}
+        {/* Logo a la izquierda */}
         <Link to="/" className="cv-nav-logo" onClick={() => setMenuOpen(false)}>
           <span className="cv-logo-binary">01010110</span>
           <div className="cv-logo-text">
@@ -21,26 +21,24 @@ export default function Navbar() {
           </div>
         </Link>
 
-        {/* Menú de Navegación con Estética de Código */}
+        {/* Links a páginas independientes */}
         <nav className={`cv-nav-menu ${menuOpen ? 'is-active' : ''}`}>
           <Link to="/tienda" className="cv-nav-link" onClick={() => setMenuOpen(false)}>
             <span className="cv-code-symbol">/</span>tienda
           </Link>
-          <a href="/#nuestra-historia" className="cv-nav-link" onClick={() => setMenuOpen(false)}>
+          <Link to="/origen" className="cv-nav-link" onClick={() => setMenuOpen(false)}>
             <span className="cv-code-symbol">/</span>origen
-          </a>
-          <a href="/#compromiso" className="cv-nav-link" onClick={() => setMenuOpen(false)}>
+          </Link>
+          <Link to="/compromiso" className="cv-nav-link" onClick={() => setMenuOpen(false)}>
             <span className="cv-code-symbol">/</span>compromiso
-          </a>
-          <a href="/#newsletter" className="cv-nav-link" onClick={() => setMenuOpen(false)}>
+          </Link>
+          <Link to="/comunidad" className="cv-nav-link" onClick={() => setMenuOpen(false)}>
             <span className="cv-code-symbol">/</span>comunidad
-          </a>
+          </Link>
         </nav>
 
-        {/* Acciones del Sistema Internacional */}
+        {/* Selector de idioma y Carrito */}
         <div className="cv-nav-actions">
-          
-          {/* Selector de Idiomas (ES / EN / PT) */}
           <div className="cv-lang-selector">
             {['ES', 'EN', 'PT'].map((l) => (
               <button
@@ -53,17 +51,13 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Cava Digital / Carrito de Compras */}
           <Link to="/carrito" className="cv-nav-cart">
-            <span className="material-symbols-outlined cv-cart-icon">wine_bar</span>
+            <span className="material-symbols-outlined cv-cart-icon">shopping_cart</span>
             <span className="cv-cart-badge">{`[ ${cartCount} ]`}</span>
           </Link>
 
-          {/* Interruptor Móvil (Hamburguesa) */}
           <button className="cv-menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
-            <span className="material-symbols-outlined">
-              {menuOpen ? 'close' : 'menu'}
-            </span>
+            <span className="material-symbols-outlined">{menuOpen ? 'close' : 'menu'}</span>
           </button>
         </div>
 

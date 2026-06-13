@@ -1,17 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
+import { useLanguage } from '../../context/LanguageContext';
 import './Cart.css';
 
 export default function Cart() {
   const { cart, cartTotal, removeFromCart, updateQuantity, clearCart } = useCart();
+  const { t } = useLanguage();
 
   if (cart.length === 0) {
     return (
       <div className="cv-page-cart cv-empty-cart">
-        <span className="cv-code-text">/ status: 0_items</span>
-        <h2>TU CAVA ESTÁ VACÍA</h2>
-        <Link to="/tienda" className="cv-btn-primary" style={{marginTop: '20px'}}>EXPLORAR ETIQUETAS</Link>
+        <h2>{t('carrito_vacio')}</h2>
+        <Link to="/tienda" className="cv-btn-primary" style={{marginTop: '20px'}}>{t('seguir_comprando')}</Link>
       </div>
     );
   }
@@ -21,61 +22,53 @@ export default function Cart() {
       <div className="cv-cart-container">
         
         <div className="cv-cart-header">
-          <h1 className="cv-section-title">REVISIÓN DE <span className="cv-text-wine">CÓDIGO</span></h1>
-          <button onClick={clearCart} className="cv-btn-clear">
-            <span className="cv-code-symbol">[x]</span> VACIAR
-          </button>
+          <h1 className="cv-section-title">TU <span className="cv-text-wine">CARRITO</span></h1>
+          <button onClick={clearCart} className="cv-btn-clear">Vaciar carrito</button>
         </div>
 
         <div className="cv-cart-content">
-          <div className="cv-cart-items">
+          <div className="cv-cart-items-container">
             {cart.map((item) => (
-              <div key={item.id} className="cv-cart-item">
-                <img src={item.image_url} alt={item.name} className="cv-cart-item-img" />
-                
-                <div className="cv-cart-item-info">
-                  <Link to={`/producto/${item.id}`} className="cv-cart-item-name">{item.name}</Link>
-                  <span className="cv-cart-item-price">${item.price.toLocaleString('es-AR')}</span>
+              <div key={item.id} className="cv-cart-card">
+                <img src={item.image_url} alt={item.name} className="cv-cart-card-img" />
+                <div className="cv-cart-card-info">
+                  <h3>{item.name}</h3>
+                  <p>${item.price.toLocaleString('es-AR')}</p>
                 </div>
-
-                <div className="cv-cart-item-actions">
-                  <div className="cv-quantity-selector cv-small-qty">
+                <div className="cv-cart-card-actions">
+                  <div className="cv-qty-controls">
                     <button onClick={() => updateQuantity(item.id, item.quantity - 1)}>-</button>
                     <span>{item.quantity}</span>
-                    <button onClick={() => updateQuantity(item.id, item.quantity + 1)} disabled={item.quantity >= item.stock}>+</button>
+                    <button onClick={() => updateQuantity(item.id, item.quantity + 1)}>+</button>
                   </div>
-                  <button onClick={() => removeFromCart(item.id)} className="cv-cart-item-remove">
-                    <span className="material-symbols-outlined">delete</span>
-                  </button>
+                  <span className="cv-cart-card-total">${(item.price * item.quantity).toLocaleString('es-AR')}</span>
+                  <button onClick={() => removeFromCart(item.id)} className="cv-cart-remove-icon">✕</button>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="cv-cart-summary">
-            <span className="cv-code-text">/ resumen_operacion</span>
-            <div className="cv-summary-row">
-              <span>Subtotal:</span>
+          <div className="cv-cart-summary-card">
+            <h3>{t('resumen')}</h3>
+            <div className="cv-summary-line">
+              <span>{t('subtotal')}</span>
               <span>${cartTotal.toLocaleString('es-AR')}</span>
             </div>
-            <div className="cv-summary-row">
-              <span>Envío:</span>
-              <span>A calcular</span>
+            <div className="cv-summary-line">
+              <span>{t('envio')}</span>
+              <span>{t('a_coordinar')}</span>
             </div>
-            <div className="cv-summary-total">
-              <span>TOTAL:</span>
+            <div className="cv-summary-line cv-total-line">
+              <span>{t('total')}</span>
               <span>${cartTotal.toLocaleString('es-AR')}</span>
             </div>
             
-            <button className="cv-btn-primary cv-checkout-btn">
-              <span className="cv-code-symbol">{'>'}</span> INICIAR CHECKOUT
-            </button>
-            <Link to="/tienda" className="cv-btn-secondary" style={{display: 'block', textAlign: 'center', marginTop: '15px'}}>
-              SEGUIR COMPRANDO
-            </Link>
+            <Link to="/checkout" className="cv-btn-primary cv-checkout-btn">
+  <span className="cv-code-symbol">{'>'}</span> IR A PAGAR
+</Link>
+            <Link to="/tienda" className="cv-link-continue">— {t('seguir_comprando')}</Link>
           </div>
         </div>
-
       </div>
     </div>
   );

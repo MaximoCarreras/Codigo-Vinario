@@ -7,8 +7,11 @@ export default function Checkout() {
   const { cart, cartTotal } = useCart();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  
+  // Opciones seleccionables
+  const [deliveryMethod, setDeliveryMethod] = useState('store'); // 'store' o 'home'
+  const [paymentMethod, setPaymentMethod] = useState('mercadopago'); // 'mercadopago' o 'cash'
 
-  // Si entra al checkout sin nada, lo mandamos a la tienda
   if (cart.length === 0) {
     navigate('/tienda');
     return null;
@@ -17,9 +20,8 @@ export default function Checkout() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    // Acá a futuro conectamos con tu carpeta `server/checkout.js` para generar la preferencia de MercadoPago
     setTimeout(() => {
-      alert("Simulación: Redirigiendo a MercadoPago...");
+      alert(`Simulación: Pagando con ${paymentMethod} | Envío: ${deliveryMethod}`);
       setLoading(false);
     }, 2000);
   };
@@ -29,100 +31,145 @@ export default function Checkout() {
       <div className="cv-checkout-container">
         
         <div className="cv-checkout-header">
-          <span className="cv-code-text cv-blinking-cursor">/ encriptando_datos_de_envio</span>
           <h1 className="cv-section-title">FINALIZAR <span className="cv-text-wine">COMPRA</span></h1>
+          <div className="cv-checkout-steps">
+            <span className="step done"><span className="material-symbols-outlined">check_circle</span> Carrito</span>
+            <span className="step active"><span className="step-number">2</span> Datos y Envío</span>
+            <span className="step"><span className="step-number">3</span> Pago</span>
+          </div>
         </div>
 
         <div className="cv-checkout-grid">
           
-          {/* Formulario de Datos */}
-          <div className="cv-checkout-form-section">
-            <h2 className="cv-checkout-subtitle">_DATOS DEL RECEPTOR</h2>
-            <form onSubmit={handleSubmit} className="cv-form">
+          {/* Columna Izquierda: Formularios interactivos estilo Huellitas */}
+          <div className="cv-checkout-left">
+            <form id="checkout-form" onSubmit={handleSubmit} className="cv-form-wrapper">
               
-              <div className="cv-form-row">
-                <div className="cv-input-group">
-                  <label>Nombre Completo</label>
-                  <input type="text" required placeholder="Ej: Juan Pérez" />
+              {/* Sección 1: Datos */}
+              <div className="cv-checkout-box">
+                <h2 className="cv-box-title">Tus datos de contacto</h2>
+                <div className="cv-form-row">
+                  <div className="cv-input-group">
+                    <label>Nombre completo *</label>
+                    <input type="text" required placeholder="Ej: Juan Pérez" />
+                  </div>
+                  <div className="cv-input-group">
+                    <label>Teléfono *</label>
+                    <input type="tel" required placeholder="+54 9 261..." />
+                  </div>
                 </div>
-                <div className="cv-input-group">
-                  <label>DNI / Pasaporte</label>
-                  <input type="text" required placeholder="Documento de identidad" />
-                </div>
-              </div>
-
-              <div className="cv-form-row">
-                <div className="cv-input-group">
-                  <label>Email</label>
+                <div className="cv-input-group" style={{marginTop: '15px'}}>
+                  <label>Email *</label>
                   <input type="email" required placeholder="correo@ejemplo.com" />
                 </div>
-                <div className="cv-input-group">
-                  <label>Teléfono (WhatsApp)</label>
-                  <input type="tel" required placeholder="+54 9 261..." />
+              </div>
+
+              {/* Sección 2: Entrega */}
+              <div className="cv-checkout-box">
+                <h2 className="cv-box-title">Entrega</h2>
+                <div className="cv-options-grid">
+                  <div 
+                    className={`cv-option-card ${deliveryMethod === 'store' ? 'selected' : ''}`}
+                    onClick={() => setDeliveryMethod('store')}
+                  >
+                    <span className="material-symbols-outlined">storefront</span>
+                    <strong>Retiro en sucursal</strong>
+                    <small>Sin costo adicional</small>
+                  </div>
+                  <div 
+                    className={`cv-option-card ${deliveryMethod === 'home' ? 'selected' : ''}`}
+                    onClick={() => setDeliveryMethod('home')}
+                  >
+                    <span className="material-symbols-outlined">local_shipping</span>
+                    <strong>Envío a domicilio</strong>
+                    <small>Zonas disponibles</small>
+                  </div>
+                </div>
+                
+                {/* Formulario condicional de envío */}
+                {deliveryMethod === 'home' && (
+                  <div className="cv-conditional-form">
+                    <div className="cv-input-group">
+                      <label>Dirección de entrega *</label>
+                      <input type="text" required placeholder="Calle y número" />
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Sección 3: Pago */}
+              <div className="cv-checkout-box">
+                <h2 className="cv-box-title">Método de pago</h2>
+                <div className="cv-options-grid">
+                  <div 
+                    className={`cv-option-card ${paymentMethod === 'mercadopago' ? 'selected' : ''}`}
+                    onClick={() => setPaymentMethod('mercadopago')}
+                  >
+                    <span className="material-symbols-outlined">credit_card</span>
+                    <strong>Mercado Pago</strong>
+                    <small>Tarjetas / Transferencia</small>
+                  </div>
+                  <div 
+                    className={`cv-option-card ${paymentMethod === 'cash' ? 'selected' : ''}`}
+                    onClick={() => setPaymentMethod('cash')}
+                  >
+                    <span className="material-symbols-outlined">payments</span>
+                    <strong>Efectivo en local</strong>
+                    <small>Pagás al retirar</small>
+                  </div>
                 </div>
               </div>
 
-              <h2 className="cv-checkout-subtitle" style={{marginTop: '40px'}}>_COORDENADAS DE ENTREGA</h2>
-              
-              <div className="cv-input-group">
-                <label>Dirección (Calle y Número)</label>
-                <input type="text" required placeholder="Ej: Av. San Martín 1234" />
-              </div>
-
-              <div className="cv-form-row">
-                <div className="cv-input-group">
-                  <label>Ciudad / Provincia</label>
-                  <input type="text" required placeholder="Ej: Mendoza, Capital" />
-                </div>
-                <div className="cv-input-group">
-                  <label>Código Postal</label>
-                  <input type="text" required placeholder="Ej: 5500" />
-                </div>
-              </div>
-
+              {/* Botón de Pago que cambia según selección */}
               <button 
                 type="submit" 
-                className="cv-btn-primary cv-pay-btn"
+                className="cv-btn-pay-action"
                 disabled={loading}
               >
-                {loading ? 'CONECTANDO CON PASARELA...' : 'PAGAR CON MERCADOPAGO'}
+                {loading ? 'PROCESANDO...' : (paymentMethod === 'mercadopago' ? 'Ir a pagar con Mercado Pago' : 'Confirmar Reserva')}
               </button>
+
             </form>
           </div>
 
-          {/* Resumen Fijo (Ticket) */}
-          <div className="cv-checkout-summary">
-            <div className="cv-ticket">
-              <div className="cv-ticket-header">
-                <span className="cv-code-text">=== TICKET_0101 ===</span>
-              </div>
+          {/* Columna Derecha: Resumen del Pedido limpio */}
+          <div className="cv-checkout-right">
+            <div className="cv-order-summary">
+              <h2 className="cv-box-title">Resumen del pedido</h2>
               
-              <div className="cv-ticket-items">
+              <div className="cv-summary-items">
                 {cart.map(item => (
-                  <div key={item.id} className="cv-ticket-item">
-                    <span>{item.quantity}x {item.name}</span>
-                    <span>${(item.price * item.quantity).toLocaleString('es-AR')}</span>
+                  <div key={item.id} className="cv-summary-item">
+                    <img src={item.image_url} alt={item.name} />
+                    <div className="cv-item-details">
+                      <strong>{item.name}</strong>
+                      <span>x{item.quantity}</span>
+                    </div>
+                    <div className="cv-item-price">
+                      ${(item.price * item.quantity).toLocaleString('es-AR')}
+                    </div>
                   </div>
                 ))}
               </div>
 
-              <div className="cv-ticket-totals">
-                <div className="cv-ticket-row">
-                  <span>SUBTOTAL</span>
-                  <span>${cartTotal.toLocaleString('es-AR')}</span>
+              <div className="cv-summary-totals">
+                <div className="cv-totals-row">
+                  <span>Subtotal</span>
+                  <strong>${cartTotal.toLocaleString('es-AR')}</strong>
                 </div>
-                <div className="cv-ticket-row">
-                  <span>ENVÍO</span>
-                  <span>A acordar</span>
+                <div className="cv-totals-row">
+                  <span>Envío</span>
+                  <strong>{deliveryMethod === 'store' ? 'Gratis' : 'A calcular'}</strong>
                 </div>
-                <div className="cv-ticket-row cv-ticket-final">
-                  <span>TOTAL FINAL</span>
-                  <span>${cartTotal.toLocaleString('es-AR')}</span>
+                <div className="cv-totals-row cv-final-total">
+                  <span>Total</span>
+                  <span className="cv-text-wine">${cartTotal.toLocaleString('es-AR')}</span>
                 </div>
               </div>
-              
-              <div className="cv-ticket-footer">
-                <Link to="/carrito" className="cv-back-cart-link">{'< MODIFICAR CARRITO'}</Link>
+
+              <div className="cv-secure-badge">
+                <span className="material-symbols-outlined">lock</span>
+                <small>Pago procesado de forma segura.</small>
               </div>
             </div>
           </div>

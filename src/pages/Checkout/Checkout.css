@@ -1,7 +1,7 @@
 .cv-page-checkout {
-    background-color: var(--color-black);
+    background-color: #050505; /* Fondo general ultra oscuro */
     min-height: 100vh;
-    padding: 120px 5% 80px;
+    padding: 100px 5% 80px;
     color: var(--color-white);
 }
 
@@ -10,32 +10,79 @@
     margin: 0 auto;
 }
 
+/* Cabecera y Pasos */
 .cv-checkout-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-bottom: 40px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 30px;
 }
 
+.cv-checkout-steps {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+    font-family: var(--font-primary);
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.step.done {
+    color: var(--color-wine);
+}
+
+.step.active {
+    color: var(--color-white);
+    font-weight: 700;
+}
+
+.step-number {
+    background-color: #222;
+    color: #fff;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 0.8rem;
+}
+
+.step.active .step-number {
+    background-color: var(--color-wine);
+}
+
+/* Grid Principal */
 .cv-checkout-grid {
     display: grid;
     grid-template-columns: 1.5fr 1fr;
-    gap: 60px;
+    gap: 40px;
     align-items: start;
 }
 
-.cv-checkout-subtitle {
-    font-family: var(--font-code);
-    color: var(--color-wine);
-    font-size: 1.1rem;
-    margin-bottom: 20px;
-    letter-spacing: 1px;
+/* Cajas de Secciones (Formularios) */
+.cv-checkout-box {
+    background-color: #0a0a0a;
+    border: 1px solid #1a1a1a;
+    border-radius: 8px;
+    padding: 30px;
+    margin-bottom: 25px;
 }
 
-/* Formularios */
-.cv-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+.cv-box-title {
+    font-size: 1.2rem;
+    color: var(--color-white);
+    margin-bottom: 20px;
+    border-bottom: 1px solid #1a1a1a;
+    padding-bottom: 10px;
 }
 
 .cv-form-row {
@@ -52,14 +99,15 @@
 
 .cv-input-group label {
     font-size: 0.85rem;
-    color: var(--color-grey-medium);
+    color: #888;
 }
 
 .cv-input-group input {
-    background-color: #080808;
-    border: 1px solid #333;
+    background-color: #050505;
+    border: 1px solid #222;
     color: var(--color-white);
-    padding: 15px;
+    padding: 14px;
+    border-radius: 4px;
     font-family: var(--font-primary);
     transition: var(--transition-smooth);
     outline: none;
@@ -67,79 +115,176 @@
 
 .cv-input-group input:focus {
     border-color: var(--color-wine);
-    box-shadow: 0 0 10px rgba(133, 18, 62, 0.2);
 }
 
-.cv-pay-btn {
-    margin-top: 30px;
+/* Tarjetas de Selección (Botones de Envío/Pago) */
+.cv-options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.cv-option-card {
+    border: 2px solid #222;
+    background-color: #050505;
+    border-radius: 6px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.cv-option-card .material-symbols-outlined {
+    font-size: 2rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.cv-option-card strong {
+    font-size: 0.95rem;
+    color: var(--color-white);
+}
+
+.cv-option-card small {
+    font-size: 0.8rem;
+    color: #777;
+    margin-top: 5px;
+}
+
+.cv-option-card:hover {
+    border-color: #444;
+}
+
+.cv-option-card.selected {
+    border-color: var(--color-wine);
+    background-color: rgba(133, 18, 62, 0.05);
+}
+
+.cv-option-card.selected .material-symbols-outlined {
+    color: var(--color-wine);
+}
+
+.cv-conditional-form {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px dashed #222;
+}
+
+/* Botón de Pago Gigante */
+.cv-btn-pay-action {
+    background-color: var(--color-wine);
+    color: white;
     width: 100%;
-    justify-content: center;
     padding: 20px;
     font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+    letter-spacing: 1px;
 }
 
-/* El Ticket estilo consola */
-.cv-checkout-summary {
+.cv-btn-pay-action:hover {
+    background-color: #630c2d;
+}
+
+/* Resumen del Pedido (Columna Derecha) */
+.cv-order-summary {
+    background-color: #0a0a0a;
+    border: 1px solid #1a1a1a;
+    border-radius: 8px;
+    padding: 30px;
     position: sticky;
     top: 100px;
 }
 
-.cv-ticket {
-    background-color: #050505;
-    border: 1px solid #222;
-    padding: 30px;
-    font-family: var(--font-code);
+.cv-summary-items {
+    margin-bottom: 25px;
 }
 
-.cv-ticket-header {
-    text-align: center;
-    border-bottom: 1px dashed #444;
-    padding-bottom: 20px;
-    margin-bottom: 20px;
-}
-
-.cv-ticket-item {
+.cv-summary-item {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
-    font-size: 0.85rem;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid #1a1a1a;
+}
+
+.cv-summary-item img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+    background-color: #111;
+}
+
+.cv-item-details {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.cv-item-details strong {
+    font-size: 0.9rem;
+    color: #eee;
+}
+
+.cv-item-details span {
+    font-size: 0.8rem;
+    color: #777;
+}
+
+.cv-item-price {
+    font-family: var(--font-code);
+    font-size: 0.95rem;
     color: #ccc;
 }
 
-.cv-ticket-totals {
-    margin-top: 30px;
-    border-top: 1px dashed #444;
-    padding-top: 20px;
+.cv-summary-totals {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
-.cv-ticket-row {
+.cv-totals-row {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
-    font-size: 0.9rem;
-    color: #888;
+    font-size: 0.95rem;
+    color: #aaa;
 }
 
-.cv-ticket-final {
-    margin-top: 20px;
+.cv-totals-row strong {
+    color: #fff;
+    font-family: var(--font-code);
+}
+
+.cv-final-total {
+    border-top: 1px solid #222;
+    padding-top: 15px;
     font-size: 1.2rem;
-    color: var(--color-wine);
+    color: #fff;
     font-weight: bold;
 }
 
-.cv-ticket-footer {
-    margin-top: 30px;
-    text-align: center;
+.cv-final-total .cv-text-wine {
+    font-family: var(--font-code);
 }
 
-.cv-back-cart-link {
+.cv-secure-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 25px;
     color: #666;
-    font-size: 0.8rem;
-    transition: color 0.3s;
 }
 
-.cv-back-cart-link:hover {
-    color: var(--color-white);
+.cv-secure-badge .material-symbols-outlined {
+    font-size: 1.1rem;
 }
 
 @media (max-width: 992px) {
@@ -148,6 +293,9 @@
     }
     .cv-form-row {
         flex-direction: column;
-        gap: 20px;
+        gap: 15px;
+    }
+    .cv-checkout-steps {
+        display: none;
     }
 }
