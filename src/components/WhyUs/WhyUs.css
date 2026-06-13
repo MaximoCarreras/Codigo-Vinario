@@ -1,0 +1,72 @@
+.cv-whyus {
+    background-color: var(--color-grey-dark);
+    padding: 100px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cv-whyus-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+.cv-whyus-header {
+    text-align: center;
+    margin-bottom: 70px;
+}
+
+.cv-whyus-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+}
+
+.cv-whyus-card {
+    background-color: var(--color-black);
+    padding: 40px 30px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition-smooth);
+}
+
+.cv-whyus-card:hover {
+    border-color: var(--color-wine);
+    transform: translateY(-5px);
+}
+
+.cv-whyus-number {
+    position: absolute;
+    top: -10px;
+    right: 10px;
+    font-family: var(--font-code);
+    font-size: 6rem;
+    color: rgba(255, 255, 255, 0.03);
+    font-weight: 700;
+    z-index: 1;
+    transition: var(--transition-smooth);
+}
+
+.cv-whyus-card:hover .cv-whyus-number {
+    color: rgba(133, 18, 62, 0.1);
+}
+
+.cv-whyus-card-title {
+    color: var(--color-white);
+    font-size: 1.2rem;
+    letter-spacing: 1.5px;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cv-whyus-card-desc {
+    color: #aaaaaa;
+    line-height: 1.7;
+    position: relative;
+    z-index: 2;
+    font-size: 0.95rem;
+}
