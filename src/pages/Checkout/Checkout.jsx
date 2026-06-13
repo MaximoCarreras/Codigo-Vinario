@@ -179,3 +179,39 @@ export default function Checkout() {
     </div>
   );
 }
+{/* Opciones Dinámicas de Entrega */}
+                {deliveryMethod === 'home' && (
+                  <div className="cv-conditional-form">
+                    <div className="cv-input-group">
+                      <label>Dirección de entrega *</label>
+                      <input type="text" required placeholder="Calle y número, Piso/Depto" />
+                    </div>
+                  </div>
+                )}
+
+                {deliveryMethod === 'store' && (
+                  <div className="cv-store-pickup-info">
+                    <div className="cv-store-address">
+                      <span className="material-symbols-outlined">location_on</span>
+                      <div>
+                        <strong>Código Vinario - Wine Stop</strong>
+                        <p>Av. Colón y Perú, Mendoza, Argentina</p>
+                        <small>Horarios: Lunes a Sábados de 10:00 a 20:30 hs.</small>
+                      </div>
+                    </div>
+                    
+                    <div className="cv-map-container">
+                      {/* Mapa con filtro de modo oscuro por CSS */}
+                      <iframe 
+                        title="Ubicación Código Vinario"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3350.608381832049!2d-68.84752538481545!3d-32.88203878094034!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x967e09105a3b934b%3A0x10842db18e244837!2sAv.%20Col%C3%B3n%20%26%20Per%C3%BA%2C%20Mendoza!5e0!3m2!1ses-419!2sar!4v1680000000000!5m2!1ses-419!2sar" 
+                        width="100%" 
+                        height="250" 
+                        style={{border: 0}} 
+                        allowFullScreen="" 
+                        loading="lazy" 
+                        referrerPolicy="no-referrer-when-downgrade">
+                      </iframe>
+                    </div>
+                  </div>
+                )}

@@ -299,3 +299,58 @@
         display: none;
     }
 }
+/* --- ESTILOS DEL MAPA Y RETIRO EN SUCURSAL --- */
+.cv-store-pickup-info {
+    margin-top: 25px;
+    padding-top: 25px;
+    border-top: 1px dashed #222;
+}
+
+.cv-store-address {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    background-color: #111;
+    padding: 20px;
+    border-radius: 6px;
+    border-left: 3px solid var(--color-wine);
+    margin-bottom: 20px;
+}
+
+.cv-store-address .material-symbols-outlined {
+    color: var(--color-wine);
+    font-size: 1.8rem;
+}
+
+.cv-store-address strong {
+    display: block;
+    color: var(--color-white);
+    font-size: 1.05rem;
+    margin-bottom: 5px;
+}
+
+.cv-store-address p {
+    color: #ccc;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.cv-store-address small {
+    color: #777;
+    font-size: 0.8rem;
+    font-family: var(--font-code);
+}
+
+.cv-map-container {
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #222;
+    /* El truco mágico para que el mapa de Google se vea en Modo Oscuro */
+    filter: invert(100%) hue-rotate(180deg) contrast(90%);
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+
+.cv-map-container:hover {
+    opacity: 1;
+}

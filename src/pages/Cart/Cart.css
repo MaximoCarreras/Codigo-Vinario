@@ -5,123 +5,133 @@
     color: var(--color-white);
 }
 
+.cv-cart-container { max-width: 1200px; margin: 0 auto; }
+
+/* Estado Vacío */
 .cv-empty-cart {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    min-height: 60vh;
+    min-height: 50vh;
+    background-color: #0a0a0a;
+    border: 1px dashed #222;
+    border-radius: 8px;
+    padding: 50px;
 }
+.cv-empty-icon { font-size: 4rem !important; color: #333; }
 
-.cv-cart-container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
+/* Cabecera */
 .cv-cart-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    margin-bottom: 40px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+.cv-btn-clear {
+    background: none; border: none; color: #ff4d4d; font-family: var(--font-primary);
+    font-size: 0.9rem; cursor: pointer; transition: 0.3s; text-decoration: underline;
 }
 
-.cv-cart-content {
+/* Layout Principal */
+.cv-cart-layout {
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 40px;
+    grid-template-columns: 1.8fr 1fr;
+    gap: 30px;
     align-items: start;
 }
 
-.cv-cart-items {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
+/* Lista de Productos (Estilo Huellitas) */
+.cv-cart-items-list { display: flex; flex-direction: column; gap: 15px; }
 
-.cv-cart-item {
-    display: grid;
-    grid-template-columns: 80px 1fr auto auto; /* Esto fuerza a la imagen a medir 80px MÁXIMO */
+.cv-cart-card {
+    display: flex;
     align-items: center;
-    gap: 20px;
-    background-color: #0a0a0a;
-    padding: 15px;
-    border: 1px solid #1a1a1a;
+    justify-content: space-between;
+    background-color: #ffffff; /* Fondo blanco para las tarjetas como en tu referencia */
     border-radius: 8px;
+    padding: 15px 20px;
+    color: #000;
 }
 
-.cv-cart-item-img {
-    width: 80px !important;
-    height: 100px !important;
-    object-fit: cover;
-    border-radius: 4px;
+.cv-cart-card-img {
+    width: 60px;
+    height: 80px;
+    flex-shrink: 0;
 }
 
-.cv-cart-item-info {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+.cv-cart-card-img img {
+    width: 100%; height: 100%; object-fit: contain;
 }
 
-.cv-cart-item-name {
-    font-weight: 700;
-    font-size: 1rem;
-    color: #eee;
+.cv-cart-card-info {
+    display: flex; flex-direction: column; flex-grow: 1; margin-left: 20px;
 }
 
-.cv-cart-item-price {
-    font-family: var(--font-code);
-    color: var(--color-wine);
-    font-size: 1.1rem;
+.cv-cart-card-title {
+    font-weight: 700; font-size: 1.05rem; color: #111; text-decoration: none;
+}
+.cv-cart-card-title:hover { color: var(--color-wine); }
+
+.cv-cart-card-cat { font-family: var(--font-code); font-size: 0.75rem; color: #666; margin-bottom: 5px; }
+.cv-cart-card-unit-price { font-size: 0.9rem; color: #555; }
+
+/* Controles de Cantidad */
+.cv-qty-box {
+    display: flex; align-items: center; background-color: #f5f5f5;
+    border-radius: 20px; padding: 5px; gap: 10px; margin-right: 20px;
+}
+.cv-qty-box button {
+    width: 25px; height: 25px; border-radius: 50%; border: none;
+    background-color: #ddd; color: #000; cursor: pointer; font-weight: bold;
+}
+.cv-qty-box button:hover { background-color: #ccc; }
+.cv-qty-box span { font-family: var(--font-code); font-weight: bold; width: 20px; text-align: center; }
+
+/* Precio total y Borrar */
+.cv-cart-card-total {
+    display: flex; align-items: center; gap: 20px; min-width: 120px; justify-content: flex-end;
+}
+.cv-price-total { font-weight: 700; font-size: 1.1rem; color: var(--color-wine); }
+.cv-btn-remove-item {
+    background: none; border: none; color: #999; cursor: pointer; display: flex; align-items: center;
+}
+.cv-btn-remove-item:hover { color: #000; }
+
+/* Resumen (Sidebar) */
+.cv-cart-summary-sidebar { position: sticky; top: 100px; }
+
+.cv-summary-box {
+    background-color: #ffffff; /* Resumen en blanco estilo Huellitas */
+    border-radius: 8px; padding: 25px; color: #000;
 }
 
-.cv-cart-item-actions {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+.cv-summary-title { font-size: 1.2rem; margin-bottom: 20px; font-weight: 800; color: var(--color-wine); }
+
+.cv-summary-line {
+    display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 0.95rem; color: #444;
 }
 
-.cv-small-qty {
-    display: flex;
-    align-items: center;
-    border: 1px solid #333;
-    background-color: #000;
+.cv-summary-total-line {
+    display: flex; justify-content: space-between; margin-top: 20px; padding-top: 20px;
+    border-top: 1px solid #eee; font-size: 1.3rem; font-weight: 800;
 }
 
-.cv-small-qty button {
-    width: 30px;
-    height: 30px;
-    background: transparent;
-    border: none;
-    color: white;
-    cursor: pointer;
+.cv-btn-checkout {
+    display: block; width: 100%; background-color: var(--color-wine); color: white;
+    text-align: center; padding: 15px; border-radius: 6px; font-weight: bold;
+    text-decoration: none; margin-top: 25px; transition: 0.3s;
 }
+.cv-btn-checkout:hover { background-color: #630c2d; }
 
-.cv-small-qty span {
-    width: 30px;
-    text-align: center;
-    font-family: var(--font-code);
-}
-
-.cv-cart-summary {
-    background-color: #0a0a0a;
-    padding: 30px;
-    border: 1px solid #1a1a1a;
-    border-radius: 8px;
-    position: sticky;
-    top: 100px;
-}
+.cv-summary-footer { text-align: center; margin-top: 15px; }
+.cv-link-continue { color: #666; font-size: 0.9rem; text-decoration: none; transition: 0.3s; }
+.cv-link-continue:hover { color: #000; }
 
 @media (max-width: 992px) {
-    .cv-cart-content { grid-template-columns: 1fr; }
-    .cv-cart-item {
-        grid-template-columns: 80px 1fr; /* Mantiene la imagen chiquita en celular */
-        row-gap: 15px;
-    }
-    .cv-cart-item-actions {
-        grid-column: 1 / -1;
-        justify-content: space-between;
-    }
+    .cv-cart-layout { grid-template-columns: 1fr; }
+    .cv-cart-card { flex-wrap: wrap; }
+    .cv-cart-card-total { width: 100%; justify-content: space-between; border-top: 1px solid #eee; padding-top: 15px; margin-top: 10px; }
+    .cv-qty-box { margin-right: 0; }
 }
