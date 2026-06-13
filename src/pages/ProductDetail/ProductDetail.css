@@ -1,0 +1,146 @@
+.cv-page-detail {
+    background-color: var(--color-black);
+    min-height: 100vh;
+    padding: 120px 5% 80px;
+    color: var(--color-white);
+}
+
+.cv-loading-state, .cv-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.cv-detail-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+.cv-detail-image-wrapper {
+    position: relative;
+    background-color: #080808;
+    border: 1px solid rgba(133, 18, 62, 0.2);
+    aspect-ratio: 1 / 1.2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.cv-detail-image {
+    width: 80%;
+    height: 90%;
+    object-fit: cover;
+    position: relative;
+    z-index: 2;
+}
+
+.cv-detail-badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: var(--color-wine);
+    padding: 5px 10px;
+    z-index: 3;
+}
+
+.cv-back-link {
+    font-family: var(--font-code);
+    font-size: 0.8rem;
+    color: var(--color-grey-medium);
+    margin-bottom: 20px;
+    display: inline-block;
+    transition: var(--transition-smooth);
+}
+
+.cv-back-link:hover {
+    color: var(--color-white);
+}
+
+.cv-detail-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 10px;
+    line-height: 1.1;
+}
+
+.cv-detail-price {
+    font-family: var(--font-code);
+    font-size: 2rem;
+    color: var(--color-wine);
+    margin-bottom: 30px;
+}
+
+.cv-detail-description {
+    background-color: #111;
+    padding: 25px;
+    border-left: 2px solid var(--color-wine);
+    margin-bottom: 30px;
+}
+
+.cv-detail-description p {
+    margin-top: 10px;
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.cv-detail-stock {
+    font-family: var(--font-code);
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 30px;
+}
+
+.cv-detail-actions {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.cv-quantity-selector {
+    display: flex;
+    align-items: center;
+    border: 1px solid #333;
+    background-color: #000;
+}
+
+.cv-quantity-selector button {
+    background: transparent;
+    border: none;
+    color: var(--color-white);
+    width: 45px;
+    height: 45px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.cv-quantity-selector button:hover:not(:disabled) {
+    background-color: var(--color-wine);
+}
+
+.cv-quantity-selector button:disabled {
+    color: #444;
+    cursor: not-allowed;
+}
+
+.cv-quantity-selector span {
+    font-family: var(--font-code);
+    width: 40px;
+    text-align: center;
+}
+
+.cv-detail-add-btn {
+    flex-grow: 1;
+    justify-content: center;
+}
+
+@media (max-width: 992px) {
+    .cv-detail-container {
+        grid-template-columns: 1fr;
+    }
+}

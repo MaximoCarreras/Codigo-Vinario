@@ -54,7 +54,7 @@ export default function Navbar() {
           </div>
 
           {/* Cava Digital / Carrito de Compras */}
-          <Link to="/tienda" className="cv-nav-cart">
+          <Link to="/carrito" className="cv-nav-cart">
             <span className="material-symbols-outlined cv-cart-icon">wine_bar</span>
             <span className="cv-cart-badge">{`[ ${cartCount} ]`}</span>
           </Link>
