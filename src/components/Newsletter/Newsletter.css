@@ -1,0 +1,90 @@
+.cv-newsletter {
+    background-color: var(--color-grey-dark);
+    padding: 100px 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cv-newsletter-content {
+    position: relative;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(133, 18, 62, 0.3);
+    padding: 60px 40px;
+    border-radius: 8px;
+    max-width: 700px;
+    width: 100%;
+    text-align: center;
+    box-shadow: var(--shadow-card);
+}
+
+.cv-newsletter-header h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--color-white);
+    margin: 15px 0;
+}
+
+.cv-newsletter-header p {
+    margin-bottom: 30px;
+    color: #cccccc;
+}
+
+.cv-newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.cv-input-wrapper {
+    display: flex;
+    align-items: center;
+    background-color: var(--color-black);
+    border: 1px solid #333;
+    padding: 0 15px;
+    border-radius: 4px;
+    transition: var(--transition-smooth);
+}
+
+.cv-input-wrapper:focus-within {
+    border-color: var(--color-wine);
+    box-shadow: 0 0 10px rgba(133, 18, 62, 0.2);
+}
+
+.cv-input-prefix {
+    font-family: var(--font-code);
+    color: var(--color-wine);
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.cv-newsletter-form input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: var(--color-white);
+    font-family: var(--font-code);
+    font-size: 0.9rem;
+    padding: 18px 0;
+    outline: none;
+}
+
+.cv-newsletter-form input::placeholder {
+    color: #555;
+}
+
+.cv-submit-btn {
+    justify-content: center;
+    width: 100%;
+}
+
+@media (max-width: 600px) {
+    .cv-newsletter-content {
+        padding: 40px 20px;
+    }
+}
