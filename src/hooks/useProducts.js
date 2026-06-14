@@ -1,50 +1,6 @@
+// src/hooks/useProducts.js
 import { useState, useEffect } from 'react';
 
-// --- TRADUCTOR DE CATEGORÍAS ---
-const traducirCategoria = (rubro) => {
-  if (!rubro) return "Otros";
-  const nombre = rubro.toLowerCase();
-  const mapa = {
-    "bebida": "Vinos",
-    "gaseosa": "Complementos",
-    "espumante": "Espumantes",
-    "destilado": "Destilados",
-    "birra": "Cervezas"
-  };
-  return mapa[nombre] || "Otros"; 
-};
-
-// --- EXPORTACIÓN 1: PRODUCTOS DESTACADOS ---
-export function useFeaturedProducts() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch('/api/productos')
-      .then(res => res.json())
-      .then(data => {
-        const list = Array.isArray(data) ? data : (data.results || []);
-        // Adaptamos los datos de Dux (cod_item -> id, item -> name)
-        const formatted = list.map(item => ({
-            id: item.cod_item,
-            name: item.item,
-            price: 0, 
-            is_featured: true, // Forzamos true para que aparezcan en BestSellers
-            category: traducirCategoria(item.rubro?.nombre)
-        }));
-        setProducts(formatted.slice(0, 4));
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error("Error cargando destacados:", err);
-        setLoading(false);
-      });
-  }, []);
-
-  return { products, loading };
-}
-
-// --- EXPORTACIÓN 2: CATÁLOGO COMPLETO ---
 export function useProducts(category = null) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -54,27 +10,27 @@ export function useProducts(category = null) {
     fetch('/api/productos')
       .then(res => res.json())
       .then(data => {
-        const lista = Array.isArray(data) ? data : (data.results || []);
+        // data.results es la lista que viene de Dux
+        const listaCruda = data.results || [];
         
-        const formatted = lista.map(item => ({
-            id: item.cod_item,
-            name: item.item,
-            price: 0,
-            category: traducirCategoria(item.rubro?.nombre)
+        const listaLimpia = listaCruda.map(item => ({
+          id: item.cod_item,
+          name: item.item,
+          // Si el precio viene en otro lado, lo ajustaremos luego
+          price: 0, 
+          category: item.rubro?.nombre || "Otros",
+          image_url: 'https://images.unsplash.com/photo-1584916201218-f4242ceb4809?auto=format&fit=crop&w=500&q=80'
         }));
 
-        let filtered = formatted;
+        let filtered = listaLimpia;
         if (category && category !== "Todo") {
-          filtered = formatted.filter(p => p.category === category);
+          filtered = listaLimpia.filter(p => p.category === category);
         }
         
         setProducts(filtered);
         setLoading(false);
       })
-      .catch(err => {
-        console.error("Error cargando catálogo:", err);
-        setLoading(false);
-      });
+      .catch(() => setLoading(false));
   }, [category]);
 
   return { products, loading };
