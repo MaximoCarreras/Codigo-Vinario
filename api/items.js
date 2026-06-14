@@ -3,7 +3,8 @@ export default async function handler(req, res) {
   const token = process.env.DUX_API_TOKEN;
 
   try {
-    const response = await fetch('https://erp.duxsoftware.com.ar/WSERP/rest/services/items', {
+    // Agregamos ?limite=500 para traer hasta 500 productos de una sola vez
+const response = await fetch('https://erp.duxsoftware.com.ar/WSERP/rest/services/items?limite=10000', {
       method: 'GET',
       headers: { 
         'authorization': token, 
