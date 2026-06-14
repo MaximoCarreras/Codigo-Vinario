@@ -12,7 +12,7 @@ import ProductDetail from './pages/ProductDetail/ProductDetail';
 import Cart from './pages/Cart/Cart';
 import Checkout from './pages/Checkout/Checkout';
 import NotFound from './pages/NotFound/NotFound';
-
+import Pedidos from './pages/Pedidos/Pedidos';
 // Importamos el nuevo componente de Mi Cuenta
 import Account from './pages/Account/Account';
 
@@ -39,7 +39,7 @@ export default function App() {
           <Route path="/eventos" element={<Eventos />} />
           <Route path="/compromiso" element={<Compromiso />} />
           <Route path="/comunidad" element={<Comunidad />} />
-          
+          <Route path="/pedidos" element={<Pedidos />} />
           {/* Panel de usuario Real (Login / Registro) */}
           <Route path="/mi-cuenta" element={<Account />} />
 
