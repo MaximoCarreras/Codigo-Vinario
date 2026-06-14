@@ -1,8 +1,5 @@
 import { useState, useEffect } from 'react';
 
-console.log("Cargando duxHooks.js con traductor inteligente");
-
-// TRADUCTOR INTELIGENTE DE CATEGORÍAS
 const clasificarProducto = (item) => {
   const nombre = (item.item || "").toLowerCase();
   const rubro = (item.rubro?.nombre || "").toLowerCase();
@@ -12,7 +9,7 @@ const clasificarProducto = (item) => {
   if (rubro.includes("cerveza") || rubro.includes("birra") || nombre.includes("ipa")) return "cervezas";
   if (nombre.includes("combo") || nombre.includes("degustacion") || nombre.includes("caja") || nombre.includes("box")) return "combos";
   
-  return "vinos"; // Fallback por defecto
+  return "vinos"; 
 };
 
 export function useProducts(category = null) {
@@ -34,7 +31,6 @@ export function useProducts(category = null) {
           image_url: 'https://images.unsplash.com/photo-1584916201218-f4242ceb4809?auto=format&fit=crop&w=500&q=80'
         }));
         
-        // Filtramos asegurándonos de ignorar mayúsculas/minúsculas
         setProducts(category && category !== "Todo" ? formatted.filter(p => p.category === category.toLowerCase()) : formatted);
         setLoading(false);
       })
