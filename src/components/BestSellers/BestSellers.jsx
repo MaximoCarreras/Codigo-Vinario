@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useFeaturedProducts } from '../../hooks/useProducts';
+import { useProducts } from "../../hooks/duxHooks";
 import { useCart } from '../../context/CartContext';
 import './BestSellers.css';
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { useProducts } from '../../hooks/useProducts';
+import { useProducts } from "../../hooks/duxHooks";
 import { useCart } from '../../context/CartContext';
 import './ProductDetail.css';
 

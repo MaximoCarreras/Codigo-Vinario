@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useProducts } from '../../hooks/useProducts';
+import { useProducts } from "../../hooks/duxHooks";
 import { useCart } from '../../context/CartContext';
 import { useLanguage } from '../../context/LanguageContext';
 import './Shop.css';
