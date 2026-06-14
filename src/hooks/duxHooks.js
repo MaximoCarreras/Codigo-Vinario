@@ -19,12 +19,13 @@ export function useProducts(category = null) {
       .then(data => {
         const lista = data.results || [];
         
-        // Mapeo inteligente con búsqueda automática de campos de precio
         const formatted = lista.map(item => ({
           id: item.cod_item,
           name: item.item,
-          // Intenta buscar el precio en varios campos comunes de Dux
-          price: item.precio_venta || item.precio || item.precio_lista || item.precio_publico || 0,
+          // Aquí buscamos el precio en la lista [0]
+          price: item.precios && item.precios[0] ? parseFloat(item.precios[0].precio) : 0,
+          // Aquí sumamos el stock de todos los depósitos
+          stock: item.stock ? item.stock.reduce((acc, s) => acc + parseFloat(s.ctd_disponible), 0) : 0,
           category: traducirCategoria(item.rubro?.nombre),
           image_url: 'https://images.unsplash.com/photo-1584916201218-f4242ceb4809?auto=format&fit=crop&w=500&q=80'
         }));
@@ -50,7 +51,8 @@ export function useFeaturedProducts() {
         const formatted = lista.map(item => ({ 
           id: item.cod_item, 
           name: item.item, 
-          price: item.precio_venta || item.precio || item.precio_lista || item.precio_publico || 0 
+          price: item.precios && item.precios[0] ? parseFloat(item.precios[0].precio) : 0,
+          stock: item.stock ? item.stock.reduce((acc, s) => acc + parseFloat(s.ctd_disponible), 0) : 0
         }));
         setProducts(formatted.slice(0, 4));
         setLoading(false);
