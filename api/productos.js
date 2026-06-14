@@ -1,25 +1,19 @@
 export default async function handler(req, res) {
   const token = process.env.DUX_API_TOKEN;
-  
   try {
     const response = await fetch('https://erp.duxsoftware.com.ar/WSERP/rest/services/items', {
       method: 'GET',
-      headers: {
-        'accept': 'application/json',
-        'authorization': token
-      }
+      headers: { 'accept': 'application/json', 'authorization': token }
     });
 
-    if (!response.ok) {
-        // En lugar de tirar error, devolvemos lista vacía para que la web no explote
-        return res.status(200).json([]); 
-    }
-
     const data = await response.json();
+    
+    // --- ESTO ES LA CLAVE ---
+    // Imprimimos el resultado en los logs de Vercel para ver qué nos manda Dux
+    console.log("Respuesta cruda de Dux:", JSON.stringify(data).substring(0, 500));
+    
     return res.status(200).json(data);
-
   } catch (error) {
-    console.error("Error Dux:", error);
-    return res.status(200).json([]); // Retorno vacío para evitar error 500
+    return res.status(500).json({ error: error.message });
   }
 }
