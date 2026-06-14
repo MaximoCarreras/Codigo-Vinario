@@ -18,13 +18,17 @@ export function useProducts(category = null) {
       .then(res => res.json())
       .then(data => {
         const lista = data.results || [];
+        
+        // Mapeo inteligente con búsqueda automática de campos de precio
         const formatted = lista.map(item => ({
           id: item.cod_item,
           name: item.item,
-          price: 0,
+          // Intenta buscar el precio en varios campos comunes de Dux
+          price: item.precio_venta || item.precio || item.precio_lista || item.precio_publico || 0,
           category: traducirCategoria(item.rubro?.nombre),
           image_url: 'https://images.unsplash.com/photo-1584916201218-f4242ceb4809?auto=format&fit=crop&w=500&q=80'
         }));
+        
         setProducts(category ? formatted.filter(p => p.category === category) : formatted);
         setLoading(false);
       })
@@ -33,7 +37,7 @@ export function useProducts(category = null) {
   return { products, loading };
 }
 
-// EXPORT 2: Destacados (¡Lo escribimos explícitamente!)
+// EXPORT 2: Destacados
 export function useFeaturedProducts() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -43,7 +47,11 @@ export function useFeaturedProducts() {
       .then(res => res.json())
       .then(data => {
         const lista = data.results || [];
-        const formatted = lista.map(item => ({ id: item.cod_item, name: item.item, price: 0 }));
+        const formatted = lista.map(item => ({ 
+          id: item.cod_item, 
+          name: item.item, 
+          price: item.precio_venta || item.precio || item.precio_lista || item.precio_publico || 0 
+        }));
         setProducts(formatted.slice(0, 4));
         setLoading(false);
       })
