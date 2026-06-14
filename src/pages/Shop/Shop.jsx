@@ -97,16 +97,16 @@ export default function Shop() {
                     <p className="cv-product-price">{`$${product.price.toLocaleString('es-AR')}`}</p>
                     
                     <button 
-                      className="cv-btn-add-cart"
-                      onClick={() => addToCart(product, 1)}
-                      disabled={product.stock <= 0}
-                    >
-                      {product.stock > 0 ? (
-                        <><span className="cv-code-symbol">[+]</span> {t.btn_add}</>
-                      ) : (
-                        <><span className="cv-code-symbol">[x]</span> {t.btn_no_stock}</>
-                      )}
-                    </button>
+  className="cv-btn-add-cart"
+  onClick={() => addToCart(product, 1)}
+  disabled={product.stock <= 0} // Usamos product.stock, que ahora viene de Dux
+>
+  {product.stock > 0 ? (
+    <><span className="cv-code-symbol">[+]</span> {t.btn_add}</>
+  ) : (
+    <><span className="cv-code-symbol">[x]</span> {t.btn_no_stock}</>
+  )}
+</button>
                   </div>
                 </div>
               ))
