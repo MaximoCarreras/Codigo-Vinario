@@ -94,7 +94,9 @@ export default function Shop() {
                     <Link to={`/producto/${product.id}`}>
                       <h3 className="cv-product-name">{product.name}</h3>
                     </Link>
-                    <p className="cv-product-price">{`$${product.price.toLocaleString('es-AR')}`}</p>
+                    <p className="cv-product-price">
+  {product.price > 0 ? `$${product.price.toLocaleString('es-AR')}` : "Consultar precio"}
+</p>
                     
                     <button 
   className="cv-btn-add-cart"
