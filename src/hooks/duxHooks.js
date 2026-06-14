@@ -1,4 +1,3 @@
-// src/hooks/duxHooks.js
 import { useState, useEffect } from 'react';
 
 const traducirCategoria = (rubro) => {
@@ -13,7 +12,7 @@ export function useProducts(category = null) {
 
   useEffect(() => {
     setLoading(true);
-    fetch('/api/items') // Llamamos a la ruta plana
+    fetch('/api/items')
       .then(res => res.json())
       .then(data => {
         const lista = data.results || [];
@@ -37,14 +36,15 @@ export function useFeaturedProducts() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/items') // Llamamos a la ruta plana
+    fetch('/api/items')
       .then(res => res.json())
       .then(data => {
         const lista = data.results || [];
         const formatted = lista.map(item => ({ id: item.cod_item, name: item.item, price: 0 }));
         setProducts(formatted.slice(0, 4));
         setLoading(false);
-      });
+      })
+      .catch(() => setLoading(false));
   }, []);
   return { products, loading };
 }

@@ -1,3 +1,4 @@
+import { useFeaturedProducts } from "../../hooks/duxHooks";
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useProducts } from "../../hooks/duxHooks";
