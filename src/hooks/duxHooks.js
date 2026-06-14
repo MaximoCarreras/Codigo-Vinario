@@ -1,12 +1,18 @@
 import { useState, useEffect } from 'react';
 
-// Si esto aparece en los logs de Vercel, es que está leyendo el archivo correcto
-console.log("Cargando duxHooks.js correctamente");
+console.log("Cargando duxHooks.js con traductor inteligente");
 
-const traducirCategoria = (rubro) => {
-  const nombre = (rubro || "").toLowerCase();
-  const mapa = { "bebida": "Vinos", "gaseosa": "Complementos", "espumante": "Espumantes", "destilado": "Destilados", "birra": "Cervezas" };
-  return mapa[nombre] || "Otros"; 
+// TRADUCTOR INTELIGENTE DE CATEGORÍAS
+const clasificarProducto = (item) => {
+  const nombre = (item.item || "").toLowerCase();
+  const rubro = (item.rubro?.nombre || "").toLowerCase();
+
+  if (rubro.includes("vino") || nombre.includes("vino") || nombre.includes("malbec") || nombre.includes("cabernet") || nombre.includes("pinot") || nombre.includes("blend") || nombre.includes("naranjo") || nombre.includes("syrah")) return "vinos";
+  if (rubro.includes("destilado") || nombre.includes("gin") || nombre.includes("vodka") || nombre.includes("whisky") || nombre.includes("ron")) return "destilados";
+  if (rubro.includes("cerveza") || rubro.includes("birra") || nombre.includes("ipa")) return "cervezas";
+  if (nombre.includes("combo") || nombre.includes("degustacion") || nombre.includes("caja") || nombre.includes("box")) return "combos";
+  
+  return "vinos"; // Fallback por defecto
 };
 
 export function useProducts(category = null) {
@@ -23,10 +29,13 @@ export function useProducts(category = null) {
           id: item.cod_item,
           name: item.item,
           price: item.precios && item.precios[0] ? parseFloat(item.precios[0].precio) : 0,
-          category: traducirCategoria(item.rubro?.nombre),
+          stock: item.stock ? item.stock.reduce((acc, s) => acc + parseFloat(s.ctd_disponible), 0) : 0,
+          category: clasificarProducto(item),
           image_url: 'https://images.unsplash.com/photo-1584916201218-f4242ceb4809?auto=format&fit=crop&w=500&q=80'
         }));
-        setProducts(category ? formatted.filter(p => p.category === category) : formatted);
+        
+        // Filtramos asegurándonos de ignorar mayúsculas/minúsculas
+        setProducts(category && category !== "Todo" ? formatted.filter(p => p.category === category.toLowerCase()) : formatted);
         setLoading(false);
       })
       .catch(() => setLoading(false));
@@ -46,7 +55,10 @@ export function useFeaturedProducts() {
         const formatted = lista.map(item => ({ 
           id: item.cod_item, 
           name: item.item, 
-          price: item.precios && item.precios[0] ? parseFloat(item.precios[0].precio) : 0 
+          price: item.precios && item.precios[0] ? parseFloat(item.precios[0].precio) : 0,
+          stock: item.stock ? item.stock.reduce((acc, s) => acc + parseFloat(s.ctd_disponible), 0) : 0,
+          category: clasificarProducto(item),
+          image_url: 'https://images.unsplash.com/photo-1584916201218-f4242ceb4809?auto=format&fit=crop&w=500&q=80'
         }));
         setProducts(formatted.slice(0, 4));
         setLoading(false);

@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import './Checkout.css';
 
 export default function Checkout() {
-  const { cart, cartTotal } = useCart();
+  const { cart, cartTotal, clearCart } = useCart(); // Agregamos clearCart si lo tienes en tu contexto
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   
@@ -12,19 +12,66 @@ export default function Checkout() {
   const [deliveryMethod, setDeliveryMethod] = useState('store'); // 'store' o 'home'
   const [paymentMethod, setPaymentMethod] = useState('mercadopago'); // 'mercadopago' o 'cash'
 
+  // Referencias para capturar los datos del cliente
+  const nombreRef = useRef();
+  const telefonoRef = useRef();
+  const emailRef = useRef();
+
   if (cart.length === 0) {
     navigate('/tienda');
     return null;
   }
 
-  const handleSubmit = (e) => {
+  // --- FUNCIÓN REAL QUE ENVÍA EL PEDIDO A DUX ---
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
-      alert(`Simulación: Pagando con ${paymentMethod} | Envío: ${deliveryMethod}`);
+
+    const datosCliente = {
+      nombre: nombreRef.current.value,
+      telefono: telefonoRef.current.value,
+      email: emailRef.current.value
+    };
+
+    const payload = {
+      cliente: {
+        nombre: datosCliente.nombre,
+        email: datosCliente.email,
+        telefono: datosCliente.telefono
+      },
+      items: cart.map(item => ({
+        cod_item: item.id,
+        cantidad: item.quantity,
+        precio: item.price
+      })),
+      estado: "emitido",
+      observaciones: `Envío: ${deliveryMethod} | Pago: ${paymentMethod}`
+    };
+
+    try {
+      const res = await fetch('/api/crear-pedido', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const result = await res.json();
+      
+      if (res.ok) {
+        alert("¡Pedido creado con éxito en Dux! Nro: " + result.numero);
+        // Si tienes la función clearCart en tu contexto, la usamos:
+        if (clearCart) clearCart(); 
+        navigate('/tienda'); // Redirigimos al catálogo
+      } else {
+        alert("Hubo un error con el pedido: " + result.error);
+      }
+    } catch (err) {
+      console.error("Error conectando con la API", err);
+      alert("Hubo un error de conexión al enviar el pedido.");
+    } finally {
       setLoading(false);
-    }, 2000);
+    }
   };
+  // ----------------------------------------------
 
   return (
     <div className="cv-page-checkout">
@@ -51,16 +98,19 @@ export default function Checkout() {
                 <div className="cv-form-row">
                   <div className="cv-input-group">
                     <label>Nombre completo *</label>
-                    <input type="text" required placeholder="Ej: Juan Pérez" />
+                    {/* Vinculamos el input con la referencia */}
+                    <input type="text" ref={nombreRef} required placeholder="Ej: Juan Pérez" />
                   </div>
                   <div className="cv-input-group">
                     <label>Teléfono *</label>
-                    <input type="tel" required placeholder="+54 9 261..." />
+                    {/* Vinculamos el input con la referencia */}
+                    <input type="tel" ref={telefonoRef} required placeholder="+54 9 261..." />
                   </div>
                 </div>
                 <div className="cv-input-group" style={{marginTop: '15px'}}>
                   <label>Email *</label>
-                  <input type="email" required placeholder="correo@ejemplo.com" />
+                  {/* Vinculamos el input con la referencia */}
+                  <input type="email" ref={emailRef} required placeholder="correo@ejemplo.com" />
                 </div>
               </div>
 
@@ -110,15 +160,15 @@ export default function Checkout() {
                     <div className="cv-map-container">
                       {/* Mapa de Google con ubicación exacta y Modo Oscuro */}
                       <iframe 
-  title="Ubicación Código Vinario"
-  src="https://maps.google.com/maps?q=Av.%20Col%C3%B3n%20y%20Per%C3%BA,%20Mendoza,%20Argentina&t=&z=16&ie=UTF8&iwloc=&output=embed" 
-  width="100%" 
-  height="250" 
-  style={{border: 0}} 
-  allowFullScreen="" 
-  loading="lazy" 
-  referrerPolicy="no-referrer-when-downgrade">
-</iframe>
+                        title="Ubicación Código Vinario"
+                        src="https://maps.google.com/maps?q=Av.%20Col%C3%B3n%20y%20Per%C3%BA,%20Mendoza,%20Argentina&t=&z=16&ie=UTF8&iwloc=&output=embed" 
+                        width="100%" 
+                        height="250" 
+                        style={{border: 0}} 
+                        allowFullScreen="" 
+                        loading="lazy" 
+                        referrerPolicy="no-referrer-when-downgrade">
+                      </iframe>
                     </div>
                   </div>
                 )}

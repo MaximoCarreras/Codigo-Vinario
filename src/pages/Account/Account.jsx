@@ -1,62 +1,54 @@
+// src/pages/Account/Account.jsx
 import React, { useState } from 'react';
-import './Account.css';
+import { useDux } from "../../hooks/useDux";
 
 export default function Account() {
-  const [isLogin, setIsLogin] = useState(true);
+  const [emailBusqueda, setEmailBusqueda] = useState('');
+  const [buscando, setBuscando] = useState(false);
+  
+  // Usamos el puente universal filtrando por el cliente
+  const { data: pedidos, loading } = useDux(buscando ? "pedidos" : null, { cliente: emailBusqueda });
+
+  const handleBuscar = (e) => {
+    e.preventDefault();
+    if (emailBusqueda) setBuscando(true);
+  };
 
   return (
-    <div className="cv-page-account cv-binary-bg">
-      <div className="cv-account-container">
-        
-        <div className="cv-account-box">
-          <div className="cv-account-header">
-            <span className="cv-code-text cv-blinking-cursor">
-              {isLogin ? '/ autenticación_requerida' : '/ nuevo_registro'}
-            </span>
-            <h1 className="cv-account-title">
-              {isLogin ? 'ACCESO A LA ' : 'UNIRSE A LA '} 
-              <span className="cv-text-wine">CAVA</span>
-            </h1>
-          </div>
-
-          <form className="cv-account-form" onSubmit={(e) => e.preventDefault()}>
-            {!isLogin && (
-              <div className="cv-input-group">
-                <label>Nombre y Apellido</label>
-                <input type="text" placeholder="Ej: Juan Pérez" required />
-              </div>
-            )}
-            
-            <div className="cv-input-group">
-              <label>Correo Electrónico</label>
-              <input type="email" placeholder="correo@ejemplo.com" required />
-            </div>
-            
-            <div className="cv-input-group">
-              <label>Contraseña</label>
-              <input type="password" placeholder="••••••••" required />
-            </div>
-
-            <button type="submit" className="cv-btn-primary cv-account-submit">
-              <span className="cv-code-symbol">{'>'}</span>
-              {isLogin ? 'INICIAR SESIÓN' : 'CREAR CUENTA'}
-            </button>
-          </form>
-
-          <div className="cv-account-footer">
-            <p>
-              {isLogin ? '¿No tienes el código de acceso?' : '¿Ya eres miembro?'}
-              <button 
-                className="cv-account-toggle-btn" 
-                onClick={() => setIsLogin(!isLogin)}
-              >
-                {isLogin ? 'Regístrate aquí' : 'Inicia sesión'}
-              </button>
-            </p>
-          </div>
-        </div>
-
+    <div className="cv-page-shop" style={{ padding: '50px' }}>
+      <h1 className="cv-section-title">MI <span className="cv-text-wine">CUENTA</span></h1>
+      
+      <div style={{ maxWidth: '400px', margin: '30px 0' }}>
+        <form onSubmit={handleBuscar} style={{ display: 'flex', gap: '10px' }}>
+          <input 
+            type="email" 
+            placeholder="Tu email de compra..." 
+            value={emailBusqueda}
+            onChange={(e) => { setEmailBusqueda(e.target.value); setBuscando(false); }}
+            style={{ padding: '10px', flex: 1, background: '#111', color: '#fff', border: '1px solid #333' }}
+          />
+          <button type="submit" className="cv-btn-secondary">Buscar Pedidos</button>
+        </form>
       </div>
+
+      {loading && buscando && <div className="cv-code-text cv-blinking-cursor">/ decodificando_historial...</div>}
+
+      {buscando && !loading && (
+        <div className="cv-products-grid">
+          {pedidos.length === 0 ? (
+            <p className="cv-code-text">/ no_se_registran_movimientos</p>
+          ) : (
+            pedidos.map((pedido) => (
+              <div key={pedido.id} className="cv-product-card" style={{ padding: '20px' }}>
+                <h3 className="cv-product-name">Orden #{pedido.numero}</h3>
+                <p className="cv-code-text">Fecha: {pedido.fecha}</p>
+                <p className="cv-code-text">Estado: {pedido.estado}</p>
+                <p className="cv-product-price">${pedido.total}</p>
+              </div>
+            ))
+          )}
+        </div>
+      )}
     </div>
   );
 }

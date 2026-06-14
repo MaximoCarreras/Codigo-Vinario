@@ -3,8 +3,8 @@ export default async function handler(req, res) {
   const token = process.env.DUX_API_TOKEN;
 
   try {
-    // Agregamos ?limite=500 para traer hasta 500 productos de una sola vez
-const response = await fetch('https://erp.duxsoftware.com.ar/WSERP/rest/services/items?limite=10000', {
+    // Fijamos el límite directamente en la consulta a Dux para evitar el Time Out de Vercel
+    const response = await fetch('https://erp.duxsoftware.com.ar/WSERP/rest/services/items?limite=200', {
       method: 'GET',
       headers: { 
         'authorization': token, 
