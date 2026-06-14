@@ -1,34 +1,53 @@
-export default async function handler(req, res) {
-  // El token que configuraste en Vercel
-  const token = process.env.DUX_API_TOKEN;
+import { useState, useEffect } from 'react';
 
-  if (!token) {
-    return res.status(500).json({ error: "Falta configurar DUX_API_TOKEN en Vercel" });
-  }
+export function useFeaturedProducts() {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  try {
-    // URL REAL sacada de tu captura de pantalla
-    const DUX_URL = 'https://erp.duxsoftware.com.ar/WSERP/rest/services/items';
+  useEffect(() => {
+    fetch('/api/productos')
+      .then(res => res.json())
+      .then(data => {
+        // Ajuste: Si Dux devuelve un objeto, buscamos la lista ahí
+        const list = Array.isArray(data) ? data : (data.items || []);
+        const destacados = list.filter(p => p.is_featured || p.destacado).slice(0, 4);
+        setProducts(destacados);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error("Error cargando destacados:", err);
+        setLoading(false);
+      });
+  }, []);
 
-    const response = await fetch(DUX_URL, {
-      method: 'GET',
-      headers: {
-        'accept': 'application/json',
-        'authorization': token
-      }
-    });
+  return { products, loading };
+}
 
-    if (!response.ok) {
-      throw new Error(`Dux respondió con error: ${response.status}`);
-    }
+export function useProducts(category = null, subcategory = null) {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-    const data = await response.json();
+  useEffect(() => {
+    setLoading(true);
+    fetch('/api/productos')
+      .then(res => res.json())
+      .then(data => {
+        // Ajuste: Aseguramos que siempre sea una lista
+        const lista = Array.isArray(data) ? data : (data.items || []);
+        
+        let filtered = lista;
+        if (category) {
+          filtered = filtered.filter(p => p.category?.toLowerCase() === category.toLowerCase());
+        }
+        
+        setProducts(filtered);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error("Error cargando catálogo:", err);
+        setLoading(false);
+      });
+  }, [category, subcategory]);
 
-    // Dux devuelve los items en un formato específico, lo enviamos tal cual
-    return res.status(200).json(data);
-
-  } catch (error) {
-    console.error("Error en la conexión:", error);
-    return res.status(500).json({ error: "Error al consultar los items en Dux" });
-  }
+  return { products, loading };
 }
