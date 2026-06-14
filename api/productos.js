@@ -10,18 +10,14 @@ export default async function handler(req, res) {
       }
     });
 
-    if (!response.ok) {
-      return res.status(500).json({ error: "Error en Dux" });
-    }
+    if (!response.ok) return res.status(200).json([]);
 
     const data = await response.json();
     
-    // --- ESTA LÍNEA ES PARA DEBUGEAR ---
-    console.log("Dux nos envió estas llaves:", Object.keys(data));
-    
-    return res.status(200).json(data);
+    // Devolvemos DIRECTAMENTE la lista de productos (results)
+    return res.status(200).json(data.results || []);
 
   } catch (error) {
-    return res.status(500).json({ error: error.message });
+    return res.status(200).json([]);
   }
 }
