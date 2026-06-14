@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react';
 
-// Esta función es tu TRADUCTOR
+// --- TRADUCTOR DE CATEGORÍAS ---
 const traducirCategoria = (rubro) => {
   if (!rubro) return "Otros";
   const nombre = rubro.toLowerCase();
-  
-  // Aquí mapeas lo que dice Dux (izquierda) a lo que tu web espera (derecha)
   const mapa = {
     "bebida": "Vinos",
     "gaseosa": "Complementos",
@@ -13,11 +11,11 @@ const traducirCategoria = (rubro) => {
     "destilado": "Destilados",
     "birra": "Cervezas"
   };
-  
   return mapa[nombre] || "Otros"; 
 };
 
-export function useProducts(category = null) {
+// --- EXPORTACIÓN 1: PRODUCTOS DESTACADOS ---
+export function useFeaturedProducts() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -25,19 +23,56 @@ export function useProducts(category = null) {
     fetch('/api/productos')
       .then(res => res.json())
       .then(data => {
-        // Mapeamos los productos aplicando el traductor
-        const lista = data.map(item => ({
-          ...item,
-          category: traducirCategoria(item.rubro?.nombre)
+        const list = Array.isArray(data) ? data : (data.results || []);
+        // Adaptamos los datos de Dux (cod_item -> id, item -> name)
+        const formatted = list.map(item => ({
+            id: item.cod_item,
+            name: item.item,
+            price: 0, 
+            is_featured: true, // Forzamos true para que aparezcan en BestSellers
+            category: traducirCategoria(item.rubro?.nombre)
+        }));
+        setProducts(formatted.slice(0, 4));
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error("Error cargando destacados:", err);
+        setLoading(false);
+      });
+  }, []);
+
+  return { products, loading };
+}
+
+// --- EXPORTACIÓN 2: CATÁLOGO COMPLETO ---
+export function useProducts(category = null) {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch('/api/productos')
+      .then(res => res.json())
+      .then(data => {
+        const lista = Array.isArray(data) ? data : (data.results || []);
+        
+        const formatted = lista.map(item => ({
+            id: item.cod_item,
+            name: item.item,
+            price: 0,
+            category: traducirCategoria(item.rubro?.nombre)
         }));
 
-        let filtered = lista;
+        let filtered = formatted;
         if (category && category !== "Todo") {
-          // Comparamos usando el nombre traducido
-          filtered = lista.filter(p => p.category === category);
+          filtered = formatted.filter(p => p.category === category);
         }
         
         setProducts(filtered);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error("Error cargando catálogo:", err);
         setLoading(false);
       });
   }, [category]);
