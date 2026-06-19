@@ -1,10 +1,10 @@
 .cv-navbar {
-    background-color: #050505 !important; /* Negro Boutique para la Navbar */
-    border-bottom: 1px solid rgba(133, 18, 62, 0.4) !important; /* Línea inferior sutil color vino */
+    background-color: #000000 !important; /* NEGRO PURO ABSOLUTO */
+    border-bottom: 1px solid rgba(133, 18, 62, 0.4) !important;
     position: fixed;
     top: 0; left: 0; width: 100%;
     z-index: 9999;
-    padding: 15px 0 !important; 
+    padding: 10px 0 !important; 
     transition: var(--transition-smooth);
 }
 
@@ -14,9 +14,9 @@
 }
 .cv-nav-logo { display: flex; align-items: center; }
 
-/* LOGO LIMPIO: Sin filtros de color. Mostrará exactamente la imagen que subas */
+/* LOGO GIGANTE (El doble de su tamaño anterior) */
 .cv-nav-logo-img {
-    height: 100px !important; /* Tamaño grande */
+    height: 200px !important; /* Antes 100px, ahora 200px */
     width: auto !important;
     object-fit: contain !important;
     transition: transform 0.3s ease;
@@ -36,11 +36,13 @@
 .cv-code-symbol { font-family: var(--font-code); color: var(--color-wine) !important; margin-right: 4px; }
 .cv-nav-link:hover { color: var(--color-wine) !important; }
 
-/* Mega menú (Mantenemos en fondo oscuro para que coincida con la Navbar) */
+/* Mega menú adaptado al nuevo tamaño de la Navbar */
 .cv-nav-item-has-mega { position: relative; }
 .cv-megamenu {
-    position: fixed; top: 130px; left: 0; width: 100%;
-    background-color: #050505 !important;
+    position: fixed; 
+    top: 220px; /* Se bajó para que no quede escondido detrás del logo gigante */
+    left: 0; width: 100%;
+    background-color: #000000 !important; /* NEGRO PURO ABSOLUTO ACÁ TAMBIÉN */
     border-bottom: 1px solid var(--color-wine) !important;
     padding: 40px 5%; opacity: 0; visibility: hidden;
     transform: translateY(10px); transition: all 0.3s ease;
