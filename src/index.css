@@ -1,4 +1,19 @@
-@import './styles/variables.css';
+/* Importamos MONTSERRAT en sus distintos pesos (Ligero, Normal, SemiBold, ExtraBold) */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap');
+
+:root {
+  /* COLORES OFICIALES DEL MANUAL */
+  --color-black: #1a1a1a;
+  --color-white: #ffffff;
+  --color-wine: #85123e;
+  --color-rosa-claro: #ffb3c6;
+  --color-grey-medium: #555555;
+  --color-grey-light: #f5f5f5;
+  
+  /* TIPOGRAFÍAS */
+  --font-primary: 'Montserrat', sans-serif;
+  --font-code: 'Courier New', Courier, monospace;
+}
 
 /* Reseteo Global */
 * {
@@ -9,9 +24,9 @@
 
 html {
   scroll-behavior: smooth;
-  /* Preparamos el terreno para traducciones y un scroll elegante */
 }
 
+/* TEMA CLARO POR DEFECTO */
 body {
   font-family: var(--font-primary);
   background-color: var(--color-white);
@@ -22,17 +37,22 @@ body {
   overflow-x: hidden;
 }
 
-/* Tipografía de Títulos (Letras fuertes, separadas y en mayúscula) */
+/* Tipografía de Títulos (Montserrat Bold 34pt equivalente) */
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 800;
+  font-family: var(--font-primary);
+  font-weight: 800; /* Montserrat ExtraBold */
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   line-height: 1.2;
 }
 
-/* Párrafos legibles y sutiles */
+h1 {
+  font-size: 34pt; /* Pedido exacto del manual */
+}
+
+/* Párrafos legibles */
 p {
-  font-weight: 300;
+  font-weight: 400; /* Montserrat Regular */
   color: var(--color-grey-medium);
 }
 
@@ -42,19 +62,16 @@ a {
 }
 
 /* =========================================
-   EFECTOS "CÓDIGO VINARIO" (El toque Tech)
+   EFECTOS "CÓDIGO VINARIO" (Adaptados al tema claro)
    ========================================= */
 
-/* Texto estilo terminal para subtítulos o detalles (ej: /degustación) */
 .cv-code-text {
   font-family: var(--font-code);
   color: var(--color-wine);
   font-size: 0.9rem;
-  letter-spacing: 2px;
-  text-transform: none;
+  letter-spacing: 1px;
 }
 
-/* Animación de cursor de programación titilando */
 .cv-blinking-cursor::after {
   content: '_';
   font-family: var(--font-code);
@@ -68,41 +85,18 @@ a {
   50% { opacity: 0; }
 }
 
-/* Marca de agua binaria de fondo (01010110) para secciones oscuras */
-.cv-binary-bg {
-  position: relative;
-  overflow: hidden;
-}
-
-.cv-binary-bg::before {
-  content: '01010110';
-  font-family: var(--font-code);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 15vw;
-  color: rgba(255, 255, 255, 0.03);
-  z-index: 0;
-  pointer-events: none;
-  white-space: nowrap;
-}
-
 /* =========================================
    UTILIDADES ESTRUCTURALES
    ========================================= */
    
 .container {
-  max-width: 1400px; /* Ancho amplio para mostrar muchas etiquetas */
+  max-width: 1400px; 
   margin: 0 auto;
   padding: 0 5%;
 }
 
-.section-dark {
-  background-color: var(--color-black);
-  color: var(--color-white);
-}
-
-.section-dark p {
-  color: #bbbbbb;
+/* Fondos sutiles para diferenciar secciones en el tema claro */
+.section-light-grey {
+  background-color: var(--color-grey-light);
+  color: var(--color-black);
 }
