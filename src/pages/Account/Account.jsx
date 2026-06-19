@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDux } from "../../hooks/useDux";
+import { useDux } from "../../hooks/duxHooks";
 import './Account.css';
 
 export default function Account() {

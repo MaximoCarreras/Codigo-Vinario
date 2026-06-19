@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDux } from "../../hooks/useDux";
+import { useDux } from "../../hooks/duxHooks";
 
 export default function Facturas() {
   // Nota: Si en Dux el módulo se llama distinto (ej: "comprobantes"), cámbialo aquí.

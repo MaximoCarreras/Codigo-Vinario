@@ -19,20 +19,17 @@ const clasificarProducto = (item) => {
   return "oculto"; 
 };
 
-// HOOK PRINCIPAL UNIVERSAL
+// 1. EL MOTOR NUEVO UNIVERSAL (Para la página "Mi Cuenta" y pedidos)
 export function useDux(endpoint = "items", params = null) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Si no pasamos endpoint (ej: no apretó buscar en Mi Cuenta), no hacemos la llamada
     if (!endpoint) return;
-
     setLoading(true);
     let url = `/api/${endpoint}`;
     
-    // Si pasamos parámetros (ej: el email para consultar pedidos)
     if (params && params.cliente) {
         url = `/api/consultar-pedidos?email=${encodeURIComponent(params.cliente)}`;
     }
@@ -55,7 +52,6 @@ export function useDux(endpoint = "items", params = null) {
             })).filter(p => p.category !== "oculto");
             setData(formatted);
         } else {
-            // Para pedidos o subrubros, devolvemos la data cruda
             setData(json.results || []);
         }
         setLoading(false);
@@ -67,4 +63,28 @@ export function useDux(endpoint = "items", params = null) {
   }, [endpoint, params?.cliente]);
 
   return { data, loading, error };
+}
+
+// =========================================================================
+// 2. ADAPTADORES DE COMPATIBILIDAD (Para que Vercel no rompa la compilación)
+// =========================================================================
+
+export function useProducts(category = null) {
+    // Usamos el motor nuevo internamente
+    const { data, loading } = useDux("items");
+    
+    // Y filtramos como esperaba la Tienda original
+    let filteredProducts = data;
+    if (category && category !== "Todo") {
+        filteredProducts = data.filter(p => p.category === category.toLowerCase());
+    }
+    
+    // Devolvemos la palabra "products" que es la que busca Shop.jsx
+    return { products: filteredProducts, loading };
+}
+
+export function useFeaturedProducts() {
+    const { data, loading } = useDux("items");
+    // Devolvemos solo 4 productos para el Inicio
+    return { products: data.slice(0, 4), loading };
 }

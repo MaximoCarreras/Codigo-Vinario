@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDux } from "../../hooks/useDux";
+import { useDux } from "../../hooks/duxHooks";
 
 export default function Pedidos() {
   // Aquí ocurre la magia: le decimos "traeme el módulo 'pedidos'"
