@@ -48,59 +48,32 @@ h1, h2, h3, h4, h5, h6,
    PULIDO FINAL: ERRADICADOR DE MODO OSCURO
    ========================================= */
 
-/* 1. ARREGLO DEL HERO (Inicio) - Hace que las letras resalten sobre el fondo oscuro */
-.cv-hero h1, .cv-hero h2, .cv-hero p, .cv-hero span {
-    color: #ffffff !important;
+/* =========================================
+   AJUSTES DE COLOR: NAVBAR Y MATRIX CLARO (#f6f6f8)
+   ========================================= */
+
+/* 1. Igualamos la Navbar y el fondo general al color exacto del logo */
+body, .cv-page-home, .cv-navbar {
+    background-color: #f6f6f8 !important;
 }
 
-/* 2. ARREGLO DEL CARRITO Y MI CUENTA (Estaban atrapados en cajas negras) */
-.cv-page-cart, .cv-page-account,
-div[class*="cart"], div[class*="account"] {
-    background-color: #ffffff !important;
+/* 2. Forzamos el contenedor del Hero (Inicio) al nuevo color claro */
+.cv-hero {
+    background-color: #f6f6f8 !important;
+}
+
+/* 3. Invertimos el texto del inicio: Ahora que el fondo es claro, las letras deben ser negras */
+.cv-hero h1, .cv-hero h2, .cv-hero p {
     color: #111111 !important;
 }
 
-/* 3. ARREGLO DE CAJAS NEGRAS EN BODEGAS, EVENTOS Y ORIGEN */
-/* Forzamos cualquier tarjeta oscura a ser blanca con un borde sutil */
-div[class*="card"], div[class*="box"], div[class*="item"] {
-    background-color: #ffffff !important;
-    border: 1px solid #eeeeee !important;
-}
-/* Aseguramos que el texto adentro de esas tarjetas sea oscuro y legible */
-div[class*="card"] h1, div[class*="card"] h2, div[class*="card"] h3, 
-div[class*="card"] p, div[class*="card"] span {
-    color: #111111 !important;
+/* Mantenemos el color vino tinto para los detalles y palabras resaltadas */
+.cv-hero .cv-code-text, .cv-hero .cv-text-wine {
+    color: #85123e !important;
 }
 
-/* 4. ESTILIZADO DE LAS TARJETAS DE PRODUCTO (Tienda) */
-/* Para que no parezcan flotar en la nada, les damos relieve */
-.cv-product-card {
-    box-shadow: 0 4px 15px rgba(0,0,0,0.03) !important;
-    border: 1px solid #eaeaea !important;
-    border-radius: 6px;
-    overflow: hidden;
-}
-
-/* 5. ARREGLO DE INPUTS (Formularios en Mi Cuenta y Checkout) */
-input, textarea, select {
-    background-color: #f9f9f9 !important;
-    color: #111111 !important;
-    border: 1px solid #dddddd !important;
-    padding: 12px;
-    border-radius: 4px;
-    font-family: var(--font-primary);
-}
-
-/* 6. BOTONES GLOBALES (El botón de "Ver catálogo" estaba invisible) */
-.cv-btn-secondary {
-    background-color: #111111 !important;
-    color: #ffffff !important;
-    padding: 12px 30px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    border-radius: 4px;
-    display: inline-block;
-}
-.cv-btn-secondary:hover {
-    background-color: var(--color-wine) !important;
+/* 4. Si el efecto de Matrix está hecho con CSS, aseguramos que el fondo sea claro 
+   y los 0 y 1 mantengan su tono original (con opacidad para que no molesten la lectura) */
+.cv-binary-bg::before {
+    color: rgba(133, 18, 62, 0.08) !important; /* Color vino sutil para los números */
 }
