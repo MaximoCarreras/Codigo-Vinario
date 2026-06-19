@@ -1,204 +1,77 @@
 .cv-navbar {
-    background-color: var(--color-black);
-    border-bottom: 1px solid rgba(133, 18, 62, 0.2);
+    background-color: #ffffff;
+    border-bottom: 1px solid #eeeeee;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+    top: 0; left: 0; width: 100%;
     z-index: 9999;
-    padding: 10px 0; /* Un poco más de aire vertical */
+    padding: 10px 0; 
     transition: var(--transition-smooth);
 }
-
 .cv-nav-container {
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 5%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: flex; align-items: center; justify-content: space-between;
 }
-
-/* --- LOGO AGRANDADO --- */
-.cv-nav-logo {
-    display: flex;
-    align-items: center;
-}
-
+.cv-nav-logo { display: flex; align-items: center; }
 .cv-nav-logo-img {
-    height: 60px; /* Agrandado estratégico para presencia de marca de lujo */
+    height: 85px; /* LOGO GIGANTE Y DESTACADO */
     width: auto;
     object-fit: contain;
     transition: var(--transition-smooth);
 }
-
-.cv-nav-logo-img:hover {
-    transform: scale(1.02);
-}
-
-/* --- LINKS CORE --- */
-.cv-nav-menu {
-    display: flex;
-    gap: 30px;
-    align-items: center;
-}
-
+.cv-nav-logo-img:hover { transform: scale(1.02); }
+.cv-nav-menu { display: flex; gap: 30px; align-items: center; }
 .cv-nav-link {
-    color: #cccccc;
-    font-size: 0.85rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    transition: var(--transition-smooth);
-    display: flex;
-    align-items: center;
-    padding: 15px 0;
+    color: #111111; /* NEGRO MARCA */
+    font-size: 0.85rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1.5px; transition: var(--transition-smooth);
+    display: flex; align-items: center; padding: 15px 0;
 }
+.cv-code-symbol { font-family: var(--font-code); color: var(--color-wine); margin-right: 4px; }
+.cv-nav-link:hover { color: var(--color-wine); }
+.cv-nav-item-has-mega { position: relative; }
 
-.cv-code-symbol {
-    font-family: var(--font-code);
-    color: var(--color-wine);
-    margin-right: 4px;
-}
-
-.cv-nav-link:hover {
-    color: var(--color-white);
-}
-
-/* =========================================
-   SISTEMA DE MEGA MENÚ (Efecto Cortina Oscura)
-   ========================================= */
-.cv-nav-item-has-mega {
-    position: relative;
-}
-
+/* MEGA MENÚ CLARO */
 .cv-megamenu {
-    position: fixed;
-    top: 81px; /* Justo debajo de la navbar */
-    left: 0;
-    width: 100%;
-    background-color: rgba(5, 5, 5, 0.98);
-    backdrop-filter: blur(10px);
+    position: fixed; top: 106px; left: 0; width: 100%;
+    background-color: #ffffff;
     border-bottom: 2px solid var(--color-wine);
-    padding: 40px 5%;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(10px);
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    z-index: -1;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+    padding: 40px 5%; opacity: 0; visibility: hidden;
+    transform: translateY(10px); transition: all 0.3s ease;
+    z-index: -1; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
-
-/* Al pasar el mouse, el mega menú se despliega elegantemente */
 .cv-nav-item-has-mega:hover .cv-megamenu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
+    opacity: 1; visibility: visible; transform: translateY(0);
 }
-
 .cv-megamenu-grid {
-    max-width: 1400px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 40px;
+    max-width: 1400px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px;
 }
-
 .cv-mega-col h3 {
-    font-family: var(--font-code);
-    color: var(--color-wine);
-    font-size: 0.85rem;
-    margin-bottom: 20px;
-    letter-spacing: 1px;
+    font-family: var(--font-code); color: var(--color-wine);
+    font-size: 0.85rem; margin-bottom: 20px; letter-spacing: 1px;
 }
-
 .cv-mega-col a {
-    display: block;
-    color: #aaaaaa;
-    font-size: 0.9rem;
-    padding: 8px 0;
-    font-weight: 300;
-    transition: var(--transition-smooth);
+    display: block; color: #555555; font-size: 0.9rem;
+    padding: 8px 0; font-weight: 400; transition: var(--transition-smooth);
 }
+.cv-mega-col a:hover { color: #111111; padding-left: 5px; font-weight: 600; }
 
-.cv-mega-col a:hover {
-    color: var(--color-white);
-    padding-left: 5px;
-}
-
-/* --- ACCIONES --- */
-.cv-nav-actions {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
+.cv-nav-actions { display: flex; align-items: center; gap: 20px; }
 .cv-lang-selector {
-    display: flex;
-    gap: 2px;
-    background-color: #111;
-    padding: 4px;
-    border-radius: 4px;
-    border: 1px solid #222;
+    display: flex; gap: 2px; background-color: #f5f5f5;
+    padding: 4px; border-radius: 4px; border: 1px solid #eeeeee;
 }
-
 .cv-lang-btn {
-    background: none;
-    border: none;
-    color: #555;
-    font-family: var(--font-code);
-    font-size: 0.7rem;
-    font-weight: 700;
-    cursor: pointer;
-    padding: 4px 8px;
-    transition: var(--transition-smooth);
+    background: none; border: none; color: #555;
+    font-family: var(--font-code); font-size: 0.7rem;
+    font-weight: 700; cursor: pointer; padding: 4px 8px;
 }
-
 .cv-lang-btn.is-active {
-    color: var(--color-white);
-    background-color: var(--color-wine);
-    border-radius: 2px;
+    color: var(--color-white); background-color: var(--color-wine); border-radius: 2px;
 }
-
-.cv-nav-account, .cv-nav-cart {
-    color: var(--color-white);
-    display: flex;
-    align-items: center;
-    transition: var(--transition-smooth);
-}
-
-.cv-cart-icon {
-    font-size: 1.3rem !important;
-}
-
-.cv-cart-badge {
-    font-family: var(--font-code);
-    font-size: 0.85rem;
-    margin-left: 5px;
-}
-
-.cv-menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    color: var(--color-white);
-}
-
-@media (max-width: 1024px) {
-    .cv-menu-toggle { display: block; }
-    .cv-nav-menu {
-        position: fixed;
-        top: 81px;
-        left: 0;
-        width: 100%;
-        height: calc(100vh - 81px);
-        background-color: var(--color-black);
-        flex-direction: column;
-        justify-content: center;
-        gap: 30px;
-        transform: translateX(-100%);
-        transition: transform 0.4s ease;
-    }
-    .cv-nav-menu.is-active { transform: translateX(0); }
-    .cv-megamenu { display: none; } /* Desactivado en responsive directo por simplicidad en móvil */
-}
+.cv-nav-account, .cv-nav-cart { color: #111111; display: flex; align-items: center; }
+.cv-cart-icon { font-size: 1.3rem !important; }
+.cv-cart-badge { font-family: var(--font-code); font-size: 0.85rem; margin-left: 5px; color: var(--color-wine); font-weight: bold;}
+.cv-menu-toggle { display: none; background: none; border: none; color: #111111; }
