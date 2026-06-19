@@ -27,7 +27,7 @@
     transition: transform 0.3s ease;
     margin-left: 15px; /* Un poco de margen para despegarlo del borde */
 }
-.cv-nav-logo-img:hover { transform: scale(2.6) !important; }
+.cv-nav-logo-img:hover { transform: scale(1.1) !important; }
 
 .cv-nav-menu { display: flex; gap: 30px; align-items: center; }
 
