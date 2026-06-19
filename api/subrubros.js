@@ -1,9 +1,8 @@
-// Archivo: api/items.js
+// Archivo: api/subrubros.js
 export default async function handler(req, res) {
   const token = process.env.DUX_API_TOKEN;
   try {
-    // Traemos hasta 500 productos para asegurarnos de que cargue toda tu cava
-    const response = await fetch('https://erp.duxsoftware.com.ar/WSERP/rest/services/items?limite=500', {
+    const response = await fetch('https://erp.duxsoftware.com.ar/WSERP/rest/services/subrubros?limit=100', {
       method: 'GET',
       headers: { 
         'authorization': token, 
@@ -15,6 +14,6 @@ export default async function handler(req, res) {
     const data = await response.json();
     return res.status(200).json(data);
   } catch (error) {
-    return res.status(500).json({ error: "Fallo de conexión con Dux Items" });
+    return res.status(500).json({ error: "Fallo de conexión con Dux Subrubros" });
   }
 }
