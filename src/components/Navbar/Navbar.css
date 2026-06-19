@@ -21,7 +21,7 @@
     object-fit: contain !important;
     
     /* ↓↓↓ LA MAGIA ESTÁ ACÁ ↓↓↓ */
-    transform: scale(1) !important; /* <--- CAMBIÁ ESTE NÚMERO (2.0, 2.5, 3.0) PARA AGRANDAR O ACHICAR SOLO EL DIBUJO */
+    transform: scale(1.0) !important; /* <--- CAMBIÁ ESTE NÚMERO (2.0, 2.5, 3.0) PARA AGRANDAR O ACHICAR SOLO EL DIBUJO */
     transform-origin: left center !important; /* Hace que crezca hacia la derecha y no se corte por la izquierda */
     
     transition: transform 0.3s ease;
