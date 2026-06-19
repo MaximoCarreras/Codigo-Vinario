@@ -15,9 +15,10 @@
 }
 .cv-nav-logo { display: flex; align-items: center; }
 .cv-nav-logo-img {
-    height: 85px; /* LOGO GIGANTE Y DESTACADO */
+    height: 85px; 
     width: auto;
     object-fit: contain;
+    mix-blend-mode: multiply; /* ¡ESTA LÍNEA ES MAGIA PURA! Elimina el fondo gris del logo */
     transition: var(--transition-smooth);
 }
 .cv-nav-logo-img:hover { transform: scale(1.02); }
