@@ -2,8 +2,8 @@
    MASTER LIGHT THEME OVERRIDE (#f6f6f8)
    ========================================= */
 
-/* 1. TIPOGRAFÍA MÁS FINA (Como el logo) */
-body, p, a, span, div, input, button {
+/* 1. TIPOGRAFÍA (Excluimos los íconos para no romperlos) */
+body, p, a, div, input, button, span:not(.material-symbols-outlined) {
     font-family: 'Montserrat', sans-serif !important;
     font-weight: 300 !important; 
 }

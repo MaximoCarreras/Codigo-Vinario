@@ -1,6 +1,6 @@
 .cv-navbar {
-    background-color: #ffffff;
-    border-bottom: 1px solid #eeeeee;
+    background-color: #f6f6f8; /* El color exacto de tu logo */
+    border-bottom: 1px solid #eaeaea;
     position: fixed;
     top: 0; left: 0; width: 100%;
     z-index: 9999;
@@ -15,16 +15,16 @@
 }
 .cv-nav-logo { display: flex; align-items: center; }
 .cv-nav-logo-img {
-    height: 85px; 
+    height: 120px; /* ¡AHORA SÍ ES GIGANTE! */
     width: auto;
     object-fit: contain;
-    mix-blend-mode: multiply; /* ¡ESTA LÍNEA ES MAGIA PURA! Elimina el fondo gris del logo */
+    mix-blend-mode: multiply; /* Borra el cuadrado blanco/gris */
     transition: var(--transition-smooth);
 }
 .cv-nav-logo-img:hover { transform: scale(1.02); }
 .cv-nav-menu { display: flex; gap: 30px; align-items: center; }
 .cv-nav-link {
-    color: #111111; /* NEGRO MARCA */
+    color: #111111; 
     font-size: 0.85rem; font-weight: 700; text-transform: uppercase;
     letter-spacing: 1.5px; transition: var(--transition-smooth);
     display: flex; align-items: center; padding: 15px 0;
@@ -33,46 +33,25 @@
 .cv-nav-link:hover { color: var(--color-wine); }
 .cv-nav-item-has-mega { position: relative; }
 
-/* MEGA MENÚ CLARO */
 .cv-megamenu {
-    position: fixed; top: 106px; left: 0; width: 100%;
+    position: fixed; top: 121px; left: 0; width: 100%;
     background-color: #ffffff;
     border-bottom: 2px solid var(--color-wine);
     padding: 40px 5%; opacity: 0; visibility: hidden;
     transform: translateY(10px); transition: all 0.3s ease;
     z-index: -1; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
-.cv-nav-item-has-mega:hover .cv-megamenu {
-    opacity: 1; visibility: visible; transform: translateY(0);
-}
-.cv-megamenu-grid {
-    max-width: 1400px; margin: 0 auto;
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px;
-}
-.cv-mega-col h3 {
-    font-family: var(--font-code); color: var(--color-wine);
-    font-size: 0.85rem; margin-bottom: 20px; letter-spacing: 1px;
-}
-.cv-mega-col a {
-    display: block; color: #555555; font-size: 0.9rem;
-    padding: 8px 0; font-weight: 400; transition: var(--transition-smooth);
-}
+.cv-nav-item-has-mega:hover .cv-megamenu { opacity: 1; visibility: visible; transform: translateY(0); }
+.cv-megamenu-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; }
+.cv-mega-col h3 { font-family: var(--font-code); color: var(--color-wine); font-size: 0.85rem; margin-bottom: 20px; letter-spacing: 1px; }
+.cv-mega-col a { display: block; color: #555555; font-size: 0.9rem; padding: 8px 0; font-weight: 400; transition: var(--transition-smooth); }
 .cv-mega-col a:hover { color: #111111; padding-left: 5px; font-weight: 600; }
 
 .cv-nav-actions { display: flex; align-items: center; gap: 20px; }
-.cv-lang-selector {
-    display: flex; gap: 2px; background-color: #f5f5f5;
-    padding: 4px; border-radius: 4px; border: 1px solid #eeeeee;
-}
-.cv-lang-btn {
-    background: none; border: none; color: #555;
-    font-family: var(--font-code); font-size: 0.7rem;
-    font-weight: 700; cursor: pointer; padding: 4px 8px;
-}
-.cv-lang-btn.is-active {
-    color: var(--color-white); background-color: var(--color-wine); border-radius: 2px;
-}
+.cv-lang-selector { display: flex; gap: 2px; background-color: #ffffff; padding: 4px; border-radius: 4px; border: 1px solid #eaeaea; }
+.cv-lang-btn { background: none; border: none; color: #555; font-family: var(--font-code); font-size: 0.7rem; font-weight: 700; cursor: pointer; padding: 4px 8px; }
+.cv-lang-btn.is-active { color: #ffffff; background-color: var(--color-wine); border-radius: 2px; }
 .cv-nav-account, .cv-nav-cart { color: #111111; display: flex; align-items: center; }
-.cv-cart-icon { font-size: 1.3rem !important; }
+.cv-cart-icon { font-size: 1.5rem !important; }
 .cv-cart-badge { font-family: var(--font-code); font-size: 0.85rem; margin-left: 5px; color: var(--color-wine); font-weight: bold;}
 .cv-menu-toggle { display: none; background: none; border: none; color: #111111; }

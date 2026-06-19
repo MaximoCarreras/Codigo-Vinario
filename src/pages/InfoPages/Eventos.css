@@ -1,37 +1,13 @@
-/* --- src/pages/InfoPages/Eventos.css --- */
-
-.cv-page-eventos {
-    position: relative;
-    overflow: hidden;
-}
-
-.cv-event-card {
-    transition: var(--transition-smooth);
-}
-
-/* Efecto hover de lujo para la tarjeta del evento */
+.cv-page-eventos { position: relative; overflow: hidden; }
+.cv-event-card { transition: var(--transition-smooth); }
 .cv-event-card:hover {
-    border-color: var(--color-wine) !important;
+    border-color: rgba(133, 18, 62, 0.3) !important;
     transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(133, 18, 62, 0.15);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05) !important;
 }
-
-/* Diseño Responsive para Celulares */
 @media (max-width: 768px) {
-    .cv-event-card {
-        flex-direction: column;
-    }
-    
-    .cv-event-card img {
-        max-width: 100% !important;
-        height: 250px;
-    }
-    
-    .cv-event-card > div {
-        padding: 25px !important;
-    }
-    
-    .cv-event-card h2 {
-        font-size: 1.5rem !important;
-    }
+    .cv-event-card { flex-direction: column; }
+    .cv-event-card img { max-width: 100% !important; height: 250px; }
+    .cv-event-card > div { padding: 30px !important; }
+    .cv-event-card h2 { font-size: 1.5rem !important; }
 }

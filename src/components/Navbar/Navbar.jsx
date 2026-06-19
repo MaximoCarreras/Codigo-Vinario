@@ -13,16 +13,11 @@ export default function Navbar() {
     <header className="cv-navbar">
       <div className="cv-nav-container">
         
-        {/* LOGO GIGANTE Y LIMPIO */}
+        {/* LOGO LIBERADO (Sin estilos inline que lo bloqueen) */}
         <Link to="/" className="cv-nav-logo" onClick={() => setMenuOpen(false)}>
-          <img 
-            src="/logo.png" 
-            alt="Código Vinario" 
-            style={{ height: '80px', width: 'auto', objectFit: 'contain' }} 
-          />
+          <img src="/logo.png" alt="Código Vinario" className="cv-nav-logo-img" />
         </Link>
 
-        {/* Menú de Navegación con Mega Menú Integrado */}
         <nav className={`cv-nav-menu ${menuOpen ? 'is-active' : ''}`}>
           <Link to="/" className="cv-nav-link" onClick={() => setMenuOpen(false)}>
             <span className="cv-code-symbol">/</span>{t.nav_inicio}
@@ -33,7 +28,6 @@ export default function Navbar() {
               <span className="cv-code-symbol">/</span>{t.nav_tienda}
             </Link>
             
-            {/* MEGA MENÚ CON LINKS REALES */}
             <div className="cv-megamenu">
               <div className="cv-megamenu-grid">
                 <div className="cv-mega-col">
@@ -76,7 +70,6 @@ export default function Navbar() {
           </Link>
         </nav>
 
-        {/* Selectores y carrito */}
         <div className="cv-nav-actions">
           <div className="cv-lang-selector">
             {['ES', 'EN', 'PT'].map((l) => (
@@ -89,7 +82,7 @@ export default function Navbar() {
               </button>
             ))}
           </div>
-
+          {/* Íconos usando la clase material-symbols-outlined (NO TOCAR ESA CLASE) */}
           <Link to="/mi-cuenta" className="cv-nav-account" title="Mi Perfil">
             <span className="material-symbols-outlined cv-cart-icon">person</span>
           </Link>
