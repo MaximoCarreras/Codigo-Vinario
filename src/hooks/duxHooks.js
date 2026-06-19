@@ -57,7 +57,7 @@ const clasificarProducto = (item) => {
 };
 
 // =========================================================================
-// MOTOR UNIVERSAL DE CONEXIÓN CON LA API (CON BYPASS DE STOCK)
+// MOTOR UNIVERSAL DE CONEXIÓN CON LA API (CON BYPASS DE STOCK Y MARCAS)
 // =========================================================================
 export function useDux(endpoint = "items", params = null) {
   const [data, setData] = useState([]);
@@ -102,6 +102,8 @@ export function useDux(endpoint = "items", params = null) {
                 return {
                     id: item.cod_item,
                     name: item.item,
+                    // AGREGAMOS LA MARCA (BODEGA) ACÁ:
+                    brand: item.marca?.nombre || item.marca || "Bodega Boutique",
                     price: item.precios && item.precios[0] ? parseFloat(item.precios[0].precio) : 0,
                     stock: stockReal,
                     category: clasificarProducto(item),

@@ -7,10 +7,12 @@ export default async function handler(req, res) {
     let offset = 0;
     let keepFetching = true;
 
-    // Pedimos a Dux en "tandas de a 5 páginas" para no saturar su seguridad
-    while (keepFetching && offset < 2000) {
+    // AUMENTAMOS EL LÍMITE A 10.000 PRODUCTOS (200 páginas de Dux)
+    while (keepFetching && offset < 10000) {
       const batch = [];
-      for (let i = 0; i < 5; i++) {
+      
+      // Lanzamos 10 páginas al mismo tiempo (traemos de a 500 productos por ciclo)
+      for (let i = 0; i < 10; i++) {
         const currentOffset = offset + (i * limit);
         const p = fetch(`https://erp.duxsoftware.com.ar/WSERP/rest/services/items?limit=${limit}&offset=${currentOffset}`, {
           method: 'GET',
@@ -23,19 +25,19 @@ export default async function handler(req, res) {
         batch.push(p);
       }
 
-      // Esperamos que vuelvan los 5 camiones
+      // Esperamos que vuelvan las 10 páginas
       const results = await Promise.all(batch);
 
       for (const data of results) {
         const items = data.results || [];
         allItems.push(...items);
         
-        // Si Dux nos manda una página con menos de 50 productos, significa que llegamos al final del catálogo
+        // Si una página trae menos de 50, significa que vaciamos el catálogo de Dux
         if (items.length < limit) {
           keepFetching = false;
         }
       }
-      offset += 250; // Avanzamos a la siguiente tanda
+      offset += 500; // Avanzamos a los siguientes 500
     }
 
     return res.status(200).json({ results: allItems });
