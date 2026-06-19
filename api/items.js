@@ -2,36 +2,44 @@ export default async function handler(req, res) {
   const token = process.env.DUX_API_TOKEN;
 
   try {
-    // Dux limita la salida a 50 artículos por petición.
-    // Generamos 40 páginas en paralelo (40 x 50 = 2000 productos potenciales)
-    // para asegurarnos de vaciar por completo el inventario de Dux.
-    const offsets = Array.from({ length: 40 }, (_, i) => i * 50);
-    
-    const fetchPage = async (offset) => {
-      try {
-        const response = await fetch(`https://erp.duxsoftware.com.ar/WSERP/rest/services/items?limit=50&offset=${offset}`, {
+    const limit = 50;
+    let allItems = [];
+    let offset = 0;
+    let keepFetching = true;
+
+    // Pedimos a Dux en "tandas de a 5 páginas" para no saturar su seguridad
+    while (keepFetching && offset < 2000) {
+      const batch = [];
+      for (let i = 0; i < 5; i++) {
+        const currentOffset = offset + (i * limit);
+        const p = fetch(`https://erp.duxsoftware.com.ar/WSERP/rest/services/items?limit=${limit}&offset=${currentOffset}`, {
           method: 'GET',
           headers: { 
             'authorization': token, 
             'accept': 'application/json' 
           }
-        });
-        if (!response.ok) return [];
-        const data = await response.json();
-        return data.results || [];
-      } catch (e) {
-        return []; // Si una página falla, no frenamos el resto
+        }).then(r => r.ok ? r.json() : { results: [] }).catch(() => ({ results: [] }));
+        
+        batch.push(p);
       }
-    };
 
-    // Lanzamos las 40 peticiones exactamente al mismo tiempo
-    const paginas = await Promise.all(offsets.map(off => fetchPage(off)));
-    
-    // Unificamos todas las páginas en una sola lista gigante
-    const todosLosProductos = paginas.flat();
+      // Esperamos que vuelvan los 5 camiones
+      const results = await Promise.all(batch);
 
-    return res.status(200).json({ results: todosLosProductos });
+      for (const data of results) {
+        const items = data.results || [];
+        allItems.push(...items);
+        
+        // Si Dux nos manda una página con menos de 50 productos, significa que llegamos al final del catálogo
+        if (items.length < limit) {
+          keepFetching = false;
+        }
+      }
+      offset += 250; // Avanzamos a la siguiente tanda
+    }
+
+    return res.status(200).json({ results: allItems });
   } catch (error) {
-    return res.status(500).json({ error: "Fallo de conexión masiva con Dux" });
+    return res.status(500).json({ error: "Fallo de conexión en bloque con Dux" });
   }
 }
