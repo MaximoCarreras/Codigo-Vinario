@@ -1,8 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap');
+
+/* =========================================
+   VARIABLES GLOBALES Y RESET
+   ========================================= */
+:root {
+  --color-black: #111111;
+  --color-white: #ffffff;
+  --color-wine: #85123e;
+  --color-grey-medium: #555555;
+  --font-primary: 'Montserrat', sans-serif;
+  --font-code: 'Courier New', Courier, monospace;
+  --transition-smooth: all 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 /* =========================================
    MASTER LIGHT THEME OVERRIDE (#f6f6f8)
    ========================================= */
 
-/* 1. TIPOGRAFÍA (Excluimos los íconos para no romperlos) */
+/* 1. TIPOGRAFÍA (Fina y elegante, excluyendo íconos) */
 body, p, a, div, input, button, span:not(.material-symbols-outlined) {
     font-family: 'Montserrat', sans-serif !important;
     font-weight: 300 !important; 
@@ -12,48 +37,46 @@ h1, h2, h3, h4, h5, h6, .cv-section-title, .cv-box-title {
     font-weight: 400 !important; 
     letter-spacing: 2px !important;
     color: #111111 !important;
+    text-transform: uppercase;
+}
+
+/* Aseguramos que NINGÚN enlace tenga subrayado en toda la web */
+a {
+  text-decoration: none !important;
+  color: inherit;
+}
+button {
+  text-decoration: none !important;
 }
 
 /* 2. FONDO GLOBAL UNIFICADO (#f6f6f8) */
+/* (Se quitó .cv-navbar para permitir que la barra sea negra) */
 body, #root, 
 .cv-page-home, .cv-page-shop, .cv-page-cart, .cv-page-account,
-.cv-navbar, .cv-hero, .cv-trustbar, .cv-bestsellers,
+.cv-hero, .cv-trustbar, .cv-bestsellers,
 .cv-shop-header, .cv-shop-container, .cv-checkout-container,
-section, header, footer {
+section, footer {
     background-color: #f6f6f8 !important;
 }
 
-/* 3. LOGO GIGANTE Y NAVBAR INVISIBLE */
-.cv-navbar {
-    border-bottom: none !important; /* Le sacamos la línea para que quede flotando elegante */
-    padding: 15px 0 !important; 
-}
-.cv-nav-logo-img {
-    height: 120px !important; /* Logo extra grande */
-    width: auto !important;
-    object-fit: contain !important;
-    mix-blend-mode: multiply !important; /* Adiós al borde gris de la imagen */
-}
-
-/* 4. OVERLAY DEL HERO (Claro en lugar de Oscuro) */
-/* Esto hace que las imágenes de fondo se vean blanquecinas para que la Matrix resalte */
+/* 3. OVERLAY DEL HERO (Claro en lugar de Oscuro para la Matrix) */
 .cv-hero-overlay {
     background: linear-gradient(to bottom, rgba(246, 246, 248, 0.85) 0%, rgba(246, 246, 248, 1) 100%) !important;
 }
 
-/* 5. CONTRASTE DE TEXTOS */
-.cv-hero p, .cv-hero span, 
+/* 4. CONTRASTE DE TEXTOS */
+.cv-hero p, .cv-hero span:not(.material-symbols-outlined), 
 .cv-trust-title, .cv-product-name, .cv-product-price {
     color: #111111 !important;
 }
 .cv-trust-desc, p {
     color: #555555 !important;
 }
-.cv-code-text, .cv-text-wine {
-    color: #85123e !important;
+.cv-code-text, .cv-text-wine, .cv-code-symbol {
+    color: var(--color-wine) !important;
 }
 
-/* 6. TARJETAS CON RELIEVE Y BOTONES */
+/* 5. TARJETAS CON RELIEVE Y VOLUMEN */
 .cv-product-card, .cv-trust-item, .cv-checkout-box, div[class*="card"] {
     background-color: #ffffff !important; 
     border: 1px solid #eaeaea !important;
@@ -61,30 +84,48 @@ section, header, footer {
     border-radius: 4px !important;
 }
 
+/* 6. BOTONES GLOBALES BOUTIQUE */
 .cv-btn-secondary, .cv-btn-pay-action, .cv-btn-primary {
     background-color: #111111 !important;
     color: #ffffff !important;
     border: 1px solid #111111 !important;
     padding: 12px 30px !important;
     text-transform: uppercase;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+.cv-btn-secondary:hover, .cv-btn-pay-action:hover, .cv-btn-primary:hover {
+    background-color: var(--color-wine) !important;
+    border-color: var(--color-wine) !important;
 }
 
 .cv-btn-add-cart {
     background-color: transparent !important;
     color: #111111 !important;
     border-color: #cccccc !important;
+    cursor: pointer;
+    transition: var(--transition-smooth);
 }
 .cv-btn-add-cart:hover {
-    background-color: #85123e !important;
+    background-color: var(--color-wine) !important;
     color: #ffffff !important;
-    border-color: #85123e !important;
-}
-/* Aseguramos que NINGÚN enlace tenga subrayado en toda la web */
-a {
-  text-decoration: none !important;
-  color: inherit;
+    border-color: var(--color-wine) !important;
 }
 
-button {
-  text-decoration: none !important;
+/* 7. UTILIDADES ESTRUCTURALES */
+.container {
+  max-width: 1400px; 
+  margin: 0 auto;
+  padding: 0 5%;
+}
+.cv-blinking-cursor::after {
+  content: '_';
+  font-family: var(--font-code);
+  color: var(--color-wine);
+  animation: blink 1s step-end infinite;
+  margin-left: 2px;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }

@@ -1,25 +1,24 @@
 .cv-navbar {
-    background-color: #050505 !important; /* Negro Boutique */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    background-color: #050505 !important; /* Negro Boutique para la Navbar */
+    border-bottom: 1px solid rgba(133, 18, 62, 0.4) !important; /* Línea inferior sutil color vino */
     position: fixed;
     top: 0; left: 0; width: 100%;
     z-index: 9999;
     padding: 15px 0 !important; 
     transition: var(--transition-smooth);
 }
+
 .cv-nav-container {
     max-width: 1400px; margin: 0 auto; padding: 0 5%;
     display: flex; align-items: center; justify-content: space-between;
 }
 .cv-nav-logo { display: flex; align-items: center; }
 
+/* LOGO LIMPIO: Sin filtros de color. Mostrará exactamente la imagen que subas */
 .cv-nav-logo-img {
-    height: 100px !important; /* Logo Grande */
+    height: 100px !important; /* Tamaño grande */
     width: auto !important;
     object-fit: contain !important;
-    /* MAGIA: Invierte los colores (negro a blanco) y hace el fondo transparente */
-    filter: invert(1) brightness(2) !important;
-    mix-blend-mode: screen !important;
     transition: transform 0.3s ease;
 }
 .cv-nav-logo-img:hover { transform: scale(1.02); }
@@ -33,13 +32,14 @@
     letter-spacing: 1.5px; transition: var(--transition-smooth);
     display: flex; align-items: center; padding: 15px 0;
 }
+/* Detalles en color vino */
 .cv-code-symbol { font-family: var(--font-code); color: var(--color-wine) !important; margin-right: 4px; }
 .cv-nav-link:hover { color: var(--color-wine) !important; }
 
 /* Mega menú (Mantenemos en fondo oscuro para que coincida con la Navbar) */
 .cv-nav-item-has-mega { position: relative; }
 .cv-megamenu {
-    position: fixed; top: 125px; left: 0; width: 100%;
+    position: fixed; top: 130px; left: 0; width: 100%;
     background-color: #050505 !important;
     border-bottom: 1px solid var(--color-wine) !important;
     padding: 40px 5%; opacity: 0; visibility: hidden;
@@ -52,13 +52,13 @@
 .cv-mega-col a { display: block; color: #888888 !important; font-size: 0.9rem; padding: 8px 0; font-weight: 300 !important; transition: 0.3s; }
 .cv-mega-col a:hover { color: #ffffff !important; padding-left: 5px; }
 
-/* Selectores e Íconos */
+/* Selectores de Idioma */
 .cv-nav-actions { display: flex; align-items: center; gap: 20px; }
 .cv-lang-selector { display: flex; gap: 2px; background-color: transparent !important; padding: 4px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1) !important; }
 .cv-lang-btn { background: none; border: none; color: #888888 !important; font-family: var(--font-code); font-size: 0.7rem; font-weight: 400 !important; cursor: pointer; padding: 4px 8px; }
 .cv-lang-btn.is-active { color: #ffffff !important; background-color: var(--color-wine) !important; border-radius: 2px; }
 
-/* Íconos blancos */
+/* Íconos Blancos (Carrito y Usuario) */
 .cv-nav-account, .cv-nav-cart { color: #ffffff !important; display: flex; align-items: center; transition: 0.3s; }
 .cv-nav-account:hover, .cv-nav-cart:hover { color: var(--color-wine) !important; }
 .cv-cart-icon { font-size: 1.5rem !important; font-weight: 300 !important; }
