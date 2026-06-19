@@ -1,54 +1,68 @@
-// src/pages/Account/Account.jsx
 import React, { useState } from 'react';
 import { useDux } from "../../hooks/useDux";
+import './Account.css';
 
 export default function Account() {
-  const [emailBusqueda, setEmailBusqueda] = useState('');
+  const [email, setEmail] = useState('');
   const [buscando, setBuscando] = useState(false);
-  
-  // Usamos el puente universal filtrando por el cliente
-  const { data: pedidos, loading } = useDux(buscando ? "pedidos" : null, { cliente: emailBusqueda });
+  const { data: pedidos, loading } = useDux(buscando ? "pedidos" : null, { cliente: email });
 
   const handleBuscar = (e) => {
     e.preventDefault();
-    if (emailBusqueda) setBuscando(true);
+    if (email) setBuscando(true);
   };
 
   return (
-    <div className="cv-page-shop" style={{ padding: '50px' }}>
-      <h1 className="cv-section-title">MI <span className="cv-text-wine">CUENTA</span></h1>
-      
-      <div style={{ maxWidth: '400px', margin: '30px 0' }}>
-        <form onSubmit={handleBuscar} style={{ display: 'flex', gap: '10px' }}>
-          <input 
-            type="email" 
-            placeholder="Tu email de compra..." 
-            value={emailBusqueda}
-            onChange={(e) => { setEmailBusqueda(e.target.value); setBuscando(false); }}
-            style={{ padding: '10px', flex: 1, background: '#111', color: '#fff', border: '1px solid #333' }}
-          />
-          <button type="submit" className="cv-btn-secondary">Buscar Pedidos</button>
-        </form>
-      </div>
+    <div className="cv-page-account">
+      <div className="cv-account-container">
+        
+        <div className="cv-account-card">
+          <h1 className="cv-account-title">MI <span className="cv-text-wine">CAVA</span> PRIVADA</h1>
+          <p className="cv-account-subtitle">Ingresá tu correo para rastrear tus etiquetas y conocer el estado de tus envíos.</p>
 
-      {loading && buscando && <div className="cv-code-text cv-blinking-cursor">/ decodificando_historial...</div>}
-
-      {buscando && !loading && (
-        <div className="cv-products-grid">
-          {pedidos.length === 0 ? (
-            <p className="cv-code-text">/ no_se_registran_movimientos</p>
-          ) : (
-            pedidos.map((pedido) => (
-              <div key={pedido.id} className="cv-product-card" style={{ padding: '20px' }}>
-                <h3 className="cv-product-name">Orden #{pedido.numero}</h3>
-                <p className="cv-code-text">Fecha: {pedido.fecha}</p>
-                <p className="cv-code-text">Estado: {pedido.estado}</p>
-                <p className="cv-product-price">${pedido.total}</p>
-              </div>
-            ))
-          )}
+          <form onSubmit={handleBuscar} className="cv-account-form">
+            <input 
+              type="email" 
+              required 
+              placeholder="ejemplo@correo.com" 
+              className="cv-account-input"
+              value={email}
+              onChange={(e) => { setEmail(e.target.value); setBuscando(false); }}
+            />
+            <button type="submit" className="cv-account-btn">
+              {loading ? 'RASTREANDO...' : 'BUSCAR PEDIDOS'}
+            </button>
+          </form>
         </div>
-      )}
+
+        {/* Resultados */}
+        {buscando && !loading && (
+          <div className="cv-account-results">
+            {pedidos.length === 0 ? (
+              <div className="cv-account-empty">
+                <span className="material-symbols-outlined">search_off</span>
+                <p>No registramos pedidos asociados a este correo electrónico.</p>
+              </div>
+            ) : (
+              <div className="cv-orders-grid">
+                {pedidos.map(p => (
+                  <div key={p.id} className="cv-order-card">
+                    <div className="cv-order-header">
+                      <span className="cv-order-number">Orden #{p.numero}</span>
+                      <span className="cv-order-status">{p.estado}</span>
+                    </div>
+                    <div className="cv-order-body">
+                      <p>Fecha de emisión: {p.fecha}</p>
+                      <p className="cv-order-total">${p.total.toLocaleString('es-AR')}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+      </div>
     </div>
   );
 }

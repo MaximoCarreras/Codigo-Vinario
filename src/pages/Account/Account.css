@@ -1,37 +1,35 @@
 .cv-page-account {
-    background-color: var(--color-black);
+    background-color: #f6f6f8;
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 100px 5% 50px;
+    padding: 160px 5% 80px;
 }
 
 .cv-account-container {
-    width: 100%;
-    max-width: 500px;
-    position: relative;
-    z-index: 2;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
-.cv-account-box {
-    background-color: rgba(5, 5, 5, 0.9);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(133, 18, 62, 0.3);
+.cv-account-card {
+    background-color: #ffffff;
+    border: 1px solid #eaeaea;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.02);
     padding: 50px 40px;
-    border-radius: 8px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-}
-
-.cv-account-header {
     text-align: center;
-    margin-bottom: 40px;
+    border-radius: 4px;
 }
 
 .cv-account-title {
     font-size: 2rem;
-    color: var(--color-white);
-    margin-top: 10px;
+    color: #111111;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.cv-account-subtitle {
+    color: #666666;
+    font-size: 0.95rem;
+    margin-bottom: 40px;
+    line-height: 1.6;
 }
 
 .cv-account-form {
@@ -40,59 +38,106 @@
     gap: 20px;
 }
 
-.cv-input-group {
+.cv-account-input {
+    width: 100%;
+    padding: 15px 20px;
+    border: 1px solid #dddddd !important;
+    background-color: #fcfcfc !important;
+    border-radius: 4px;
+    font-family: var(--font-primary);
+    font-size: 0.95rem;
+    outline: none;
+    transition: 0.3s;
+    text-align: center;
+}
+
+.cv-account-input:focus {
+    border-color: var(--color-wine) !important;
+    background-color: #ffffff !important;
+}
+
+.cv-account-btn {
+    background-color: #111111;
+    color: #ffffff;
+    border: none;
+    padding: 16px;
+    font-family: var(--font-primary);
+    font-weight: 400;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 4px;
+}
+
+.cv-account-btn:hover {
+    background-color: var(--color-wine);
+}
+
+/* Resultados */
+.cv-account-results {
+    margin-top: 40px;
+}
+
+.cv-account-empty {
+    text-align: center;
+    color: #888888;
+    padding: 40px;
+}
+
+.cv-account-empty .material-symbols-outlined {
+    font-size: 3rem;
+    color: #dddddd;
+    margin-bottom: 15px;
+}
+
+.cv-orders-grid {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 15px;
 }
 
-.cv-input-group label {
-    font-size: 0.85rem;
-    color: var(--color-grey-medium);
+.cv-order-card {
+    background-color: #ffffff;
+    border: 1px solid #eaeaea;
+    padding: 25px;
+    border-radius: 4px;
+}
+
+.cv-order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.cv-order-number {
     font-family: var(--font-code);
-}
-
-.cv-input-group input {
-    background-color: #000;
-    border: 1px solid #333;
-    color: var(--color-white);
-    padding: 15px;
-    font-family: var(--font-primary);
-    transition: var(--transition-smooth);
-    outline: none;
-}
-
-.cv-input-group input:focus {
-    border-color: var(--color-wine);
-    box-shadow: 0 0 10px rgba(133, 18, 62, 0.2);
-}
-
-.cv-account-submit {
-    width: 100%;
-    justify-content: center;
-    margin-top: 20px;
-    padding: 15px;
-}
-
-.cv-account-footer {
-    margin-top: 30px;
-    text-align: center;
-    font-size: 0.9rem;
-    color: #888;
-    border-top: 1px solid #222;
-    padding-top: 20px;
-}
-
-.cv-account-toggle-btn {
-    background: none;
-    border: none;
     color: var(--color-wine);
-    font-family: var(--font-primary);
-    font-weight: 700;
-    cursor: pointer;
-    margin-left: 8px;
+    font-size: 0.9rem;
 }
 
-.cv-account-toggle-btn:hover {
-    text-decoration: underline;
+.cv-order-status {
+    background-color: #f6f6f8;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: #111111;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.cv-order-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #555555;
+    font-size: 0.9rem;
+}
+
+.cv-order-total {
+    font-weight: bold;
+    color: #111111;
+    font-size: 1.1rem;
 }

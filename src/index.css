@@ -79,3 +79,12 @@ section, header, footer {
     color: #ffffff !important;
     border-color: #85123e !important;
 }
+/* Aseguramos que NINGÚN enlace tenga subrayado en toda la web */
+a {
+  text-decoration: none !important;
+  color: inherit;
+}
+
+button {
+  text-decoration: none !important;
+}
