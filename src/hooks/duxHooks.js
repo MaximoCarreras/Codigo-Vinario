@@ -1,44 +1,69 @@
 import { useState, useEffect } from 'react';
 
-// Traductor de categorías BLINDADO
+// =========================================================================
+// TRADUCTOR BOUTIQUE - BASADO EN EL ÁRBOL EXACTO DE DUX
+// =========================================================================
 const clasificarProducto = (item) => {
   const nombre = (item.item || "").toLowerCase();
-  const rubro = (item.rubro?.nombre || "").toLowerCase();
-  const subRubro = (item.sub_rubro?.nombre || "").toLowerCase();
+  const rubro = (item.rubro?.nombre || item.rubro || "").toLowerCase();
+  const subRubro = (item.sub_rubro?.nombre || item.sub_rubro || "").toLowerCase();
 
-  // 1. FILTRO DE BASURA: Ocultamos lo que no se vende
-  if (rubro.includes("insumo") || rubro.includes("varios") || rubro.includes("servicio") || rubro.includes("financiero") || rubro.includes("talabarteria")) {
+  // 1. EXCLUSIÓN ADMINISTRATIVA ESTRICTA (Protege tu web de datos internos)
+  if (
+    rubro.includes("gastos") || 
+    rubro.includes("servicio") || 
+    rubro.includes("talabarteria") || 
+    rubro.includes("indumentaria") || 
+    rubro === "otros" ||
+    subRubro.includes("logistica") || 
+    subRubro.includes("mantenimiento") || 
+    subRubro.includes("personal") || 
+    subRubro.includes("packaging") ||
+    subRubro.includes("grabado")
+  ) {
     return "oculto";
   }
 
-  // 2. SALVAVIDAS: Si el nombre tiene la cepa, lo mandamos a vinos directo, no importa cómo esté el Rubro en Dux
+  // 2. EVENTOS
+  if (rubro === "eventos" || subRubro === "entradas") return "eventos";
+
+  // 3. BAZAR Y COMPLEMENTOS
+  if (subRubro === "estuches" || nombre.includes("combo") || nombre.includes("caja") || nombre.includes("box")) return "combos";
+  if (rubro === "bazar" || subRubro.includes("cristalería") || subRubro.includes("accesorios") || subRubro.includes("decanters")) return "bazar";
+
+  // 4. GOURMET / ALIMENTOS
+  if (rubro === "aceites" || rubro === "vinagre" || rubro === "delicatessens") return "gourmet";
+
+  // 5. CLASIFICACIÓN EXACTA DE BEBIDAS SEGÚN TU SISTEMA
+  if (rubro.includes("cerveza") || subRubro.includes("cerveza") || nombre.includes("ipa") || nombre.includes("birra")) return "cervezas";
+  
+  if (rubro.includes("destilado") || subRubro.includes("destilado") || nombre.includes("gin ") || nombre.includes("vodka") || nombre.includes("whisky") || nombre.includes("ron")) return "destilados";
+  
+  if (subRubro.includes("espumante") || rubro.includes("espumante") || nombre.includes("espumante") || nombre.includes("brut") || rubro.includes("sidra") || subRubro.includes("sidra")) return "espumantes";
+  
+  if (rubro.includes("vermouth") || rubro.includes("vermut") || subRubro.includes("vermut")) return "aperitivos";
+  
+  if (rubro.includes("sin alcohol") || subRubro.includes("sin alcohol")) return "sin-alcohol";
+
+  // 6. EL NÚCLEO: VINOS
   if (
+    rubro === "vino" || 
+    subRubro.includes("vino gp") || 
+    rubro === "bebidas" || // Si quedó en bebidas y no fue atrapado por Cerveza/Destilado/Espumante, es vino
     nombre.includes("malbec") || nombre.includes("cabernet") || nombre.includes("pinot") || 
     nombre.includes("torrontes") || nombre.includes("chardonnay") || nombre.includes("sauvignon") || 
-    nombre.includes("blend") || nombre.includes("syrah") || nombre.includes("merlot")
+    nombre.includes("blend") || nombre.includes("syrah") || nombre.includes("merlot") || nombre.includes("naranjo")
   ) {
     return "vinos";
   }
 
-  // 3. CLASIFICACIÓN POR RUBRO/SUBRUBRO
-  if (subRubro) {
-    if (subRubro.includes("vino")) return "vinos";
-    if (subRubro.includes("destilado")) return "destilados";
-    if (subRubro.includes("cerveza") || subRubro.includes("birra")) return "cervezas";
-    if (subRubro.includes("combo") || subRubro.includes("caja")) return "combos";
-    return subRubro.replace(/\s+/g, '-'); 
-  }
-
-  if (rubro.includes("vino") || rubro.includes("bebida")) return "vinos";
-  if (nombre.includes("gin") || nombre.includes("vodka") || nombre.includes("whisky")) return "destilados";
-  if (nombre.includes("cerveza") || nombre.includes("ipa")) return "cervezas";
-
-  return "oculto"; 
+  // FALLBACK DE SEGURIDAD: Si no logramos entender qué es, lo mandamos a vinos para que no desaparezca de la web
+  return "vinos"; 
 };
 
-// ... (El resto de tu código de useDux, useProducts, etc. sigue acá abajo igual que antes)
-
-// 1. EL MOTOR NUEVO UNIVERSAL (Para la página "Mi Cuenta" y pedidos)
+// =========================================================================
+// MOTOR UNIVERSAL DE CONEXIÓN CON LA API
+// =========================================================================
 export function useDux(endpoint = "items", params = null) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -68,7 +93,7 @@ export function useDux(endpoint = "items", params = null) {
                 stock: item.stock ? item.stock.reduce((acc, s) => acc + parseFloat(s.ctd_disponible), 0) : 0,
                 category: clasificarProducto(item),
                 image_url: 'https://images.unsplash.com/photo-1584916201218-f4242ceb4809?auto=format&fit=crop&w=500&q=80'
-            })).filter(p => p.category !== "oculto");
+            })).filter(p => p.category !== "oculto"); // Acá se eliminan los ocultos
             setData(formatted);
         } else {
             setData(json.results || []);
@@ -85,25 +110,18 @@ export function useDux(endpoint = "items", params = null) {
 }
 
 // =========================================================================
-// 2. ADAPTADORES DE COMPATIBILIDAD (Para que Vercel no rompa la compilación)
+// ADAPTADORES DE COMPATIBILIDAD
 // =========================================================================
-
 export function useProducts(category = null) {
-    // Usamos el motor nuevo internamente
     const { data, loading } = useDux("items");
-    
-    // Y filtramos como esperaba la Tienda original
     let filteredProducts = data;
     if (category && category !== "Todo") {
         filteredProducts = data.filter(p => p.category === category.toLowerCase());
     }
-    
-    // Devolvemos la palabra "products" que es la que busca Shop.jsx
     return { products: filteredProducts, loading };
 }
 
 export function useFeaturedProducts() {
     const { data, loading } = useDux("items");
-    // Devolvemos solo 4 productos para el Inicio
     return { products: data.slice(0, 4), loading };
 }
