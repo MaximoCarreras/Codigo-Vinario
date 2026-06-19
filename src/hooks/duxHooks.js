@@ -1,12 +1,26 @@
 import { useState, useEffect } from 'react';
 
-// Traductor de categorías para limpiar el catálogo
+// Traductor de categorías BLINDADO
 const clasificarProducto = (item) => {
+  const nombre = (item.item || "").toLowerCase();
   const rubro = (item.rubro?.nombre || "").toLowerCase();
   const subRubro = (item.sub_rubro?.nombre || "").toLowerCase();
 
-  if (rubro.includes("insumo") || rubro.includes("varios") || rubro.includes("servicio")) return "oculto";
+  // 1. FILTRO DE BASURA: Ocultamos lo que no se vende
+  if (rubro.includes("insumo") || rubro.includes("varios") || rubro.includes("servicio") || rubro.includes("financiero") || rubro.includes("talabarteria")) {
+    return "oculto";
+  }
 
+  // 2. SALVAVIDAS: Si el nombre tiene la cepa, lo mandamos a vinos directo, no importa cómo esté el Rubro en Dux
+  if (
+    nombre.includes("malbec") || nombre.includes("cabernet") || nombre.includes("pinot") || 
+    nombre.includes("torrontes") || nombre.includes("chardonnay") || nombre.includes("sauvignon") || 
+    nombre.includes("blend") || nombre.includes("syrah") || nombre.includes("merlot")
+  ) {
+    return "vinos";
+  }
+
+  // 3. CLASIFICACIÓN POR RUBRO/SUBRUBRO
   if (subRubro) {
     if (subRubro.includes("vino")) return "vinos";
     if (subRubro.includes("destilado")) return "destilados";
@@ -15,9 +29,14 @@ const clasificarProducto = (item) => {
     return subRubro.replace(/\s+/g, '-'); 
   }
 
-  if (rubro.includes("bebida")) return "vinos";
+  if (rubro.includes("vino") || rubro.includes("bebida")) return "vinos";
+  if (nombre.includes("gin") || nombre.includes("vodka") || nombre.includes("whisky")) return "destilados";
+  if (nombre.includes("cerveza") || nombre.includes("ipa")) return "cervezas";
+
   return "oculto"; 
 };
+
+// ... (El resto de tu código de useDux, useProducts, etc. sigue acá abajo igual que antes)
 
 // 1. EL MOTOR NUEVO UNIVERSAL (Para la página "Mi Cuenta" y pedidos)
 export function useDux(endpoint = "items", params = null) {
