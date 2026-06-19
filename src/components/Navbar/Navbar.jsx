@@ -13,9 +13,17 @@ export default function Navbar() {
     <header className="cv-navbar">
       <div className="cv-nav-container">
         
-        {/* Logo de la empresa en la esquina izquierda (Agrandado por CSS) */}
-        <Link to="/" className="cv-nav-logo" onClick={() => setMenuOpen(false)}>
-          <img src="/logo.png" alt="Código Vinario" className="cv-nav-logo-img" />
+        {/* LOGO + NOMBRE DE MARCA (Para cumplir con la exigencia de presencia) */}
+        <Link to="/" className="cv-nav-logo" onClick={() => setMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+          <img src="/logo.png" alt="Logo" className="cv-nav-logo-img" style={{ height: '45px' }} />
+          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <span style={{ fontFamily: 'var(--font-primary)', fontWeight: '800', fontSize: '1.4rem', color: 'var(--color-black)', letterSpacing: '1px', lineHeight: '1' }}>
+              CÓDIGO VINARIO
+            </span>
+            <span style={{ fontFamily: 'var(--font-code)', fontSize: '0.7rem', color: 'var(--color-wine)', letterSpacing: '2px' }}>
+              WINE STOP
+            </span>
+          </div>
         </Link>
 
         {/* Menú de Navegación con Mega Menú Integrado */}
@@ -24,38 +32,39 @@ export default function Navbar() {
             <span className="cv-code-symbol">/</span>{t.nav_inicio}
           </Link>
           
-          {/* Item con MegaMenú Desplegable */}
           <div className="cv-nav-item-has-mega">
             <Link to="/tienda" className="cv-nav-link" onClick={() => setMenuOpen(false)}>
               <span className="cv-code-symbol">/</span>{t.nav_tienda}
             </Link>
             
-            {/* Contenedor del Mega Menú Estilo Catálogo Premium */}
+            {/* MEGA MENÚ CON LINKS REALES */}
             <div className="cv-megamenu">
               <div className="cv-megamenu-grid">
                 <div className="cv-mega-col">
-                  <h3>{`// ${t.cat_tintos}`}</h3>
-                  <Link to="/tienda" onClick={() => setMenuOpen(false)}>Malbec</Link>
-                  <Link to="/tienda" onClick={() => setMenuOpen(false)}>Cabernet Sauvignon</Link>
-                  <Link to="/tienda" onClick={() => setMenuOpen(false)}>Blend de Tintas</Link>
-                  <Link to="/tienda" onClick={() => setMenuOpen(false)}>Pinot Noir</Link>
+                  <h3>{`// ${t.cat_tintos || "TINTOS"}`}</h3>
+                  {/* Fijate cómo pasamos el parámetro ?categoria= al link */}
+                  <Link to="/tienda?categoria=malbec" onClick={() => setMenuOpen(false)}>Malbec</Link>
+                  <Link to="/tienda?categoria=cabernet" onClick={() => setMenuOpen(false)}>Cabernet Sauvignon</Link>
+                  <Link to="/tienda?categoria=blend" onClick={() => setMenuOpen(false)}>Blend de Tintas</Link>
+                  <Link to="/tienda?categoria=pinot" onClick={() => setMenuOpen(false)}>Pinot Noir</Link>
                 </div>
                 <div className="cv-mega-col">
-                  <h3>{`// ${t.cat_blancos}`}</h3>
-                  <Link to="/tienda" onClick={() => setMenuOpen(false)}>Chardonnay</Link>
-                  <Link to="/tienda" onClick={() => setMenuOpen(false)}>Sauvignon Blanc</Link>
-                  <Link to="/tienda" onClick={() => setMenuOpen(false)}>Torrontés</Link>
+                  <h3>{`// ${t.cat_blancos || "BLANCOS"}`}</h3>
+                  <Link to="/tienda?categoria=chardonnay" onClick={() => setMenuOpen(false)}>Chardonnay</Link>
+                  <Link to="/tienda?categoria=sauvignon" onClick={() => setMenuOpen(false)}>Sauvignon Blanc</Link>
+                  <Link to="/tienda?categoria=torrontes" onClick={() => setMenuOpen(false)}>Torrontés</Link>
                 </div>
                 <div className="cv-mega-col">
-                  <h3>{`// ${t.cat_espumantes}`}</h3>
-                  <Link to="/tienda" onClick={() => setMenuOpen(false)}>Brut Nature</Link>
-                  <Link to="/tienda" onClick={() => setMenuOpen(false)}>Extra Brut</Link>
-                  <Link to="/tienda" onClick={() => setMenuOpen(false)}>Cosechas Históricas</Link>
+                  <h3>{`// ${t.cat_espumantes || "ESPUMANTES"}`}</h3>
+                  <Link to="/tienda?categoria=brut-nature" onClick={() => setMenuOpen(false)}>Brut Nature</Link>
+                  <Link to="/tienda?categoria=extra-brut" onClick={() => setMenuOpen(false)}>Extra Brut</Link>
+                  <Link to="/tienda?categoria=espumante" onClick={() => setMenuOpen(false)}>Todos los Espumantes</Link>
                 </div>
                 <div className="cv-mega-col">
-                  <h3>{`// complementos`}</h3>
-                  <Link to="/tienda" onClick={() => setMenuOpen(false)}>{t.cat_destilados}</Link>
-                  <Link to="/tienda" onClick={() => setMenuOpen(false)}>Estuches & Regalos</Link>
+                  <h3>{`// COMPLEMENTOS`}</h3>
+                  <Link to="/tienda?categoria=destilados" onClick={() => setMenuOpen(false)}>{t.cat_destilados || "Destilados"}</Link>
+                  <Link to="/tienda?categoria=cervezas" onClick={() => setMenuOpen(false)}>Cervezas</Link>
+                  <Link to="/tienda?categoria=combos" onClick={() => setMenuOpen(false)}>Estuches & Regalos</Link>
                 </div>
               </div>
             </div>
@@ -72,7 +81,7 @@ export default function Navbar() {
           </Link>
         </nav>
 
-        {/* selectores y carrito */}
+        {/* Selectores y carrito */}
         <div className="cv-nav-actions">
           <div className="cv-lang-selector">
             {['ES', 'EN', 'PT'].map((l) => (
@@ -92,7 +101,7 @@ export default function Navbar() {
 
           <Link to="/carrito" className="cv-nav-cart">
             <span className="material-symbols-outlined cv-cart-icon">shopping_cart</span>
-            <span className="cv-cart-badge">{`[ ${cartCount || 0} ]`}</span>
+            <span className="cv-cart-badge" style={{ color: 'var(--color-wine)', fontWeight: 'bold' }}>{`[ ${cartCount || 0} ]`}</span>
           </Link>
 
           <button className="cv-menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
