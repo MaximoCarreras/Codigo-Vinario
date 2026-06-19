@@ -16,11 +16,11 @@ export default function Hero() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentBg((prev) => (prev + 1) % backgroundImages.length);
-    }, 5000); // Cambia cada 5 segundos
+    }, 5000); 
     return () => clearInterval(interval);
   }, [backgroundImages.length]);
 
-  // Efecto Matrix en Canvas
+  // Efecto Matrix en Canvas (ADAPTADO AL TEMA CLARO)
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
@@ -33,11 +33,12 @@ export default function Hero() {
     const drops = Array(Math.floor(columns)).fill(1);
 
     const draw = () => {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      // MAGIA: En lugar de negro, pintamos con el color #f6f6f8 (RGB: 246, 246, 248) con baja opacidad
+      ctx.fillStyle = 'rgba(246, 246, 248, 0.1)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       
-      // Color vino sutil para la lluvia
-      ctx.fillStyle = 'rgba(133, 18, 62, 0.3)'; 
+      // Color vino sutil para la lluvia (aumenté a 0.4 para que se lea mejor sobre fondo claro)
+      ctx.fillStyle = 'rgba(133, 18, 62, 0.4)'; 
       ctx.font = `${fontSize}px monospace`;
 
       for (let i = 0; i < drops.length; i++) {
@@ -76,7 +77,7 @@ export default function Hero() {
         />
       ))}
 
-      {/* Overlay Oscuro y Matrix */}
+      {/* Overlay Claro y Matrix */}
       <div className="cv-hero-overlay"></div>
       <canvas ref={canvasRef} className="cv-hero-matrix"></canvas>
 

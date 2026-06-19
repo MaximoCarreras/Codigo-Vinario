@@ -1,79 +1,81 @@
 /* =========================================
-   FORZADO DE TEMA CLARO (LIGHT THEME OVERRIDES)
+   MASTER LIGHT THEME OVERRIDE (#f6f6f8)
    ========================================= */
 
-/* Hacemos la Navbar completamente blanca y con borde sutil */
-.cv-navbar {
-  background-color: #ffffff !important;
-  border-bottom: 1px solid #eeeeee;
+/* 1. TIPOGRAFÍA MÁS FINA (Como el logo) */
+body, p, a, span, div, input, button {
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 300 !important; 
 }
-
-/* Letras de la Navbar y los íconos en el negro oficial */
-.cv-nav-link, 
-.cv-nav-actions .material-symbols-outlined,
-.cv-lang-btn {
-  color: #111111 !important;
-}
-
-/* Forzar fondos blancos y textos negros en las secciones que quedaron oscuras */
-.cv-page-home, 
-.cv-page-home section,
-.cv-trustbar, 
-.cv-bestsellers {
-  background-color: #ffffff !important;
-  color: #111111 !important;
-}
-
-/* Títulos y textos descriptivos en el negro oficial */
-h1, h2, h3, h4, h5, h6,
-.cv-section-title, 
-.cv-box-title {
-  color: #111111 !important;
-}
-
-/* Para que las tarjetas grises de "Envíos Seguros" queden elegantes sobre el fondo blanco */
-.cv-trust-card {
-  background-color: #f9f9f9 !important;
-  border: 1px solid #eeeeee !important;
-}
-.cv-trust-card h3, .cv-trust-card p {
-  color: #111111 !important;
-}
-
-/* Color de los acentos "Vino" */
-.cv-text-wine {
-  color: #85123e !important;
-}
-/* =========================================
-   PULIDO FINAL: ERRADICADOR DE MODO OSCURO
-   ========================================= */
-
-/* =========================================
-   AJUSTES DE COLOR: NAVBAR Y MATRIX CLARO (#f6f6f8)
-   ========================================= */
-
-/* 1. Igualamos la Navbar y el fondo general al color exacto del logo */
-body, .cv-page-home, .cv-navbar {
-    background-color: #f6f6f8 !important;
-}
-
-/* 2. Forzamos el contenedor del Hero (Inicio) al nuevo color claro */
-.cv-hero {
-    background-color: #f6f6f8 !important;
-}
-
-/* 3. Invertimos el texto del inicio: Ahora que el fondo es claro, las letras deben ser negras */
-.cv-hero h1, .cv-hero h2, .cv-hero p {
+h1, h2, h3, h4, h5, h6, .cv-section-title, .cv-box-title {
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 400 !important; 
+    letter-spacing: 2px !important;
     color: #111111 !important;
 }
 
-/* Mantenemos el color vino tinto para los detalles y palabras resaltadas */
-.cv-hero .cv-code-text, .cv-hero .cv-text-wine {
+/* 2. FONDO GLOBAL UNIFICADO (#f6f6f8) */
+body, #root, 
+.cv-page-home, .cv-page-shop, .cv-page-cart, .cv-page-account,
+.cv-navbar, .cv-hero, .cv-trustbar, .cv-bestsellers,
+.cv-shop-header, .cv-shop-container, .cv-checkout-container,
+section, header, footer {
+    background-color: #f6f6f8 !important;
+}
+
+/* 3. LOGO GIGANTE Y NAVBAR INVISIBLE */
+.cv-navbar {
+    border-bottom: none !important; /* Le sacamos la línea para que quede flotando elegante */
+    padding: 15px 0 !important; 
+}
+.cv-nav-logo-img {
+    height: 120px !important; /* Logo extra grande */
+    width: auto !important;
+    object-fit: contain !important;
+    mix-blend-mode: multiply !important; /* Adiós al borde gris de la imagen */
+}
+
+/* 4. OVERLAY DEL HERO (Claro en lugar de Oscuro) */
+/* Esto hace que las imágenes de fondo se vean blanquecinas para que la Matrix resalte */
+.cv-hero-overlay {
+    background: linear-gradient(to bottom, rgba(246, 246, 248, 0.85) 0%, rgba(246, 246, 248, 1) 100%) !important;
+}
+
+/* 5. CONTRASTE DE TEXTOS */
+.cv-hero p, .cv-hero span, 
+.cv-trust-title, .cv-product-name, .cv-product-price {
+    color: #111111 !important;
+}
+.cv-trust-desc, p {
+    color: #555555 !important;
+}
+.cv-code-text, .cv-text-wine {
     color: #85123e !important;
 }
 
-/* 4. Si el efecto de Matrix está hecho con CSS, aseguramos que el fondo sea claro 
-   y los 0 y 1 mantengan su tono original (con opacidad para que no molesten la lectura) */
-.cv-binary-bg::before {
-    color: rgba(133, 18, 62, 0.08) !important; /* Color vino sutil para los números */
+/* 6. TARJETAS CON RELIEVE Y BOTONES */
+.cv-product-card, .cv-trust-item, .cv-checkout-box, div[class*="card"] {
+    background-color: #ffffff !important; 
+    border: 1px solid #eaeaea !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02) !important;
+    border-radius: 4px !important;
+}
+
+.cv-btn-secondary, .cv-btn-pay-action, .cv-btn-primary {
+    background-color: #111111 !important;
+    color: #ffffff !important;
+    border: 1px solid #111111 !important;
+    padding: 12px 30px !important;
+    text-transform: uppercase;
+}
+
+.cv-btn-add-cart {
+    background-color: transparent !important;
+    color: #111111 !important;
+    border-color: #cccccc !important;
+}
+.cv-btn-add-cart:hover {
+    background-color: #85123e !important;
+    color: #ffffff !important;
+    border-color: #85123e !important;
 }
