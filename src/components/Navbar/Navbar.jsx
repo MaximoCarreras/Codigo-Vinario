@@ -13,17 +13,13 @@ export default function Navbar() {
     <header className="cv-navbar">
       <div className="cv-nav-container">
         
-        {/* LOGO + NOMBRE DE MARCA (Para cumplir con la exigencia de presencia) */}
-        <Link to="/" className="cv-nav-logo" onClick={() => setMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-          <img src="/logo.png" alt="Logo" className="cv-nav-logo-img" style={{ height: '45px' }} />
-          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-            <span style={{ fontFamily: 'var(--font-primary)', fontWeight: '800', fontSize: '1.4rem', color: 'var(--color-black)', letterSpacing: '1px', lineHeight: '1' }}>
-              CÓDIGO VINARIO
-            </span>
-            <span style={{ fontFamily: 'var(--font-code)', fontSize: '0.7rem', color: 'var(--color-wine)', letterSpacing: '2px' }}>
-              WINE STOP
-            </span>
-          </div>
+        {/* LOGO GIGANTE Y LIMPIO */}
+        <Link to="/" className="cv-nav-logo" onClick={() => setMenuOpen(false)}>
+          <img 
+            src="/logo.png" 
+            alt="Código Vinario" 
+            style={{ height: '80px', width: 'auto', objectFit: 'contain' }} 
+          />
         </Link>
 
         {/* Menú de Navegación con Mega Menú Integrado */}
@@ -42,7 +38,6 @@ export default function Navbar() {
               <div className="cv-megamenu-grid">
                 <div className="cv-mega-col">
                   <h3>{`// ${t.cat_tintos || "TINTOS"}`}</h3>
-                  {/* Fijate cómo pasamos el parámetro ?categoria= al link */}
                   <Link to="/tienda?categoria=malbec" onClick={() => setMenuOpen(false)}>Malbec</Link>
                   <Link to="/tienda?categoria=cabernet" onClick={() => setMenuOpen(false)}>Cabernet Sauvignon</Link>
                   <Link to="/tienda?categoria=blend" onClick={() => setMenuOpen(false)}>Blend de Tintas</Link>
@@ -101,7 +96,7 @@ export default function Navbar() {
 
           <Link to="/carrito" className="cv-nav-cart">
             <span className="material-symbols-outlined cv-cart-icon">shopping_cart</span>
-            <span className="cv-cart-badge" style={{ color: 'var(--color-wine)', fontWeight: 'bold' }}>{`[ ${cartCount || 0} ]`}</span>
+            <span className="cv-cart-badge">{`[ ${cartCount || 0} ]`}</span>
           </Link>
 
           <button className="cv-menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>

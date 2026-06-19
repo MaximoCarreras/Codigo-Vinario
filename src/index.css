@@ -1,102 +1,46 @@
-/* Importamos MONTSERRAT en sus distintos pesos (Ligero, Normal, SemiBold, ExtraBold) */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap');
-
-:root {
-  /* COLORES OFICIALES DEL MANUAL */
-  --color-black: #1a1a1a;
-  --color-white: #ffffff;
-  --color-wine: #85123e;
-  --color-rosa-claro: #ffb3c6;
-  --color-grey-medium: #555555;
-  --color-grey-light: #f5f5f5;
-  
-  /* TIPOGRAFÍAS */
-  --font-primary: 'Montserrat', sans-serif;
-  --font-code: 'Courier New', Courier, monospace;
-}
-
-/* Reseteo Global */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-/* TEMA CLARO POR DEFECTO */
-body {
-  font-family: var(--font-primary);
-  background-color: var(--color-white);
-  color: var(--color-black);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
-}
-
-/* Tipografía de Títulos (Montserrat Bold 34pt equivalente) */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-primary);
-  font-weight: 800; /* Montserrat ExtraBold */
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  line-height: 1.2;
-}
-
-h1 {
-  font-size: 34pt; /* Pedido exacto del manual */
-}
-
-/* Párrafos legibles */
-p {
-  font-weight: 400; /* Montserrat Regular */
-  color: var(--color-grey-medium);
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
 /* =========================================
-   EFECTOS "CÓDIGO VINARIO" (Adaptados al tema claro)
+   FORZADO DE TEMA CLARO (LIGHT THEME OVERRIDES)
    ========================================= */
 
-.cv-code-text {
-  font-family: var(--font-code);
-  color: var(--color-wine);
-  font-size: 0.9rem;
-  letter-spacing: 1px;
+/* Hacemos la Navbar completamente blanca y con borde sutil */
+.cv-navbar {
+  background-color: #ffffff !important;
+  border-bottom: 1px solid #eeeeee;
 }
 
-.cv-blinking-cursor::after {
-  content: '_';
-  font-family: var(--font-code);
-  color: var(--color-wine);
-  animation: blink 1s step-end infinite;
-  margin-left: 2px;
+/* Letras de la Navbar y los íconos en el negro oficial */
+.cv-nav-link, 
+.cv-nav-actions .material-symbols-outlined,
+.cv-lang-btn {
+  color: #111111 !important;
 }
 
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+/* Forzar fondos blancos y textos negros en las secciones que quedaron oscuras */
+.cv-page-home, 
+.cv-page-home section,
+.cv-trustbar, 
+.cv-bestsellers {
+  background-color: #ffffff !important;
+  color: #111111 !important;
 }
 
-/* =========================================
-   UTILIDADES ESTRUCTURALES
-   ========================================= */
-   
-.container {
-  max-width: 1400px; 
-  margin: 0 auto;
-  padding: 0 5%;
+/* Títulos y textos descriptivos en el negro oficial */
+h1, h2, h3, h4, h5, h6,
+.cv-section-title, 
+.cv-box-title {
+  color: #111111 !important;
 }
 
-/* Fondos sutiles para diferenciar secciones en el tema claro */
-.section-light-grey {
-  background-color: var(--color-grey-light);
-  color: var(--color-black);
+/* Para que las tarjetas grises de "Envíos Seguros" queden elegantes sobre el fondo blanco */
+.cv-trust-card {
+  background-color: #f9f9f9 !important;
+  border: 1px solid #eeeeee !important;
+}
+.cv-trust-card h3, .cv-trust-card p {
+  color: #111111 !important;
+}
+
+/* Color de los acentos "Vino" */
+.cv-text-wine {
+  color: #85123e !important;
 }
